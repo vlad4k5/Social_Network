@@ -1,0 +1,22 @@
+.header_wrapper {
+    height: 80px;
+    background-color: #5b5ff0;
+    margin-bottom: 5px;
+}
+
+.mediaBlock {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: ghostwhite;
+    padding-left: 4em;
+}
+
+#logo {
+    height: 80px;
+}
+
+.slogan {
+    padding-left: 15px;
+    display: inline-block;
+}

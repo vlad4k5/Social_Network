@@ -1,25 +1,34 @@
-import logo from './logo.svg';
+import React from "react";
+import { Redirect, Route, Switch } from "react-router";
 import './App.css';
+import Dialogs from "./components/Dialogs/Dialogs";
+import Header from "./components/Header/Header";
+import Navbar from "./components/Navbar/Navlink";
+import Profile from "./components/Profile/Profile";
+import Users from "./components/Users/Users";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+
+
+
+const App = () => {
+  return <div>
+    <Header />
+    <div className="app_wrapper">
+      <Navbar />
+      <main className="main_content">
+        <Switch>
+          <Redirect exact from="/" to="/profile" />
+          <Route path="/profile" render={() => <Profile />} />
+          <Route path="/dialogs" render={() => <Dialogs />} />
+          <Route path="/users" render={() => <Users />} />
+        </Switch>
+      </main>
     </div>
-  );
+
+  </div>
 }
+
+
 
 export default App;
