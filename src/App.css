@@ -1,9 +1,11 @@
 .app_wrapper {
+    max-width: 1267px;
     display: grid;
-    grid-template-columns: 1fr 5fr;
+    grid-template-columns: 20% 100%;
     column-gap: 5px;
 }
 
 .main_content {
     background-color: ghostwhite;
+    min-height: 700px;
 }
