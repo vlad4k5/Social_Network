@@ -1,0 +1,16 @@
+.post {
+    background-color: #ffffff;
+    margin: 5px 15px 5px 5px;
+    display: grid;
+    grid-template-columns: 7% 86% 7%;
+    border-radius: 20px;
+    border: 1px solid blue;
+    min-height: 100px;
+}
+
+.post img {
+    width: 70px;
+    border-radius: 50%;
+    border: 2px solid blue;
+    margin: 2px;
+}
