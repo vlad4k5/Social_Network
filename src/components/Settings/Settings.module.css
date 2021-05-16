@@ -1,0 +1,28 @@
+.settingsComponent {
+    padding: 15px;
+}
+
+
+.settingsWrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 10px;
+}
+
+.settingsBlock {
+    background-color: #ffffff;
+    border: 1px solid blue;
+    border-radius: 20px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.settingsContactsWrapper {
+    display: grid;
+    grid-template-columns: 3fr 7fr;
+}
+
+.contactsLabales {
+    line-height: 1.55em;
+}
+

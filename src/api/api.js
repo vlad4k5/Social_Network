@@ -15,6 +15,10 @@ export const profileAPI = {
     },
     getStatus(userId) {
         return instance.get(`/profile/status/${userId}`)
+    },
+    setProfile(profile) {
+        debugger
+        return instance.put("/profile", profile)
     }
 
 }

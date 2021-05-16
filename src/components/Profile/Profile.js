@@ -5,44 +5,33 @@ import MyPosts from "./MyPosts";
 import s from "./Profile.module.css";
 
 
-class Profile extends React.Component {
+const Profile = (props) => {
 
-    componentDidMount() {
-        const userId = 16227
-        this.props.getProfile(userId)
-        this.props.getStatus(userId)
-    }
+    return <>
+        <div className={s.profile_wrapper}>
+            <img src={props.profileInfo.photos.large} />
+            <div className={s.aboutMe}>
+                <span>Status: {props.status}</span>
+                <h4>About me:</h4>
+                <span>{props.profileInfo.aboutMe}</span>
 
-    render() {
-        if (!this.props.profileInfo || !this.props.status) {
-            return <div>Loading...</div>;
-        }
-        return <>
-            <div className={s.profile_wrapper}>
-                <img src={this.props.profileInfo.photos.large} />
-                <div className={s.aboutMe}>
-                    <span>Status: {this.props.status}</span>
-                    <h4>About me</h4>
-                    <span>{this.props.profileInfo.aboutMe}</span>
-
-                    <h4>Contacts:</h4>
-                    <div className={s.contactsBlock}>
-                        <a href={this.props.profileInfo.contacts.facebook} className={s.contacts}>facebook</a>
-                        <a href={this.props.profileInfo.contacts.website} className={s.contacts}>website</a>
-                        <a href={this.props.profileInfo.contacts.vk} className={s.contacts}>vk</a>
-                        <a href={this.props.profileInfo.contacts.twitter} className={s.contacts}>twitter</a>
-                        <a href={this.props.profileInfo.contacts.instagram} className={s.contacts}>instagram</a>
-                        <a href={this.props.profileInfo.contacts.youtube} className={s.contacts}>youtube</a>
-                        <a href={this.props.profileInfo.contacts.github} className={s.contacts}>github</a>
-                        <a href={this.props.profileInfo.contacts.mainLink} className={s.contacts}>mainLink</a>
-                    </div>
-
+                <h4>Contacts:</h4>
+                <div className={s.contactsBlock}>
+                    <a href={props.profileInfo.contacts.facebook} className={s.contacts}>facebook</a>
+                    <a href={props.profileInfo.contacts.website} className={s.contacts}>website</a>
+                    <a href={props.profileInfo.contacts.vk} className={s.contacts}>vk</a>
+                    <a href={props.profileInfo.contacts.twitter} className={s.contacts}>twitter</a>
+                    <a href={props.profileInfo.contacts.instagram} className={s.contacts}>instagram</a>
+                    <a href={props.profileInfo.contacts.youtube} className={s.contacts}>youtube</a>
+                    <a href={props.profileInfo.contacts.github} className={s.contacts}>github</a>
+                    <a href={props.profileInfo.contacts.mainLink} className={s.contacts}>mainLink</a>
                 </div>
 
-            </div><hr /><br />
-            <MyPosts posts={this.props.posts} userPhoto={this.props.profileInfo.photos.small} addNewPost={this.props.addNewPost} />
-        </>
-    }
+            </div>
+
+        </div><hr /><br />
+        <MyPosts posts={props.posts} userPhoto={props.profileInfo.photos.small} addNewPost={props.addNewPost} />
+    </>
 }
 
 const mapStateToProps = (state) => ({

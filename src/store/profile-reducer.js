@@ -17,7 +17,10 @@ let initialState = {
 
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
-        case SET_PROFILE: return { ...state, profileInfo: action.profileInfo }
+        case SET_PROFILE: {
+            debugger
+            return { ...state, profileInfo: { ...state.profileInfo, ...action.profileInfo } }
+        }
         case SET_STATUS: return { ...state, status: action.status }
 
         case ADD_NEW_POST: {
@@ -43,6 +46,20 @@ export const getProfile = (userId) => dispatch => {
         })
 
 }
+
+export const updateProfile = (profile) => dispatch => {
+    debugger
+    profileAPI.setProfile(profile)
+        .then(response => {
+            debugger
+            if (response.data.resultCode === 0) {
+                dispatch(setProfile(profile))
+            }
+        })
+
+}
+
+
 export const getStatus = (userId) => dispatch => {
     profileAPI.getStatus(userId)
         .then(response => {
