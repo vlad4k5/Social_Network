@@ -1,5 +1,7 @@
 import { Field, Form, Formik } from "formik";
 import { connect } from "react-redux";
+import { compose } from "redux";
+import withAuthRedirect from "../../hocs/withAuthRedirect";
 import { updateProfile } from "../../store/profile-reducer";
 import s from "./Settings.module.css"
 
@@ -87,4 +89,7 @@ const maStateToProps = state => ({
 })
 
 
-export default connect(maStateToProps, { updateProfile })(Settings);
+export default compose(
+    connect(maStateToProps, { updateProfile }),
+    withAuthRedirect
+)(Settings);

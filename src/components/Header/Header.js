@@ -3,7 +3,7 @@ import s from "./Header.module.css"
 import logo from "../../assets/images/logo.svg"
 import { connect } from "react-redux";
 import { logout } from "../../store/auth-reducer";
-import { NavLink, Redirect } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 
 const Header = (props) => {
@@ -17,8 +17,8 @@ const Header = (props) => {
                 <NavLink to="/profile" className={s.linkToProfile}>{props.userName}</NavLink>
                 <button onClick={props.logout} className={s.logoutButton}>Logout</button>
             </div>
-            : <div>
-                <Redirect to="/login" />
+            : <div className={s.loginBlock}>
+                <NavLink to="/login" className={s.linkToLogin} >Login</NavLink>
             </div>
         }
 

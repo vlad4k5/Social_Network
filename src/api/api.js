@@ -29,7 +29,10 @@ export const authAPI = {
         return instance.get("/auth/me")
     },
     logout() {
-        debugger
         return instance.delete("/auth/login")
+    },
+    login(loginData) {
+        debugger
+        return instance.post("/auth/login", loginData)
     }
 }

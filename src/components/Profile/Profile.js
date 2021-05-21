@@ -1,11 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
+import { compose } from "redux";
+import withAuthRedirect from "../../hocs/withAuthRedirect";
 import { addNewPost, getProfile, getStatus } from "../../store/profile-reducer";
 import MyPosts from "./MyPosts";
 import s from "./Profile.module.css";
 
 
 const Profile = (props) => {
+    debugger
+
+    if (!props.profileInfo) {
+        return <div>Loading...</div>
+    }
+
 
     return <>
         <div className={s.profile_wrapper}>
@@ -40,4 +48,7 @@ const mapStateToProps = (state) => ({
     posts: state.profile.posts
 })
 
-export default connect(mapStateToProps, { getProfile, getStatus, addNewPost })(Profile);
+export default compose(
+    withAuthRedirect,
+    connect(mapStateToProps, { getProfile, getStatus, addNewPost })
+)(Profile);

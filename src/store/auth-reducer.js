@@ -1,12 +1,16 @@
 import { authAPI } from "../api/api"
-import { getProfile, getStatus } from "./profile-reducer";
+import { getProfile, getStatus, setProfile, setStatus } from "./profile-reducer";
 
 
 const SET_USER_DATA = "auth-reducer/SET_USER_DATA";
 
 
 let initialState = {
-    userData: null,
+    userData: {
+        email: null,
+        id: null,
+        login: null
+    },
     isAuth: null
 }
 
@@ -14,9 +18,8 @@ const authReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_USER_DATA: {
             debugger
-            return { ...state, isAuth: action.isAuth, userData: action.userData }
+            return { ...state, isAuth: action.isAuth, userData: action.userData ? action.userData : { email: null, id: null, login: null } }
         }
-
         default: return state
     }
 }
@@ -24,7 +27,9 @@ const authReducer = (state = initialState, action) => {
 
 const setUserData = (isAuth, userData) => ({ type: SET_USER_DATA, isAuth, userData });
 
+
 export const userAuthorizing = () => dispatch => {
+    debugger
     authAPI.isUserAuthorized()
         .then(response => {
             if (response.data.resultCode === 0) {
@@ -36,13 +41,28 @@ export const userAuthorizing = () => dispatch => {
             }
         })
 }
+
+
 export const logout = () => dispatch => {
     debugger
     authAPI.logout()
         .then(response => {
+            if (response.data.resultCode === 0) {
+                debugger
+                dispatch(setUserData(false, null));
+                dispatch(setProfile(null));
+                dispatch(setStatus(null));
+            }
+        })
+}
+
+export const login = (loginData) => dispatch => {
+    debugger
+    authAPI.login(loginData)
+        .then(response => {
             debugger
             if (response.data.resultCode === 0) {
-                dispatch(setUserData(false, null));
+                dispatch(userAuthorizing())
             }
         })
 }
