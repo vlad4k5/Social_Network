@@ -4,11 +4,12 @@ import { Redirect, Route, Switch } from "react-router";
 import './App.css';
 import Dialogs from "./components/Dialogs/Dialogs";
 import Header from "./components/Header/Header";
+import Login from "./components/Login/Login";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import Settings from "./components/Settings/Settings";
 import Users from "./components/Users/Users";
-import { getProfile, getStatus } from "./store/profile-reducer";
+import { userAuthorizing } from "./store/auth-reducer";
 
 
 
@@ -18,14 +19,14 @@ class App extends React.PureComponent {
 
 
   componentDidMount() {
-    const userId = 16227
-    this.props.getProfile(userId)
-    this.props.getStatus(userId)
+    this.props.userAuthorizing();
   }
 
 
   render() {
-    if (!this.props.profileInfo || !this.props.status) {
+    if (this.props.isAuth === false) {
+      <Redirect to="/login" />
+    } else if (!this.props.status || !this.props.profileInfo) {
       return <div>Loading...</div>
     }
     return <div>
@@ -39,6 +40,7 @@ class App extends React.PureComponent {
             <Route path="/dialogs" render={() => <Dialogs />} />
             <Route path="/users" render={() => <Users />} />
             <Route path="/settings" render={() => <Settings />} />
+            <Route path="/login" render={() => <Login />} />
           </Switch>
         </main>
       </div>
@@ -49,8 +51,9 @@ class App extends React.PureComponent {
 
 const mapStateToProps = state => ({
   profileInfo: state.profile.profileInfo,
-  status: state.profile.status
+  status: state.profile.status,
+  isAuth: state.auth.isAuth
 })
 
 
-export default connect(mapStateToProps, { getProfile, getStatus })(App);
+export default connect(mapStateToProps, { userAuthorizing })(App);

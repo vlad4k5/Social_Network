@@ -17,8 +17,19 @@ export const profileAPI = {
         return instance.get(`/profile/status/${userId}`)
     },
     setProfile(profile) {
-        debugger
         return instance.put("/profile", profile)
     }
 
+}
+
+
+
+export const authAPI = {
+    isUserAuthorized() {
+        return instance.get("/auth/me")
+    },
+    logout() {
+        debugger
+        return instance.delete("/auth/login")
+    }
 }

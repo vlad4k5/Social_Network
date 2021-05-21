@@ -1,4 +1,7 @@
 .header_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     height: 80px;
     background-color: #5b5ff0;
     margin-bottom: 5px;
@@ -11,7 +14,13 @@
     color: ghostwhite;
     padding-left: 5%;
 }
-
+.loginBlock {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 60px;
+}
 #logo {
     height: 80px;
 }
@@ -19,4 +28,16 @@
 .slogan {
     padding-left: 15px;
     display: inline-block;
+}
+
+
+.linkToProfile {
+    text-decoration: none;
+    color: ghostwhite;
+    font-size: 1.5em;
+    padding-right: 10px;
+}
+
+.linkToProfile:hover {
+    font-size: 1.6em;
 }
