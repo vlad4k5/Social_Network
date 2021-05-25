@@ -24,11 +24,13 @@ class App extends React.PureComponent {
 
 
   render() {
+    debugger
     if (this.props.isAuth === false) {
       <Redirect to="/login" />
-    } else if (!this.props.status || !this.props.profileInfo) {
-      return <div>Loading...</div>
     }
+    // else if (!this.props.status || !this.props.profileInfo) {
+    //   return <div>Loading...</div>
+    // }
     return <div>
       <Header />
       <div className="app_wrapper">
@@ -36,7 +38,7 @@ class App extends React.PureComponent {
         <main className="main_content">
           <Switch>
             <Redirect exact from="/" to="/profile" />
-            <Route path="/profile" render={() => <Profile />} />
+            <Route path="/profile/:userId?" render={() => <Profile />} />
             <Route path="/dialogs" render={() => <Dialogs />} />
             <Route path="/users" render={() => <Users />} />
             <Route path="/settings" render={() => <Settings />} />

@@ -1,35 +1,46 @@
 import { Field, Form, Formik } from "formik";
+import { useState } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import withAuthRedirect from "../../hocs/withAuthRedirect";
-import { updateProfile } from "../../store/profile-reducer";
+import { getProfile, getStatus, updateProfile } from "../../store/profile-reducer";
 import s from "./Settings.module.css"
 
 
+const Settings = ({ profileInfo, updateProfile, ownerId, getProfile, getStatus }) => {
+
+    // const [loading, setLoading] = useState(false);
+    debugger
+    if (ownerId !== profileInfo.userId) {
+        getProfile(ownerId);
+        getStatus(ownerId);
+    }
+    if (!profileInfo || ownerId !== profileInfo.userId) {
+        return <div>Loading...</div>
+    }
 
 
-const Settings = (props) => {
 
     const initialValues = {
-        aboutMe: props.profileInfo.aboutMe,
-        userId: props.profileInfo.userId,
+        aboutMe: profileInfo.aboutMe,
+        userId: profileInfo.userId,
         contacts: {
-            facebook: props.profileInfo.contacts.facebook,
-            website: props.profileInfo.contacts.website,
-            vk: props.profileInfo.contacts.vk,
-            twitter: props.profileInfo.contacts.twitter,
-            instagram: props.profileInfo.contacts.instagram,
-            youtube: props.profileInfo.contacts.youtube,
-            github: props.profileInfo.contacts.github,
-            mainLink: props.profileInfo.contacts.mainLink,
+            facebook: profileInfo.contacts.facebook,
+            website: profileInfo.contacts.website,
+            vk: profileInfo.contacts.vk,
+            twitter: profileInfo.contacts.twitter,
+            instagram: profileInfo.contacts.instagram,
+            youtube: profileInfo.contacts.youtube,
+            github: profileInfo.contacts.github,
+            mainLink: profileInfo.contacts.mainLink,
         },
-        lookingForAJob: props.profileInfo.lookingForAJob,
-        lookingForAJobDescription: props.profileInfo.lookingForAJobDescription,
-        fullName: props.profileInfo.fullName
+        lookingForAJob: profileInfo.lookingForAJob,
+        lookingForAJobDescription: profileInfo.lookingForAJobDescription,
+        fullName: profileInfo.fullName
     }
     const onSubmit = values => {
         debugger
-        props.updateProfile(values)
+        updateProfile(values)
     }
 
     return <div className={s.settingsComponent}>
@@ -85,11 +96,13 @@ const Settings = (props) => {
 }
 
 const maStateToProps = state => ({
-    profileInfo: state.profile.profileInfo
+    profileInfo: state.profile.profileInfo,
+    ownerId: state.auth.userData.id,
+
 })
 
 
 export default compose(
-    connect(maStateToProps, { updateProfile }),
+    connect(maStateToProps, { updateProfile, getProfile, getStatus }),
     withAuthRedirect
 )(Settings);

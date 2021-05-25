@@ -16,7 +16,7 @@ const MyPosts = (props) => {
     return <div>
         <Formik initialValues={initialValues} onSubmit={onSubmit}>
             <Form>
-                <Field as="textarea" name="postText" id="postText" />
+                <Field as="textarea" name="postText" id="postText" placeholder="add new post" /><br />
                 <button>Add post</button>
             </Form>
         </Formik>

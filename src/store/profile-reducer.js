@@ -39,8 +39,10 @@ export const addNewPost = (postText) => ({ type: ADD_NEW_POST, postText });
 
 
 export const getProfile = (userId) => dispatch => {
+    debugger
     profileAPI.getProfile(userId)
         .then(response => {
+            debugger
             dispatch(setProfile(response.data))
         })
 
@@ -58,10 +60,17 @@ export const updateProfile = (profile) => dispatch => {
 
 
 export const getStatus = (userId) => dispatch => {
+    debugger
     profileAPI.getStatus(userId)
         .then(response => {
-            if (response.status === 200)
-                dispatch(setStatus(response.data))
+            if (response.status === 200) {
+                debugger
+                if (response.data === null) {
+                    dispatch(setStatus("user has no status"))
+                } else {
+                    dispatch(setStatus(response.data))
+                }
+            }
         })
 
 }
