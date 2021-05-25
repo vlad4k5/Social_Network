@@ -17,7 +17,7 @@ const Profile = (props) => {
 
     return <>
         <div className={s.profile_wrapper}>
-            <img src={props.profileInfo.photos.large} />
+            <img src={props.profileInfo.photos.large} alt="User Avatar" />
             <div className={s.aboutMe}>
                 <span>Status: {props.status}</span>
                 <h4>About me:</h4>

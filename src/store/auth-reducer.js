@@ -17,7 +17,6 @@ let initialState = {
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_USER_DATA: {
-            debugger
             return { ...state, isAuth: action.isAuth, userData: action.userData ? action.userData : { email: null, id: null, login: null } }
         }
         default: return state
@@ -29,7 +28,6 @@ const setUserData = (isAuth, userData) => ({ type: SET_USER_DATA, isAuth, userDa
 
 
 export const userAuthorizing = () => dispatch => {
-    debugger
     authAPI.isUserAuthorized()
         .then(response => {
             if (response.data.resultCode === 0) {
@@ -48,7 +46,6 @@ export const logout = () => dispatch => {
     authAPI.logout()
         .then(response => {
             if (response.data.resultCode === 0) {
-                debugger
                 dispatch(setUserData(false, null));
                 dispatch(setProfile(null));
                 dispatch(setStatus(null));
@@ -60,7 +57,6 @@ export const login = (loginData) => dispatch => {
     debugger
     authAPI.login(loginData)
         .then(response => {
-            debugger
             if (response.data.resultCode === 0) {
                 dispatch(userAuthorizing())
             }

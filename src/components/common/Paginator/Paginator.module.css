@@ -1,0 +1,16 @@
+.page {
+    background-color: ghostwhite;
+    padding: 5px;
+    font-size: 1.3em;
+}
+
+.activePage {
+    background-color: gold;
+    padding: 6px;
+    font-size: 1.4em;
+}
+
+
+.page:hover {
+    background-color: rgb(207, 206, 206);
+}

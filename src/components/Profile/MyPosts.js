@@ -3,7 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 
 const MyPosts = (props) => {
     const posts = [...props.posts].reverse().map(p =>
-        <Post message={p.message} likesCount={p.likesCount} userPhoto={props.userPhoto} keyId={p.id} />)
+        <Post message={p.message} likesCount={p.likesCount} userPhoto={props.userPhoto} id={p.id} />)
 
     const initialValues = {
         postText: ""
@@ -28,8 +28,8 @@ const MyPosts = (props) => {
 
 
 const Post = (props) => {
-    return <div className={s.post} key={props.keyId}>
-        <img src={props.userPhoto} alt="User photo" />
+    return <div className={s.post} key={props.id}>
+        <img src={props.userPhoto} alt="User avatar" />
         <div>
             <span>{props.message}</span>
         </div>

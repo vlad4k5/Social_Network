@@ -1,0 +1,23 @@
+
+
+.userItem{
+    border-radius: 20px;
+    border: 1px solid blue;
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+    margin: 10px 0px;
+    background-color: #ffffff;
+}
+
+.userPhoto {
+    margin: 5px 15px;
+    border-radius: 50%;
+    border: 2px solid blue;
+    width: 80px;
+}
+
+
+.followUnfollowButton {
+    margin: 0px 0px 10px 25px;
+
+}

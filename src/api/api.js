@@ -32,7 +32,24 @@ export const authAPI = {
         return instance.delete("/auth/login")
     },
     login(loginData) {
-        debugger
         return instance.post("/auth/login", loginData)
     }
 }
+
+
+
+export const usersAPI = {
+    getUsers(count, page) {
+        return instance.get(`/users/?count=${count}&page=${page}`)
+    },
+    follow(userId) {
+        debugger
+        return instance.post(`/follow/${userId}`)
+    },
+    unfollow(userId) {
+        debugger
+        return instance.delete(`/follow/${userId}`)
+    }
+}
+
+
