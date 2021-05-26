@@ -1,16 +1,16 @@
 import s from "./MyPosts.module.css"
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
-const MyPosts = (props) => {
-    const posts = [...props.posts].reverse().map(p =>
-        <Post message={p.message} likesCount={p.likesCount} userPhoto={props.userPhoto} id={p.id} />)
+const MyPosts = ({ posts, userPhoto, addNewPost }) => {
+    const profilePosts = [...posts].reverse().map(p =>
+        <Post message={p.message} likesCount={p.likesCount} userPhoto={userPhoto} id={p.id} />)
 
     const initialValues = {
         postText: ""
     }
-    const onSubmit = values => {
-        props.addNewPost(values.postText)
-
+    const onSubmit = (values, { resetForm }) => {
+        addNewPost(values.postText);
+        resetForm();
     }
 
     return <div>
@@ -21,7 +21,7 @@ const MyPosts = (props) => {
             </Form>
         </Formik>
         <div className={s.posts}>
-            {posts}
+            {profilePosts}
         </div>
     </div >
 }

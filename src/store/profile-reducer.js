@@ -2,6 +2,7 @@ import { profileAPI } from "../api/api"
 
 const SET_PROFILE = "profile-reducer/SET_PROFILE"
 const SET_STATUS = "profile-reducer/SET_STATUS"
+const SET_PHOTO = "profile-reducer/SET_PHOTO"
 const ADD_NEW_POST = "profile-reducer/ADD_NEW_POST"
 
 
@@ -23,6 +24,10 @@ const profileReducer = (state = initialState, action) => {
         case SET_STATUS: {
             return { ...state, status: action.status }
         }
+        case SET_PHOTO: {
+            debugger
+            return { ...state, profileInfo: { ...state.profileInfo, photos: action.photos } }
+        }
         case ADD_NEW_POST: {
             let newPost = { id: state.posts.lengtg + 1, message: action.postText, likesCount: 0 }
             return { ...state, posts: [...state.posts, newPost] }
@@ -34,15 +39,14 @@ const profileReducer = (state = initialState, action) => {
 
 export const setProfile = (profileInfo) => ({ type: SET_PROFILE, profileInfo });
 export const setStatus = (status) => ({ type: SET_STATUS, status });
+export const setPhoto = (photos) => ({ type: SET_PHOTO, photos });
 export const addNewPost = (postText) => ({ type: ADD_NEW_POST, postText });
 
 
 
 export const getProfile = (userId) => dispatch => {
-    debugger
     profileAPI.getProfile(userId)
         .then(response => {
-            debugger
             dispatch(setProfile(response.data))
         })
 
@@ -60,16 +64,36 @@ export const updateProfile = (profile) => dispatch => {
 
 
 export const getStatus = (userId) => dispatch => {
-    debugger
     profileAPI.getStatus(userId)
         .then(response => {
             if (response.status === 200) {
-                debugger
                 if (response.data === null) {
                     dispatch(setStatus("user has no status"))
                 } else {
                     dispatch(setStatus(response.data))
                 }
+            }
+        })
+}
+
+export const updateStatus = (status) => dispatch => {
+    profileAPI.setStatus(status)
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(setStatus(status))
+            }
+        })
+
+}
+
+
+export const updatePhoto = (photoFile) => dispatch => {
+    debugger
+    profileAPI.setUserImage(photoFile)
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                debugger
+                dispatch(setPhoto(response.data.data.photos))
             }
         })
 

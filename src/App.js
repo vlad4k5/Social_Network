@@ -24,7 +24,6 @@ class App extends React.PureComponent {
 
 
   render() {
-    debugger
     if (this.props.isAuth === false) {
       <Redirect to="/login" />
     }

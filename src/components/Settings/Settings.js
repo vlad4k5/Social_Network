@@ -1,15 +1,12 @@
 import { Field, Form, Formik } from "formik";
-import { useState } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import withAuthRedirect from "../../hocs/withAuthRedirect";
 import { getProfile, getStatus, updateProfile } from "../../store/profile-reducer";
 import s from "./Settings.module.css"
 
-
 const Settings = ({ profileInfo, updateProfile, ownerId, getProfile, getStatus }) => {
 
-    // const [loading, setLoading] = useState(false);
     debugger
     if (ownerId !== profileInfo.userId) {
         getProfile(ownerId);
@@ -18,8 +15,6 @@ const Settings = ({ profileInfo, updateProfile, ownerId, getProfile, getStatus }
     if (!profileInfo || ownerId !== profileInfo.userId) {
         return <div>Loading...</div>
     }
-
-
 
     const initialValues = {
         aboutMe: profileInfo.aboutMe,
@@ -91,16 +86,13 @@ const Settings = ({ profileInfo, updateProfile, ownerId, getProfile, getStatus }
                 <button>Save all</button>
             </Form>
         </Formik>
-
     </div >
 }
 
 const maStateToProps = state => ({
     profileInfo: state.profile.profileInfo,
-    ownerId: state.auth.userData.id,
-
+    ownerId: state.auth.userData.id
 })
-
 
 export default compose(
     connect(maStateToProps, { updateProfile, getProfile, getStatus }),

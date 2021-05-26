@@ -1,0 +1,41 @@
+.dialogsWrapper {
+    display: grid;
+    grid-template-columns: 2fr 7fr;
+    column-gap: 10px;
+}
+
+.dialogsUsers {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    border: 1px solid blue;
+    box-sizing: border-box;
+}
+.linkToUserChat{
+    text-decoration: none;
+    font-size: 1.4em;
+    color: #8488eb;
+}
+.linkToUserChat:hover{
+    /* background-color: rgb(247, 247, 247); */
+    color: blue;
+    font-weight: 500;
+}
+.dialogsUserPhoto {
+    width: 40px;
+}
+.dialogsUserWrapper {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    margin-bottom: 10px;
+}
+
+
+
+.dialogsMessages {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    border: 1px solid blue;
+    box-sizing: border-box;
+}

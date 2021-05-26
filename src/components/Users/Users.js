@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import { compose } from "redux";
 import { usersAPI } from "../../api/api";
+import withAuthRedirect from "../../hocs/withAuthRedirect";
 import { getUsers } from "../../store/users-reducer";
 import Paginator from "../common/Paginator/Paginator";
 import UserItem from "./UserItem/UserItem";
@@ -71,4 +73,7 @@ const mapStateToProps = state => ({
 
 })
 
-export default connect(mapStateToProps, { getUsers })(Users);
+export default compose(
+    connect(mapStateToProps, { getUsers }),
+    withAuthRedirect
+)(Users);
