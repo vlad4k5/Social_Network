@@ -11,6 +11,13 @@ import ProfileInfo from "./ProfileInfo";
 const Profile = ({ getProfile, getStatus, match, ownerId, profileInfo, status, posts, addNewPost, updateStatus, updatePhoto }) => {
 
     useEffect(() => {
+        if (match.params.userId) {
+            getProfile(match.params.userId);
+            getStatus(match.params.userId);
+        }
+    }, [])
+
+    useEffect(() => {
         getProfile(match.params.userId ? match.params.userId : ownerId);
         getStatus(match.params.userId ? match.params.userId : ownerId);
     }, [match.params.userId])
@@ -21,8 +28,20 @@ const Profile = ({ getProfile, getStatus, match, ownerId, profileInfo, status, p
     }
 
     return <>
-        <ProfileInfo profileInfo={profileInfo} status={status} updateStatus={updateStatus} updatePhoto={updatePhoto} />
-        <MyPosts posts={posts} userPhoto={profileInfo.photos.small ? profileInfo.photos.small : basicPhoto} addNewPost={addNewPost} />
+        <ProfileInfo
+            profileInfo={profileInfo}
+            status={status}
+            updateStatus={updateStatus}
+            updatePhoto={updatePhoto}
+            isOwner={!match.params.userId}
+        />
+        <hr />
+        <MyPosts
+            posts={posts}
+            userPhoto={profileInfo.photos.small ? profileInfo.photos.small : basicPhoto}
+            addNewPost={addNewPost}
+            isOwner={!match.params.userId}
+        />
     </>
 }
 

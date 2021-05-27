@@ -1,9 +1,10 @@
-import { Field, Form, Formik } from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import withAuthRedirect from "../../hocs/withAuthRedirect";
 import { getProfile, getStatus, updateProfile } from "../../store/profile-reducer";
 import s from "./Settings.module.css"
+import * as Yup from "yup";
 
 const Settings = ({ profileInfo, updateProfile, ownerId, getProfile, getStatus }) => {
 
@@ -38,15 +39,23 @@ const Settings = ({ profileInfo, updateProfile, ownerId, getProfile, getStatus }
         updateProfile(values)
     }
 
+    const validationSchema = Yup.object({
+        contacts: Yup.object({
+            facebook: Yup.string().url("Invalid url format")
+        }),
+        aboutMe: Yup.string().max(20, "Too long text")
+    })
+
     return <div className={s.settingsComponent}>
         <h1>Settings</h1>
         <hr />
 
-        <Formik initialValues={initialValues} onSubmit={onSubmit}>
+        <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
             <Form>
                 <div className={s.settingsWrapper}>
                     <div className={s.settingsBlock}>
-                        <label htmlFor="aboutMe">About Me:</label><br />
+                        <label htmlFor="aboutMe">About Me:</label>
+                        <ErrorMessage name="aboutMe" /><br />
                         <Field as="textarea" name="aboutMe" id="aboutMe" /><br />
                         <label htmlFor="fullName">Full Name:</label><br />
                         <Field type="text" name="fullName" id="fullName" />
@@ -62,6 +71,7 @@ const Settings = ({ profileInfo, updateProfile, ownerId, getProfile, getStatus }
                         <div className={s.settingsContactsWrapper}>
                             <div className={s.contactsLabales}>
                                 <label htmlFor="facebook">Facebook:</label><br />
+
                                 <label htmlFor="website">Website:</label><br />
                                 <label htmlFor="vk">Vk:</label><br />
                                 <label htmlFor="twitter">Twitter:</label><br />
@@ -71,7 +81,7 @@ const Settings = ({ profileInfo, updateProfile, ownerId, getProfile, getStatus }
                                 <label htmlFor="mainLink">MainLink:</label><br />
                             </div>
                             <div>
-                                <Field type="text" name="contacts.facebook" id="facebook" />
+                                <Field type="text" name="contacts.facebook" id="facebook" /><ErrorMessage name="contacts.facebook" />
                                 <Field type="text" name="contacts.website" id="website" />
                                 <Field type="text" name="contacts.vk" id="vk" />
                                 <Field type="text" name="contacts.twitter" id="twitter" />

@@ -2,7 +2,7 @@ import s from "./Profile.module.css";
 import basicPhoto from "../../assets/images/basicUserPhoto.png";
 import { useEffect, useState } from "react";
 
-const ProfileInfo = ({ profileInfo, status, updateStatus, updatePhoto }) => {
+const ProfileInfo = ({ profileInfo, status, updateStatus, updatePhoto, isOwner }) => {
     const [statusEditMode, setStatusEditMode] = useState(false)
     const [statusText, setStatusText] = useState(status)
 
@@ -20,19 +20,19 @@ const ProfileInfo = ({ profileInfo, status, updateStatus, updatePhoto }) => {
     }
 
     const onMainPhotoSelected = (e) => {
-        debugger
         updatePhoto(e.target.files[0]);
     }
+
 
     return <div className={s.profile_wrapper}>
         <div>
             <img src={profileInfo.photos.large ? profileInfo.photos.large : basicPhoto} alt="User Avatar" />
-            <input type="file" onChange={onMainPhotoSelected} />
+            {isOwner && <input type="file" onChange={onMainPhotoSelected} />}
         </div>
 
         <div className={s.aboutMe}>
             <span>Status: </span>
-            {statusEditMode
+            {statusEditMode && isOwner
                 ? <input value={statusText} onChange={onStatusTextChanged} onBlur={saveNewStatus} autoFocus={true} />
                 : <span onClick={() => { setStatusEditMode(true) }}>{status}</span>
             }

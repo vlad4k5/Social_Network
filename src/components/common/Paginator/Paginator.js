@@ -7,7 +7,6 @@ const Paginator = ({ totalItemsCount, onPageChanged, currentPage = 1, itemsPerPa
 
     let pages = []
 
-    debugger
     if (currentPage >= 7 && currentPage <= totalPages - 3) {
         for (let i = currentPage; i <= lastPage; i++) {
             pages.push(<button className={currentPage === i - 6 ? s.activePage : s.page} onClick={() => { onPageChanged(i - 6) }}>{i - 6}</button>)

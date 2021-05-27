@@ -6,7 +6,6 @@ import withAuthRedirect from "../../hocs/withAuthRedirect";
 import { getUsers } from "../../store/users-reducer";
 import Paginator from "../common/Paginator/Paginator";
 import UserItem from "./UserItem/UserItem";
-import s from "./Users.module.css";
 
 const Users = (props) => {
     const [loading, setLoading] = useState(false);
@@ -62,18 +61,6 @@ const Users = (props) => {
 
 
 
-
-
-
-
-
-const mapStateToProps = state => ({
-    totalUsersCount: state.users.totalUsersCount,
-    users: state.users.users,
-
-})
-
 export default compose(
-    connect(mapStateToProps, { getUsers }),
     withAuthRedirect
 )(Users);
