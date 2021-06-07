@@ -1,5 +1,5 @@
-import s from "./Profile.module.css";
-import basicPhoto from "../../assets/images/basicUserPhoto.png";
+import s from "./ProfileInfo.module.scss";
+import basicPhoto from "../../../assets/images/basicUserPhoto.png";
 import { useEffect, useState } from "react";
 
 const ProfileInfo = ({ profileInfo, status, updateStatus, updatePhoto, isOwner }) => {
@@ -23,12 +23,19 @@ const ProfileInfo = ({ profileInfo, status, updateStatus, updatePhoto, isOwner }
         updatePhoto(e.target.files[0]);
     }
 
+    debugger
+    return <div className={s.profileInfo_wrapper}>
 
-    return <div className={s.profile_wrapper}>
-        <div>
+        <span className={s.userName}>{profileInfo.fullName}</span>
+        <div className={s.userPhoto}>
             <img src={profileInfo.photos.large ? profileInfo.photos.large : basicPhoto} alt="User Avatar" />
-            {isOwner && <input type="file" onChange={onMainPhotoSelected} />}
+            {isOwner && <div>
+                <input id="photoFile" className={s.photoFile} type="file" onChange={onMainPhotoSelected} />
+                <label htmlFor="photoFile" className={s.changePhotoLabel}>Change Photo</label>
+            </div>}
         </div>
+
+
 
         <div className={s.aboutMe}>
             <span>Status: </span>
@@ -44,7 +51,7 @@ const ProfileInfo = ({ profileInfo, status, updateStatus, updatePhoto, isOwner }
             <div className={s.contactsBlock}>
                 <a href={profileInfo.contacts.facebook} className={s.contacts}>facebook</a>
                 <a href={profileInfo.contacts.website} className={s.contacts}>website</a>
-                <a href={profileInfo.contacts.vk} className={s.contacts}>vk</a>
+                <a href={profileInfo.contacts.vk} className={s.contacts}>vkontakte</a>
                 <a href={profileInfo.contacts.twitter} className={s.contacts}>twitter</a>
                 <a href={profileInfo.contacts.instagram} className={s.contacts}>instagram</a>
                 <a href={profileInfo.contacts.youtube} className={s.contacts}>youtube</a>

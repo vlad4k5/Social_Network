@@ -4,9 +4,9 @@ import { withRouter } from "react-router";
 import { compose } from "redux";
 import withAuthRedirect from "../../hocs/withAuthRedirect";
 import { addNewPost, getProfile, getStatus, updatePhoto, updateStatus } from "../../store/profile-reducer";
-import MyPosts from "./MyPosts";
+import Posts from "./Posts/Posts";
 import basicPhoto from "../../assets/images/basicUserPhoto.png";
-import ProfileInfo from "./ProfileInfo";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
 const Profile = ({ getProfile, getStatus, match, ownerId, profileInfo, status, posts, addNewPost, updateStatus, updatePhoto }) => {
 
@@ -36,7 +36,7 @@ const Profile = ({ getProfile, getStatus, match, ownerId, profileInfo, status, p
             isOwner={!match.params.userId}
         />
         <hr />
-        <MyPosts
+        <Posts
             posts={posts}
             userPhoto={profileInfo.photos.small ? profileInfo.photos.small : basicPhoto}
             addNewPost={addNewPost}

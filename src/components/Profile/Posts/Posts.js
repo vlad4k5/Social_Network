@@ -1,5 +1,6 @@
-import s from "./MyPosts.module.css"
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import s from "./Posts.module.scss"
+import { Formik, Form, Field } from "formik";
+import Post from "./Post";
 
 const MyPosts = ({ posts, userPhoto, addNewPost, isOwner }) => {
     const profilePosts = [...posts].reverse().map(p =>
@@ -16,8 +17,17 @@ const MyPosts = ({ posts, userPhoto, addNewPost, isOwner }) => {
     return <div>
         {isOwner && <Formik initialValues={initialValues} onSubmit={onSubmit}>
             <Form>
-                <Field as="textarea" name="postText" id="postText" placeholder="add new post" /><br />
-                <button>Add post</button>
+                <Field as="textarea" name="postText">
+                    {(props) => {
+
+                        const { field, form, meta } = props;
+
+                        return <div>
+                            <textarea className={s.postField} type="text" id="postText" placeholder="add new post" {...field}>{props.children}</textarea>
+                        </div>
+                    }}
+                </Field>
+                <button className={s.newPostButton}>Add post</button>
             </Form>
         </Formik>}
         <div className={s.posts}>
@@ -25,20 +35,6 @@ const MyPosts = ({ posts, userPhoto, addNewPost, isOwner }) => {
         </div>
     </div >
 }
-
-
-const Post = (props) => {
-    return <div className={s.post} key={props.id}>
-        <img src={props.userPhoto} alt="User avatar" />
-        <div>
-            <span>{props.message}</span>
-        </div>
-        <div>
-            <span>Likes: {props.likesCount}</span>
-        </div>
-    </div>
-}
-
 
 
 export default MyPosts;

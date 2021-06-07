@@ -1,0 +1,86 @@
+$veryLightBlue: #afb2fd;
+$lightBlue: #7c80f8;
+$blue: #5b5ff0;
+
+@mixin transitionDuration {
+    transition-duration: .3s;
+}
+
+
+.post {
+    background-color: #ffffff;
+    margin: 15px 0px;
+    display: grid;
+    grid-template-columns: 80px 1fr 70px;
+    border-radius: 20px;
+    border: 3px solid $lightBlue;
+    min-height: 100px;
+}
+
+.userPhoto {
+    align-self: flex-start;
+    justify-self: flex-start;
+    width: 70px;
+    border-radius: 50%;
+    border: 2px solid $blue;
+    margin: 2px;
+}
+
+.postText {
+    padding: 5px 10px;
+}
+
+
+.likeBlock {
+    font-size: 24px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f5f5;
+    border-radius: 0px 20px 20px 0px;
+}
+
+
+.likeButton {
+    @include transitionDuration;
+    font-size: 20px;
+    color: lightgray;
+    background-color: inherit;
+    border: none;
+    border-radius: 5px;
+    &:hover {
+        color: red;
+        transform: scale(1.4,1.4);
+        // background-color: rgb(238, 136, 136);
+    }
+}
+
+
+.newPostButton {
+    @include transitionDuration;
+    background-color: $lightBlue;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    color: white;
+    &:hover {
+        background-color: $blue;
+    }
+}
+
+
+.postField {
+    @include transitionDuration;
+    resize : none;
+    border: none;
+    min-width: 100%;
+    min-height: 100px;
+    outline: 2px solid $veryLightBlue;
+    margin: 10px 0px;
+    padding: 5px;
+    &:focus {
+        outline: 2px solid $blue;
+    }
+}

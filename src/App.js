@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Redirect, Route, Switch } from "react-router";
-import './App.css';
+import s from './App.module.scss';
 import Dialogs from "./components/Dialogs/Dialogs";
 import Header from "./components/Header/Header";
 import Login from "./components/Login/Login";
@@ -13,41 +13,36 @@ import { userAuthorizing } from "./store/auth-reducer";
 
 
 
+const App = ({ userAuthorizing, isAuth, }) => {
 
+  useEffect(() => {
+    userAuthorizing();
+  }, [])
 
-class App extends React.PureComponent {
-
-
-  componentDidMount() {
-    this.props.userAuthorizing();
+  if (isAuth === false) {
+    <Redirect to="/login" />
   }
-
-
-  render() {
-    if (this.props.isAuth === false) {
-      <Redirect to="/login" />
-    }
-    // else if (!this.props.status || !this.props.profileInfo) {
-    //   return <div>Loading...</div>
-    // }
-    return <div>
+  return <div className={s.app__Wrapper}>
+    <header className={s.app__Header}>
       <Header />
-      <div className="app_wrapper">
-        <Navbar />
-        <main className="main_content">
-          <Switch>
-            <Redirect exact from="/" to="/profile" />
-            <Route path="/profile/:userId?" render={() => <Profile />} />
-            <Route path="/dialogs" render={() => <Dialogs />} />
-            <Route path="/users" render={() => <Users />} />
-            <Route path="/settings" render={() => <Settings />} />
-            <Route path="/login" render={() => <Login />} />
-          </Switch>
-        </main>
-      </div>
+    </header>
 
+    <div className={s.app__Navbar}>
+      <Navbar className={s.app__Navbar} />
     </div>
-  }
+
+    <main className={s.app__Content}>
+      <Switch>
+        <Redirect exact from="/" to="/profile" />
+        <Route path="/profile/:userId?" render={() => <Profile />} />
+        <Route path="/dialogs" render={() => <Dialogs />} />
+        <Route path="/users" render={() => <Users />} />
+        <Route path="/settings" render={() => <Settings />} />
+        <Route path="/login" render={() => <Login />} />
+      </Switch>
+    </main>
+
+  </div>
 }
 
 const mapStateToProps = state => ({

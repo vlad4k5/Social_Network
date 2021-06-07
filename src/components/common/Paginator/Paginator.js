@@ -1,4 +1,4 @@
-import s from "./Paginator.module.css";
+import s from "./Paginator.module.scss";
 
 const Paginator = ({ totalItemsCount, onPageChanged, currentPage = 1, itemsPerPage, loading, pagesInPaginator = 10 }) => {
     let totalPages = Math.ceil(totalItemsCount / itemsPerPage);

@@ -9,7 +9,7 @@ import * as Yup from "yup";
 const Settings = ({ profileInfo, updateProfile, ownerId, getProfile, getStatus }) => {
 
     debugger
-    if (ownerId !== profileInfo.userId) {
+    if (ownerId !== profileInfo?.userId) {
         getProfile(ownerId);
         getStatus(ownerId);
     }
@@ -43,7 +43,8 @@ const Settings = ({ profileInfo, updateProfile, ownerId, getProfile, getStatus }
         contacts: Yup.object({
             facebook: Yup.string().url("Invalid url format")
         }),
-        aboutMe: Yup.string().max(20, "Too long text")
+        aboutMe: Yup.string().max(200, "Too long text"),
+        fullName: Yup.string().max(20, "Too long text"),
     })
 
     return <div className={s.settingsComponent}>

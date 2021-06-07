@@ -1,0 +1,104 @@
+$blue: #5b5ff0;
+$lightBlue: #7c80f8;
+
+@mixin imgProps($width: 100px, $borderRadius: 10%) {
+    
+}
+
+@mixin padd($padd...) {
+    padding: $padd;
+}
+
+@mixin link($link, $hover, ) {
+    a {
+        color: $link;
+        &:hover {
+            color: $hover;
+        }
+    }
+}
+@include link(black, red);
+
+
+.profileInfo_wrapper {
+    display: grid;
+    grid-template-columns: minmax(250px, 120px) minmax(720px, 1fr);
+    grid-template-rows: 40px 1fr;
+    grid-template-areas: "username aboutme" "userphoto aboutme";
+    gap: 10px;
+    margin: 0px 0px 10px 0px;
+    
+
+    h4 {
+        text-align: center;
+    }
+}
+
+
+.userName {
+    text-align: center;
+    width: 100%;
+    grid-area: username;
+    color: white;
+    font-size: 30px;
+    background-color: $blue;
+    border-radius: 10px;
+}
+
+
+.userPhoto {
+    grid-area: userphoto;
+    img {
+        width: 100%;
+        border-radius: 50%;
+        border: 3px solid $blue;
+        box-sizing: border-box;
+        margin-bottom: 5px;
+    }
+    .photoFile {
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+    }
+    .changePhotoLabel {
+        background-color: $lightBlue;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        transition-duration: .15s;
+        cursor: pointer;
+        &:hover {
+            background-color: $blue;
+        }
+    }
+}
+
+
+.aboutMe {
+    grid-area: aboutme;
+    width: 100%;
+    padding: 5px;
+    background-color: #efeff2;
+    border-radius: 20px;
+    border: 1px solid $blue;
+}
+
+
+
+
+.contactsBlock {
+    margin-left: 0px auto;
+    text-align: center;
+}
+.contacts {
+    color: #7c80f8;
+    padding: 0px 5px;
+    text-decoration: none;
+    font-size: 20px;
+    transition-duration: .3s;
+    // transition-delay: 0.07s;
+    &:hover {
+        @include padd(0px 25px);
+        color: #0008f7;
+    }
+}

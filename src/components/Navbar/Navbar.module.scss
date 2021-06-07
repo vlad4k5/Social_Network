@@ -1,0 +1,40 @@
+.link {
+    display: inline-block;
+    padding: 15px 10%;
+    width: 100%;
+    text-decoration: none;
+    color: #5b5ff0;
+    font-size: 1.5em;
+    background-color: ghostwhite;
+    transition-duration: 0.15s;
+    &:hover {
+        color: #262df5;
+        font-weight: bold;
+        background-color: #efeff2;
+    }
+}
+
+.active {
+    color: #ce888e;
+    &:hover {
+        color: #e9505d
+    } 
+}
+ 
+
+
+// .test {
+//     width: 200px;
+//     height: 200px;
+//     background-color: lightskyblue;
+//     margin: 30px auto;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     font-size: 35px;
+//     transition: 2s;
+//     // &:active{
+//     //     transform: rotate3d(3,3,3, 720deg) scale(5,5);
+        
+//     // }
+// }
