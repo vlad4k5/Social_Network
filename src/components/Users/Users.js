@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { usersAPI } from "../../api/api";
 import withAuthRedirect from "../../hocs/withAuthRedirect";
-import { getUsers } from "../../store/users-reducer";
+import { getUsers } from "../../store/users-reducer.ts";
 import Paginator from "../common/Paginator/Paginator";
 import UserItem from "./UserItem/UserItem";
 

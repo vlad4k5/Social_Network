@@ -6,19 +6,28 @@ const SET_USER_DATA = "auth-reducer/SET_USER_DATA";
 const SET_CAPTCHA = "auth-reducer/SET_CAPTCHA";
 const SET_ERROR_MESSAGE = "auth-reducer/SET_ERROR_MESSAGE";
 
+type UserDataType = {
+    email: string | null
+    id: number | null
+    login: string | null
+}
+
 
 let initialState = {
     userData: {
-        email: null,
-        id: null,
-        login: null
-    },
-    isAuth: null,
-    captcha: null,
-    errorMessage: null
+        email: null as string | null,
+        id: null as number | null,
+        login: null as string | null
+    } as UserDataType,
+    isAuth: null as boolean | null,
+    captcha: null as string | null,
+    errorMessage: null as string | null
 }
+type InitialStateType = typeof initialState;
 
-const authReducer = (state = initialState, action) => {
+
+
+const authReducer = (state = initialState, action: any): InitialStateType => {
     switch (action.type) {
         case SET_USER_DATA: {
             return { ...state, isAuth: action.isAuth, userData: action.userData ? action.userData : { email: null, id: null, login: null } }
@@ -35,12 +44,31 @@ const authReducer = (state = initialState, action) => {
 }
 
 
-const setUserData = (isAuth, userData) => ({ type: SET_USER_DATA, isAuth, userData });
-const setCaptcha = (captcha) => ({ type: SET_CAPTCHA, captcha });
-const setErrorMessage = (errorMessage) => ({ type: SET_ERROR_MESSAGE, errorMessage });
+type SetUserDataActionType = {
+    type: typeof SET_USER_DATA
+    isAuth: boolean
+    userData: UserDataType | null
+}
+const setUserData = (isAuth: boolean, userData: UserDataType | null): SetUserDataActionType => ({ type: SET_USER_DATA, isAuth, userData });
 
 
-export const userAuthorizing = () => dispatch => {
+type SetCaptchaActionType = {
+    type: typeof SET_CAPTCHA
+    captcha: string
+}
+const setCaptcha = (captcha: string): SetCaptchaActionType => ({ type: SET_CAPTCHA, captcha });
+
+
+type SetErrorMessageActionType = {
+    type: typeof SET_ERROR_MESSAGE
+    errorMessage: string | null
+}
+const setErrorMessage = (errorMessage: string | null): SetErrorMessageActionType => ({ type: SET_ERROR_MESSAGE, errorMessage });
+
+
+
+
+export const userAuthorizing = () => (dispatch: any) => {
     authAPI.isUserAuthorized()
         .then(response => {
             if (response.data.resultCode === 0) {
@@ -54,7 +82,7 @@ export const userAuthorizing = () => dispatch => {
 }
 
 
-export const logout = () => dispatch => {
+export const logout = () => (dispatch: any) => {
     debugger
     authAPI.logout()
         .then(response => {
@@ -66,14 +94,21 @@ export const logout = () => dispatch => {
         })
 }
 
-export const login = (loginData) => dispatch => {
+
+type LoginDataType = {
+    email: string | null
+    password: string | null
+    rememberMe: boolean
+    captcha: string | null
+}
+export const login = (loginData: LoginDataType) => (dispatch: any) => {
     debugger
     authAPI.login(loginData)
         .then(response => {
             if (response.data.resultCode === 0) {
                 dispatch(userAuthorizing());
                 dispatch(setErrorMessage(null));
-            } else if (response.data.resultCode = 10) {
+            } else if (response.data.resultCode === 10) {
                 dispatch(setErrorMessage(response.data.messages[0]))
                 authAPI.getCaptcha()
                     .then(res => {

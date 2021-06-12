@@ -1,5 +1,4 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router";
 import { login } from "../../store/auth-reducer";

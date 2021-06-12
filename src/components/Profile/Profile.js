@@ -9,7 +9,6 @@ import basicPhoto from "../../assets/images/basicUserPhoto.png";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
 const Profile = ({ getProfile, getStatus, match, ownerId, profileInfo, status, posts, addNewPost, updateStatus, updatePhoto }) => {
-
     useEffect(() => {
         if (match.params.userId) {
             getProfile(match.params.userId);

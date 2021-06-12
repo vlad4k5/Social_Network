@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { connect } from "react-redux";
 import { Redirect, Route, Switch } from "react-router";
 import s from './App.module.scss';
@@ -28,7 +28,7 @@ const App = ({ userAuthorizing, isAuth, }) => {
     </header>
 
     <div className={s.app__Navbar}>
-      <Navbar className={s.app__Navbar} />
+      <Navbar />
     </div>
 
     <main className={s.app__Content}>
@@ -39,6 +39,7 @@ const App = ({ userAuthorizing, isAuth, }) => {
         <Route path="/users" render={() => <Users />} />
         <Route path="/settings" render={() => <Settings />} />
         <Route path="/login" render={() => <Login />} />
+        <Redirect from="" to="/profile" />
       </Switch>
     </main>
 
