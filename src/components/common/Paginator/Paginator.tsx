@@ -1,11 +1,21 @@
 import s from "./Paginator.module.scss";
 
-const Paginator = ({ totalItemsCount, onPageChanged, currentPage = 1, itemsPerPage, loading, pagesInPaginator = 10 }) => {
+type PropsType = {
+    totalItemsCount: number
+    onPageChanged: (pageNumber: number) => void
+    currentPage?: number
+    itemsPerPage: number
+    loading: boolean
+    pagesInPaginator?: number
+}
+
+
+const Paginator: React.FC<PropsType> = ({ totalItemsCount, onPageChanged, currentPage = 1, itemsPerPage, loading, pagesInPaginator = 10 }) => {
     let totalPages = Math.ceil(totalItemsCount / itemsPerPage);
 
     let lastPage = pagesInPaginator + currentPage - 1;
 
-    let pages = []
+    let pages = [];
 
     if (currentPage >= 7 && currentPage <= totalPages - 3) {
         for (let i = currentPage; i <= lastPage; i++) {

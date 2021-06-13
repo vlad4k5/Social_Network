@@ -10,10 +10,25 @@ import Profile from "./components/Profile/Profile";
 import Settings from "./components/Settings/Settings";
 import Users from "./components/Users/Users";
 import { userAuthorizing } from "./store/auth-reducer";
+import { AppStateType } from "./store/store";
+import { ProfileInfoType } from "./store/types/types";
 
+type TStateProps = {
+  isAuth: boolean | null
+  profileInfo: ProfileInfoType | null
+  status: string | null
+}
 
+type TDispatchProps = {
+  userAuthorizing: () => void
+}
+type TOwnProps = {
 
-const App = ({ userAuthorizing, isAuth, }) => {
+}
+
+type PropsType = TStateProps & TDispatchProps & TOwnProps
+
+const App: React.FC<PropsType> = ({ userAuthorizing, isAuth, profileInfo, status }) => {
 
   useEffect(() => {
     userAuthorizing();
@@ -46,11 +61,11 @@ const App = ({ userAuthorizing, isAuth, }) => {
   </div>
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: AppStateType): TStateProps => ({
   profileInfo: state.profile.profileInfo,
   status: state.profile.status,
   isAuth: state.auth.isAuth
 })
 
 
-export default connect(mapStateToProps, { userAuthorizing })(App);
+export default connect<TStateProps, TDispatchProps, TOwnProps, AppStateType>(mapStateToProps, { userAuthorizing })(App);

@@ -1,8 +1,21 @@
 import s from "./ProfileInfo.module.scss";
 import basicPhoto from "../../../assets/images/basicUserPhoto.png";
 import { useEffect, useState } from "react";
+import { ProfileInfoType } from "../../../store/types/types";
 
-const ProfileInfo = ({ profileInfo, status, updateStatus, updatePhoto, isOwner }) => {
+
+type PropsType = {
+    profileInfo: ProfileInfoType | null
+    status: string | null
+    updateStatus: (statusText: string | null) => void
+    updatePhoto: (file: any) => void
+    isOwner: boolean | null
+}
+
+
+
+
+const ProfileInfo: React.FC<PropsType> = ({ profileInfo, status, updateStatus, updatePhoto, isOwner }) => {
     const [statusEditMode, setStatusEditMode] = useState(false)
     const [statusText, setStatusText] = useState(status)
 
@@ -15,15 +28,20 @@ const ProfileInfo = ({ profileInfo, status, updateStatus, updatePhoto, isOwner }
         setStatusEditMode(false)
     }
 
-    const onStatusTextChanged = (e) => {
+    const onStatusTextChanged = (e: React.FormEvent<HTMLInputElement>) => {
         setStatusText(e.currentTarget.value);
     }
-
-    const onMainPhotoSelected = (e) => {
+    // @ts-ignore
+    const onMainPhotoSelected = (e: any) => {
         updatePhoto(e.target.files[0]);
     }
 
-    debugger
+
+
+    if (!profileInfo) return <div>LLLLLoadign...</div>
+
+
+
     return <div className={s.profileInfo_wrapper}>
 
         <span className={s.userName}>{profileInfo.fullName}</span>
@@ -38,10 +56,11 @@ const ProfileInfo = ({ profileInfo, status, updateStatus, updatePhoto, isOwner }
 
 
         <div className={s.aboutMe}>
-            <span>Status: </span>
+            <label htmlFor="status">Status: </label>
             {statusEditMode && isOwner
+                // @ts-ignore
                 ? <input value={statusText} onChange={onStatusTextChanged} onBlur={saveNewStatus} autoFocus={true} />
-                : <span onClick={() => { setStatusEditMode(true) }}>{status}</span>
+                : <span id="status" onClick={() => { setStatusEditMode(true) }}>{status ? status : "User has no status"}</span>
             }
 
             <h4>About me:</h4>

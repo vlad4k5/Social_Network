@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
 import { compose } from "redux";
 import { usersAPI } from "../../api/api";
 import withAuthRedirect from "../../hocs/withAuthRedirect";
-import { getUsers } from "../../store/users-reducer.ts";
+import { UserType } from "../../store/types/types";
+// import { getUsers } from "../../store/users-reducer.ts";
 import Paginator from "../common/Paginator/Paginator";
 import UserItem from "./UserItem/UserItem";
 
-const Users = (props) => {
+
+
+const Users: React.FC = () => {
     const [loading, setLoading] = useState(false);
-    const [users, setUsers] = useState(null);
+    const [users, setUsers] = useState<Array<UserType>>([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalUsersCount, setTotalUsersCount] = useState(0);
     const usersPerPage = 20;
@@ -26,7 +29,7 @@ const Users = (props) => {
         fetchUsers();
     }, [currentPage])
 
-    const onPageChanged = (page) => {
+    const onPageChanged = (page: number) => {
         setCurrentPage(page);
     }
 

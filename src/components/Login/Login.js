@@ -7,6 +7,9 @@ import * as Yup from "yup";
 import TextError from "../common/TextError/TextError";
 
 
+
+
+
 const Login = ({ isAuth, captcha, login, errorMessage }) => {
     const initialValues = {
         email: null,
@@ -14,7 +17,7 @@ const Login = ({ isAuth, captcha, login, errorMessage }) => {
         rememberMe: false,
         captcha: null
     }
-    const onSubmit = (values, { resetForm }) => {
+    const onSubmit = (values) => {
         console.log("Values: ", values);
         login(values);
     }
@@ -29,30 +32,30 @@ const Login = ({ isAuth, captcha, login, errorMessage }) => {
     }
 
     return <div className={s.loginWrapper}>
-        <h2>Login Page</h2>
-        <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
+        <h2>Login Page </h2>
+        < Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema} >
             <Form>
-                {errorMessage && <div className={s.serverErrorMessage}>{errorMessage}</div>}
-                <div className={s.loginItem}>
-                    <label htmlFor="email">E-mail:</label>
-                    <ErrorMessage name="email" component={TextError} /><br />
-                    <Field id="email" name="email" />
+                {errorMessage && <div className={s.serverErrorMessage}> {errorMessage} </div>}
+                <div div className={s.loginItem} >
+                    <label htmlFor="email" > E - mail: </label>
+                    < ErrorMessage name="email" component={TextError} /> <br />
+                    < Field id="email" name="email" />
                 </div>
-                <div className={s.loginItem}>
-                    <label htmlFor="password">Password:</label>
-                    <ErrorMessage name="password" component={TextError} /><br />
-                    <Field type="password" id="password" name="password" />
+                <div div className={s.loginItem} >
+                    <label htmlFor="password" > Password: </label>
+                    < ErrorMessage name="password" component={TextError} /> <br />
+                    < Field type="password" id="password" name="password" />
                 </div>
-                <div className={s.loginItem}>
-                    <label htmlFor="rememberMe">Remember me:</label>
-                    <Field type="checkbox" id="rememberMe" name="rememberMe" />
+                < div className={s.loginItem} >
+                    <label htmlFor="rememberMe" > Remember me: </label>
+                    < Field type="checkbox" id="rememberMe" name="rememberMe" />
                 </div><br />
                 {captcha ? <div>
-                    <img src={captcha} alt="captcha" /><br />
-                    <label htmlFor="captcha">Please write a symbols from  captcha: </label><br />
+                    < img src={captcha} alt="captcha" /> <br />
+                    <div label htmlFor="captcha" > Please write a symbols from  captcha: </div><br />
                     <Field type="text" id="captcha" name="captcha" />
                 </div> : null}
-                <button>Login</button>
+                < button > Login </button>
 
             </Form>
         </Formik>

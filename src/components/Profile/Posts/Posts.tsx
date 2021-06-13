@@ -1,24 +1,36 @@
 import s from "./Posts.module.scss"
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field, FormikHelpers } from "formik";
 import Post from "./Post";
+import { PostType } from "../../../store/types/types";
 
-const MyPosts = ({ posts, userPhoto, addNewPost, isOwner }) => {
+
+
+type PropsType = {
+    posts: Array<PostType>
+    userPhoto: any
+    addNewPost: (postText: string) => void
+    isOwner: boolean | null
+}
+
+
+
+const MyPosts: React.FC<PropsType> = ({ posts, userPhoto, addNewPost, isOwner }) => {
     const profilePosts = [...posts].reverse().map(p =>
         <Post message={p.message} likesCount={p.likesCount} userPhoto={userPhoto} id={p.id} />)
 
-    const initialValues = {
-        postText: ""
+    interface Values {
+        postText: string
     }
-    const onSubmit = (values, { resetForm }) => {
+    const onSubmit = (values: Values, { resetForm }: FormikHelpers<Values>) => {
         addNewPost(values.postText);
         resetForm();
     }
 
     return <div>
-        {isOwner && <Formik initialValues={initialValues} onSubmit={onSubmit}>
+        {isOwner && <Formik initialValues={{ postText: "" }} onSubmit={onSubmit}>
             <Form>
                 <Field as="textarea" name="postText">
-                    {(props) => {
+                    {(props: any) => {
 
                         const { field, form, meta } = props;
 

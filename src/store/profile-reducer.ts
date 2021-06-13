@@ -85,23 +85,20 @@ export const getStatus = (userId: number) => (dispatch: any) => {
     profileAPI.getStatus(userId)
         .then(response => {
             if (response.status === 200) {
-                if (response.data === null) {
-                    dispatch(setStatus("user has no status"))
-                } else {
+                if (response.data !== null) {
                     dispatch(setStatus(response.data))
                 }
             }
         })
 }
 
-export const updateStatus = (status: string) => (dispatch: any) => {
+export const updateStatus = (status: string | null) => (dispatch: any) => {
     profileAPI.setStatus(status)
         .then(response => {
             if (response.data.resultCode === 0) {
                 dispatch(setStatus(status))
             }
         })
-
 }
 
 

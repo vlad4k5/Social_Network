@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { compose } from "redux";
@@ -7,8 +7,30 @@ import { addNewPost, getProfile, getStatus, updatePhoto, updateStatus } from "..
 import Posts from "./Posts/Posts";
 import basicPhoto from "../../assets/images/basicUserPhoto.png";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import { PostType, ProfileInfoType } from "../../store/types/types";
+import { AppStateType } from "../../store/store";
 
-const Profile = ({ getProfile, getStatus, match, ownerId, profileInfo, status, posts, addNewPost, updateStatus, updatePhoto }) => {
+type TStateProps = {
+    profileInfo: ProfileInfoType | null
+    status: string | null
+    posts: Array<PostType>
+    ownerId: number | null
+}
+type TDispatchProps = {
+    getProfile: (userId: number) => void
+    getStatus: (userId: number) => void
+    addNewPost: (postText: string) => void
+    updateStatus: (status: string | null) => void
+    updatePhoto: (photoFile: any) => any
+}
+type TOwnProps = {
+    match: any
+}
+
+
+type PropsType = TStateProps & TDispatchProps & TOwnProps
+
+const Profile: React.FC<PropsType> = ({ getProfile, getStatus, match, ownerId, profileInfo, status, posts, addNewPost, updateStatus, updatePhoto }) => {
     useEffect(() => {
         if (match.params.userId) {
             getProfile(match.params.userId);
@@ -44,7 +66,7 @@ const Profile = ({ getProfile, getStatus, match, ownerId, profileInfo, status, p
     </>
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppStateType): TStateProps => ({
     profileInfo: state.profile.profileInfo,
     status: state.profile.status,
     posts: state.profile.posts,
@@ -53,6 +75,6 @@ const mapStateToProps = (state) => ({
 
 export default compose(
     withAuthRedirect,
-    connect(mapStateToProps, { getProfile, getStatus, addNewPost, updateStatus, updatePhoto }),
+    connect<TStateProps, TDispatchProps, TOwnProps, AppStateType>(mapStateToProps, { getProfile, getStatus, addNewPost, updateStatus, updatePhoto }),
     withRouter
 )(Profile);
