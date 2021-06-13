@@ -12,7 +12,7 @@ import { AppStateType } from "../../store/store";
 
 type TStateProps = {
     profileInfo: ProfileInfoType | null
-    status: string | null
+    status: string
     posts: Array<PostType>
     ownerId: number | null
 }
@@ -20,7 +20,7 @@ type TDispatchProps = {
     getProfile: (userId: number) => void
     getStatus: (userId: number) => void
     addNewPost: (postText: string) => void
-    updateStatus: (status: string | null) => void
+    updateStatus: (status: string) => void
     updatePhoto: (photoFile: any) => any
 }
 type TOwnProps = {

@@ -6,8 +6,8 @@ import { ProfileInfoType } from "../../../store/types/types";
 
 type PropsType = {
     profileInfo: ProfileInfoType | null
-    status: string | null
-    updateStatus: (statusText: string | null) => void
+    status: string
+    updateStatus: (statusText: string) => void
     updatePhoto: (file: any) => void
     isOwner: boolean | null
 }

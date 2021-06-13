@@ -32,17 +32,17 @@ type ActionsType = SetUsersActionType
 
 type SetUsersActionType = {
     type: typeof SET_USERS
-    users: UserType
+    users: Array<UserType>
     totalUsersCount: number
 }
-const setUsers = (users: UserType, totalUsersCount: number): SetUsersActionType => ({ type: SET_USERS, users, totalUsersCount });
+const setUsers = (users: Array<UserType>, totalUsersCount: number): SetUsersActionType => ({ type: SET_USERS, users, totalUsersCount });
 
 
 export const getUsers = (count: number, page: number) => (dispatch: Dispatch<ActionsType>) => {
     usersAPI.getUsers(count, page)
         .then(response => {
-            if (response.status === 200) {
-                dispatch(setUsers(response.data.items, response.data.totalCount));
+            if (!response.error) {
+                dispatch(setUsers(response.items, response.totalCount));
             }
         })
 }

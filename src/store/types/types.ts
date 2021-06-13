@@ -27,6 +27,7 @@ export type PostType = {
     likesCount: number
 }
 
+
 export type UserType = {
     name: string
     id: number
@@ -34,4 +35,12 @@ export type UserType = {
     photos: PhotosType
     status: string | null
     followed: boolean
+}
+
+
+export type LoginDataType = {
+    email: string | null
+    password: string | null
+    rememberMe: boolean
+    captcha: string | null
 }

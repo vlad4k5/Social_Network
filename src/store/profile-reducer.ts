@@ -9,7 +9,7 @@ const ADD_NEW_POST = "profile-reducer/ADD_NEW_POST"
 
 
 let initialState = {
-    status: null as string | null,
+    status: "",
     profileInfo: null as ProfileInfoType | null,
     posts: [
         { id: 1, message: "My first post", likesCount: 190 },
@@ -28,7 +28,7 @@ const profileReducer = (state = initialState, action: any): InitialStateType => 
             return { ...state, status: action.status }
         }
         case SET_PHOTO: {
-            return { ...state, profileInfo: { ...state.profileInfo, photos: action.photos } as ProfileInfoType }
+            return { ...state, profileInfo: { ...state.profileInfo, photos: action.photos } as ProfileInfoType } // !!!!!!!!!!!
         }
         case ADD_NEW_POST: {
             let newPost = { id: state.posts.length + 1, message: action.postText, likesCount: 0 }
@@ -71,7 +71,7 @@ type DispatchType = Dispatch<ActionsType>
 export const getProfile = (userId: number) => (dispatch: DispatchType) => {
     profileAPI.getProfile(userId)
         .then(response => {
-            dispatch(setProfile(response.data))
+            dispatch(setProfile(response))
         })
 
 }
@@ -79,7 +79,7 @@ export const getProfile = (userId: number) => (dispatch: DispatchType) => {
 export const updateProfile = (profileInfo: ProfileInfoType) => (dispatch: DispatchType) => {
     profileAPI.setProfile(profileInfo)
         .then(response => {
-            if (response.data.resultCode === 0) {
+            if (response.resultCode === 0) {
                 dispatch(setProfile(profileInfo))
             }
         })
@@ -90,18 +90,18 @@ export const updateProfile = (profileInfo: ProfileInfoType) => (dispatch: Dispat
 export const getStatus = (userId: number) => (dispatch: DispatchType) => {
     profileAPI.getStatus(userId)
         .then(response => {
-            if (response.status === 200) {
-                if (response.data !== null) {
-                    dispatch(setStatus(response.data))
-                }
+            if (response === null) {
+                dispatch(setStatus(""))
+            } else {
+                dispatch(setStatus(response))
             }
         })
 }
 
-export const updateStatus = (status: string | null) => (dispatch: DispatchType) => {
+export const updateStatus = (status: string) => (dispatch: DispatchType) => {
     profileAPI.setStatus(status)
         .then(response => {
-            if (response.data.resultCode === 0) {
+            if (response.resultCode === 0) {
                 dispatch(setStatus(status))
             }
         })
@@ -111,8 +111,8 @@ export const updateStatus = (status: string | null) => (dispatch: DispatchType) 
 export const updatePhoto = (photoFile: any) => (dispatch: DispatchType) => {
     profileAPI.setUserImage(photoFile)
         .then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(setPhoto(response.data.data.photos))
+            if (response.resultCode === 0) {
+                dispatch(setPhoto(response.data.photos))
             }
         })
 

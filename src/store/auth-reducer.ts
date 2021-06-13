@@ -1,6 +1,7 @@
 import { Dispatch } from "redux";
 import { authAPI } from "../api/api"
 import { getProfile, getStatus, setProfile, setStatus } from "./profile-reducer";
+import { LoginDataType } from "./types/types";
 
 
 const SET_USER_DATA = "auth-reducer/SET_USER_DATA";
@@ -72,10 +73,10 @@ const setErrorMessage = (errorMessage: string | null): TSetErrorMessage => ({ ty
 export const userAuthorizing = () => (dispatch: any) => {
     authAPI.isUserAuthorized()
         .then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(setUserData(true, response.data.data));
-                dispatch(getProfile(response.data.data.id));
-                dispatch(getStatus(response.data.data.id));
+            if (response.resultCode === 0) {
+                dispatch(setUserData(true, response.data));
+                dispatch(getProfile(response.data.id));
+                dispatch(getStatus(response.data.id));
             } else {
                 dispatch(setUserData(false, null));
             }
@@ -87,7 +88,7 @@ export const logout = () => (dispatch: any) => {
     debugger
     authAPI.logout()
         .then(response => {
-            if (response.data.resultCode === 0) {
+            if (response.resultCode === 0) {
                 dispatch(setUserData(false, null));
                 dispatch(setProfile(null));
                 dispatch(setStatus(null));
@@ -96,25 +97,20 @@ export const logout = () => (dispatch: any) => {
 }
 
 
-type LoginDataType = {
-    email: string | null
-    password: string | null
-    rememberMe: boolean
-    captcha: string | null
-}
+
 export const login = (loginData: LoginDataType) => (dispatch: any) => {
     debugger
     authAPI.login(loginData)
         .then(response => {
-            if (response.data.resultCode === 0) {
+            if (response.resultCode === 0) {
                 dispatch(userAuthorizing());
                 dispatch(setErrorMessage(null));
-            } else if (response.data.resultCode === 10) {
-                dispatch(setErrorMessage(response.data.messages[0]))
+            } else if (response.resultCode === 10) {
+                dispatch(setErrorMessage(response.messages[0]))
                 authAPI.getCaptcha()
                     .then(res => {
                         debugger
-                        dispatch(setCaptcha(res.data.url))
+                        dispatch(setCaptcha(res.url))
                     })
             }
         })

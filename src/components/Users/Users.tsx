@@ -22,8 +22,8 @@ const Users: React.FC = () => {
         const fetchUsers = async () => {
             setLoading(true);
             const res = await usersAPI.getUsers(usersPerPage, currentPage);
-            setUsers(res.data.items)
-            setTotalUsersCount(res.data.totalCount)
+            setUsers(res.items)
+            setTotalUsersCount(res.totalCount)
             setLoading(false);
         }
         fetchUsers();
