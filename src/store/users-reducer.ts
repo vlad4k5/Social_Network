@@ -1,5 +1,8 @@
+import { AppStateType } from './store';
+import { Dispatch } from "redux";
+import { ThunkAction } from "redux-thunk";
 import { usersAPI } from "../api/api";
-import { PhotosType, UserType } from "./types/types";
+import { UserType } from "./types/types";
 
 const SET_USERS = "users-reducer/SET_USERS";
 
@@ -15,7 +18,7 @@ let initialState = {
 type InitialStateType = typeof initialState
 
 
-const usersReducer = (state = initialState, action: any): InitialStateType => {
+const usersReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case SET_USERS: {
             return { ...state, users: action.users, totalUsersCount: action.totalUsersCount } as any
@@ -23,6 +26,9 @@ const usersReducer = (state = initialState, action: any): InitialStateType => {
         default: return state
     }
 }
+
+type ActionsType = SetUsersActionType
+
 
 type SetUsersActionType = {
     type: typeof SET_USERS
@@ -32,11 +38,9 @@ type SetUsersActionType = {
 const setUsers = (users: UserType, totalUsersCount: number): SetUsersActionType => ({ type: SET_USERS, users, totalUsersCount });
 
 
-export const getUsers = (count: number, page: number) => (dispatch: any) => {
-    debugger
+export const getUsers = (count: number, page: number) => (dispatch: Dispatch<ActionsType>) => {
     usersAPI.getUsers(count, page)
         .then(response => {
-            debugger
             if (response.status === 200) {
                 dispatch(setUsers(response.data.items, response.data.totalCount));
             }

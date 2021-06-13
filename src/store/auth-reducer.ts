@@ -1,3 +1,4 @@
+import { Dispatch } from "redux";
 import { authAPI } from "../api/api"
 import { getProfile, getStatus, setProfile, setStatus } from "./profile-reducer";
 
@@ -27,7 +28,7 @@ type InitialStateType = typeof initialState;
 
 
 
-const authReducer = (state = initialState, action: any): InitialStateType => {
+const authReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case SET_USER_DATA: {
             return { ...state, isAuth: action.isAuth, userData: action.userData ? action.userData : { email: null, id: null, login: null } }
@@ -43,30 +44,30 @@ const authReducer = (state = initialState, action: any): InitialStateType => {
     }
 }
 
+type ActionsType = TSetUserData | TSetCaptcha | TSetErrorMessage
 
-type SetUserDataActionType = {
+type TSetUserData = {
     type: typeof SET_USER_DATA
     isAuth: boolean
     userData: UserDataType | null
 }
-const setUserData = (isAuth: boolean, userData: UserDataType | null): SetUserDataActionType => ({ type: SET_USER_DATA, isAuth, userData });
-
-
-type SetCaptchaActionType = {
+type TSetCaptcha = {
     type: typeof SET_CAPTCHA
     captcha: string
 }
-const setCaptcha = (captcha: string): SetCaptchaActionType => ({ type: SET_CAPTCHA, captcha });
-
-
-type SetErrorMessageActionType = {
+type TSetErrorMessage = {
     type: typeof SET_ERROR_MESSAGE
     errorMessage: string | null
 }
-const setErrorMessage = (errorMessage: string | null): SetErrorMessageActionType => ({ type: SET_ERROR_MESSAGE, errorMessage });
+
+
+const setUserData = (isAuth: boolean, userData: UserDataType | null): TSetUserData => ({ type: SET_USER_DATA, isAuth, userData });
+const setCaptcha = (captcha: string): TSetCaptcha => ({ type: SET_CAPTCHA, captcha });
+const setErrorMessage = (errorMessage: string | null): TSetErrorMessage => ({ type: SET_ERROR_MESSAGE, errorMessage });
 
 
 
+// type TDispatch = Dispatch<ActionsType>
 
 export const userAuthorizing = () => (dispatch: any) => {
     authAPI.isUserAuthorized()

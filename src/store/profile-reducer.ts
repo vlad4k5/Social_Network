@@ -1,3 +1,4 @@
+import { Dispatch } from "redux"
 import { profileAPI } from "../api/api"
 import { PhotosType, PostType, ProfileInfoType } from "./types/types"
 
@@ -37,6 +38,9 @@ const profileReducer = (state = initialState, action: any): InitialStateType => 
     }
 }
 
+
+type ActionsType = SetProfileActionType | SetStatusActionType | SetPhotoActionType | AddNewPostActionType
+
 type SetProfileActionType = {
     type: typeof SET_PROFILE
     profileInfo: ProfileInfoType | null
@@ -61,16 +65,18 @@ export const addNewPost = (postText: string): AddNewPostActionType => ({ type: A
 
 
 
-export const getProfile = (userId: number) => (dispatch: any) => {
+
+type DispatchType = Dispatch<ActionsType>
+
+export const getProfile = (userId: number) => (dispatch: DispatchType) => {
     profileAPI.getProfile(userId)
         .then(response => {
-            debugger
             dispatch(setProfile(response.data))
         })
 
 }
 
-export const updateProfile = (profileInfo: ProfileInfoType) => (dispatch: any) => {
+export const updateProfile = (profileInfo: ProfileInfoType) => (dispatch: DispatchType) => {
     profileAPI.setProfile(profileInfo)
         .then(response => {
             if (response.data.resultCode === 0) {
@@ -81,7 +87,7 @@ export const updateProfile = (profileInfo: ProfileInfoType) => (dispatch: any) =
 }
 
 
-export const getStatus = (userId: number) => (dispatch: any) => {
+export const getStatus = (userId: number) => (dispatch: DispatchType) => {
     profileAPI.getStatus(userId)
         .then(response => {
             if (response.status === 200) {
@@ -92,7 +98,7 @@ export const getStatus = (userId: number) => (dispatch: any) => {
         })
 }
 
-export const updateStatus = (status: string | null) => (dispatch: any) => {
+export const updateStatus = (status: string | null) => (dispatch: DispatchType) => {
     profileAPI.setStatus(status)
         .then(response => {
             if (response.data.resultCode === 0) {
@@ -102,12 +108,10 @@ export const updateStatus = (status: string | null) => (dispatch: any) => {
 }
 
 
-export const updatePhoto = (photoFile: any) => (dispatch: any) => {
-    debugger
+export const updatePhoto = (photoFile: any) => (dispatch: DispatchType) => {
     profileAPI.setUserImage(photoFile)
         .then(response => {
             if (response.data.resultCode === 0) {
-                debugger
                 dispatch(setPhoto(response.data.data.photos))
             }
         })
