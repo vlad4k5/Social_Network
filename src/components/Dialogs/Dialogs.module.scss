@@ -15,12 +15,13 @@
     text-decoration: none;
     font-size: 1.4em;
     color: #8488eb;
+    &:hover{
+        /* background-color: rgb(247, 247, 247); */
+        color: blue;
+        font-weight: 500;
+    }
 }
-.linkToUserChat:hover{
-    /* background-color: rgb(247, 247, 247); */
-    color: blue;
-    font-weight: 500;
-}
+
 .dialogsUserPhoto {
     width: 40px;
 }

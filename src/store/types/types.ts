@@ -36,7 +36,10 @@ export type UserType = {
     status: string | null
     followed: boolean
 }
-
+export type UserDialogType = {
+    userName: string
+    id: number
+}
 
 export type LoginDataType = {
     email: string | null

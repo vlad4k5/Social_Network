@@ -1,9 +1,8 @@
+import { UserDialogType } from "./types/types";
+
 const ADD_NEW_MESSAGE = "auth-reducer/ADD_NEW_MESSAGE";
 
-type UserDialogType = {
-    userName: string
-    id: number
-}
+
 let initialState = {
     users: [
         { userName: "Dmitry", id: 1 },

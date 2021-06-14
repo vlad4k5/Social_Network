@@ -2,22 +2,33 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import { connect } from "react-redux";
 import { Redirect } from "react-router";
 import { login } from "../../store/auth-reducer";
-import s from "./Login.module.css"
+import s from "./Login.module.scss"
 import * as Yup from "yup";
 import TextError from "../common/TextError/TextError";
+import { LoginDataType } from "../../store/types/types";
+import { AppStateType } from "../../store/store";
 
+type TStateProps = {
+    isAuth: boolean | null
+    captcha: string | null
+    errorMessage: string | null
+}
+type TDispatchProps = {
+    login: (loginData: LoginDataType) => void
+}
+type PropsType = TStateProps & TDispatchProps
 
+const Login: React.FC<PropsType> = ({ isAuth, captcha, login, errorMessage }) => {
 
-
-
-const Login = ({ isAuth, captcha, login, errorMessage }) => {
-    const initialValues = {
-        email: null,
-        password: null,
-        rememberMe: false,
-        captcha: null
+    interface Values {
+        email: string
+        password: string
+        rememberMe: boolean
+        captcha: string | null
     }
-    const onSubmit = (values) => {
+
+
+    const onSubmit = (values: Values) => {
         console.log("Values: ", values);
         login(values);
     }
@@ -33,15 +44,23 @@ const Login = ({ isAuth, captcha, login, errorMessage }) => {
 
     return <div className={s.loginWrapper}>
         <h2>Login Page </h2>
-        < Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema} >
+        < Formik initialValues={{
+            email: "",
+            password: "",
+            rememberMe: false,
+            captcha: null
+        }}
+            onSubmit={onSubmit}
+            validationSchema={validationSchema}
+        >
             <Form>
                 {errorMessage && <div className={s.serverErrorMessage}> {errorMessage} </div>}
-                <div div className={s.loginItem} >
+                <div className={s.loginItem} >
                     <label htmlFor="email" > E - mail: </label>
                     < ErrorMessage name="email" component={TextError} /> <br />
                     < Field id="email" name="email" />
                 </div>
-                <div div className={s.loginItem} >
+                <div className={s.loginItem} >
                     <label htmlFor="password" > Password: </label>
                     < ErrorMessage name="password" component={TextError} /> <br />
                     < Field type="password" id="password" name="password" />
@@ -52,7 +71,7 @@ const Login = ({ isAuth, captcha, login, errorMessage }) => {
                 </div><br />
                 {captcha ? <div>
                     < img src={captcha} alt="captcha" /> <br />
-                    <div label htmlFor="captcha" > Please write a symbols from  captcha: </div><br />
+                    <label htmlFor="captcha" > Please write a symbols from  captcha: </label><br />
                     <Field type="text" id="captcha" name="captcha" />
                 </div> : null}
                 < button > Login </button>
@@ -63,10 +82,10 @@ const Login = ({ isAuth, captcha, login, errorMessage }) => {
     </div >
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: AppStateType) => ({
     isAuth: state.auth.isAuth,
     captcha: state.auth.captcha,
     errorMessage: state.auth.errorMessage
 })
 
-export default connect(mapStateToProps, { login })(Login);
+export default connect<TStateProps, TDispatchProps, {}, AppStateType>(mapStateToProps, { login })(Login);

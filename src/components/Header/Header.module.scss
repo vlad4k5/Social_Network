@@ -37,9 +37,9 @@
     color: ghostwhite;
     font-size: 1.4em;
     padding-right: 10px;
-}
-.linkToProfile:hover {
-    font-size: 1.5em;
+    &:hover {
+        font-size: 1.5em;
+    }
 }
 
 
@@ -48,7 +48,7 @@
     font-size: 1.5em;
     color: ghostwhite;
     color: ghostwhite;
-}
-.linkToLogin:hover {
-    text-decoration: underline;
+    &:hover {
+        text-decoration: underline;
+    }
 }
