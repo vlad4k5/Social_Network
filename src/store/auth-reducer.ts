@@ -1,18 +1,11 @@
+import { InferActionTypes } from './store';
 import { Dispatch } from "redux";
 import { authAPI } from "../api/api"
 import { getProfile, getStatus, setProfile, setStatus } from "./profile-reducer";
-import { LoginDataType } from "./types/types";
+import { LoginDataType, UserDataType } from "./types/types";
 
 
-const SET_USER_DATA = "auth-reducer/SET_USER_DATA";
-const SET_CAPTCHA = "auth-reducer/SET_CAPTCHA";
-const SET_ERROR_MESSAGE = "auth-reducer/SET_ERROR_MESSAGE";
 
-type UserDataType = {
-    email: string | null
-    id: number | null
-    login: string | null
-}
 
 
 let initialState = {
@@ -27,17 +20,17 @@ let initialState = {
 }
 type InitialStateType = typeof initialState;
 
-
+type ActionsType = InferActionTypes<typeof actions>
 
 const authReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
-        case SET_USER_DATA: {
+        case 'SET_USER_DATA': {
             return { ...state, isAuth: action.isAuth, userData: action.userData ? action.userData : { email: null, id: null, login: null } }
         }
-        case SET_CAPTCHA: {
+        case 'SET_CAPTCHA': {
             return { ...state, captcha: action.captcha }
         }
-        case SET_ERROR_MESSAGE: {
+        case 'SET_ERROR_MESSAGE': {
             debugger
             return { ...state, errorMessage: action.errorMessage }
         }
@@ -45,26 +38,14 @@ const authReducer = (state = initialState, action: ActionsType): InitialStateTyp
     }
 }
 
-type ActionsType = TSetUserData | TSetCaptcha | TSetErrorMessage
-
-type TSetUserData = {
-    type: typeof SET_USER_DATA
-    isAuth: boolean
-    userData: UserDataType | null
-}
-type TSetCaptcha = {
-    type: typeof SET_CAPTCHA
-    captcha: string
-}
-type TSetErrorMessage = {
-    type: typeof SET_ERROR_MESSAGE
-    errorMessage: string | null
-}
 
 
-const setUserData = (isAuth: boolean, userData: UserDataType | null): TSetUserData => ({ type: SET_USER_DATA, isAuth, userData });
-const setCaptcha = (captcha: string): TSetCaptcha => ({ type: SET_CAPTCHA, captcha });
-const setErrorMessage = (errorMessage: string | null): TSetErrorMessage => ({ type: SET_ERROR_MESSAGE, errorMessage });
+
+const actions = {
+    setUserData: (isAuth: boolean, userData: UserDataType | null) => ({ type: 'SET_USER_DATA', isAuth, userData } as const),
+    setCaptcha: (captcha: string) => ({ type: 'SET_CAPTCHA', captcha } as const),
+    setErrorMessage: (errorMessage: string | null) => ({ type: 'SET_ERROR_MESSAGE', errorMessage } as const)
+}
 
 
 
@@ -74,11 +55,11 @@ export const userAuthorizing = () => (dispatch: any) => {
     authAPI.isUserAuthorized()
         .then(response => {
             if (response.resultCode === 0) {
-                dispatch(setUserData(true, response.data));
+                dispatch(actions.setUserData(true, response.data));
                 dispatch(getProfile(response.data.id));
                 dispatch(getStatus(response.data.id));
             } else {
-                dispatch(setUserData(false, null));
+                dispatch(actions.setUserData(false, null));
             }
         })
 }
@@ -89,7 +70,7 @@ export const logout = () => (dispatch: any) => {
     authAPI.logout()
         .then(response => {
             if (response.resultCode === 0) {
-                dispatch(setUserData(false, null));
+                dispatch(actions.setUserData(false, null));
                 dispatch(setProfile(null));
                 dispatch(setStatus(null));
             }
@@ -104,13 +85,13 @@ export const login = (loginData: LoginDataType) => (dispatch: any) => {
         .then(response => {
             if (response.resultCode === 0) {
                 dispatch(userAuthorizing());
-                dispatch(setErrorMessage(null));
+                dispatch(actions.setErrorMessage(null));
             } else if (response.resultCode === 10) {
-                dispatch(setErrorMessage(response.messages[0]))
+                dispatch(actions.setErrorMessage(response.messages[0]))
                 authAPI.getCaptcha()
                     .then(res => {
                         debugger
-                        dispatch(setCaptcha(res.url))
+                        dispatch(actions.setCaptcha(res.url))
                     })
             }
         })

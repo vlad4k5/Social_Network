@@ -28,6 +28,7 @@ export type PostType = {
 }
 
 
+
 export type UserType = {
     name: string
     id: number
@@ -36,10 +37,17 @@ export type UserType = {
     status: string | null
     followed: boolean
 }
+export type UserDataType = {
+    email: string | null
+    id: number | null
+    login: string | null
+}
 export type UserDialogType = {
     userName: string
     id: number
 }
+
+
 
 export type LoginDataType = {
     email: string | null
