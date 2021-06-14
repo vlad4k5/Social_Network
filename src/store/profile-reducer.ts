@@ -1,11 +1,8 @@
 import { Dispatch } from "redux"
 import { profileAPI } from "../api/api"
+import { InferActionTypes } from "./store"
 import { PhotosType, PostType, ProfileInfoType } from "./types/types"
 
-const SET_PROFILE = "profile-reducer/SET_PROFILE"
-const SET_STATUS = "profile-reducer/SET_STATUS"
-const SET_PHOTO = "profile-reducer/SET_PHOTO"
-const ADD_NEW_POST = "profile-reducer/ADD_NEW_POST"
 
 
 let initialState = {
@@ -19,18 +16,21 @@ let initialState = {
 }
 type InitialStateType = typeof initialState;
 
-const profileReducer = (state = initialState, action: any): InitialStateType => {
+
+type ActionsType = InferActionTypes<typeof profileActions>
+
+const profileReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
-        case SET_PROFILE: {
-            return { ...state, profileInfo: { ...state.profileInfo, ...action.profileInfo } }
+        case 'SET_PROFILE': {
+            return { ...state, profileInfo: action.profileInfo }    // refactoring from profileInfo : {...state.profileInfo, ...actionProfileInfo}
         }
-        case SET_STATUS: {
+        case 'SET_STATUS': {
             return { ...state, status: action.status }
         }
-        case SET_PHOTO: {
+        case 'SET_PHOTO': {
             return { ...state, profileInfo: { ...state.profileInfo, photos: action.photos } as ProfileInfoType } // !!!!!!!!!!!
         }
-        case ADD_NEW_POST: {
+        case 'ADD_NEW_POST': {
             let newPost = { id: state.posts.length + 1, message: action.postText, likesCount: 0 }
             return { ...state, posts: [...state.posts, newPost] }
         }
@@ -39,29 +39,13 @@ const profileReducer = (state = initialState, action: any): InitialStateType => 
 }
 
 
-type ActionsType = SetProfileActionType | SetStatusActionType | SetPhotoActionType | AddNewPostActionType
-
-type SetProfileActionType = {
-    type: typeof SET_PROFILE
-    profileInfo: ProfileInfoType | null
-}
-type SetStatusActionType = {
-    type: typeof SET_STATUS
-    status: string | null
-}
-type SetPhotoActionType = {
-    type: typeof SET_PHOTO
-    photos: PhotosType
-}
-type AddNewPostActionType = {
-    type: typeof ADD_NEW_POST
-    postText: string
+export const profileActions = {
+    setProfile: (profileInfo: ProfileInfoType | null) => ({ type: 'SET_PROFILE', profileInfo } as const),
+    setStatus: (status: string) => ({ type: 'SET_STATUS', status } as const),
+    setPhoto: (photos: PhotosType) => ({ type: 'SET_PHOTO', photos } as const),
+    addNewPost: (postText: string) => ({ type: 'ADD_NEW_POST', postText } as const)
 }
 
-export const setProfile = (profileInfo: ProfileInfoType | null): SetProfileActionType => ({ type: SET_PROFILE, profileInfo });
-export const setStatus = (status: string | null): SetStatusActionType => ({ type: SET_STATUS, status });
-export const setPhoto = (photos: PhotosType): SetPhotoActionType => ({ type: SET_PHOTO, photos });
-export const addNewPost = (postText: string): AddNewPostActionType => ({ type: ADD_NEW_POST, postText });
 
 
 
@@ -71,7 +55,7 @@ type DispatchType = Dispatch<ActionsType>
 export const getProfile = (userId: number) => (dispatch: DispatchType) => {
     profileAPI.getProfile(userId)
         .then(response => {
-            dispatch(setProfile(response))
+            dispatch(profileActions.setProfile(response))
         })
 
 }
@@ -80,7 +64,7 @@ export const updateProfile = (profileInfo: ProfileInfoType) => (dispatch: Dispat
     profileAPI.setProfile(profileInfo)
         .then(response => {
             if (response.resultCode === 0) {
-                dispatch(setProfile(profileInfo))
+                dispatch(profileActions.setProfile(profileInfo))
             }
         })
 
@@ -91,9 +75,9 @@ export const getStatus = (userId: number) => (dispatch: DispatchType) => {
     profileAPI.getStatus(userId)
         .then(response => {
             if (response === null) {
-                dispatch(setStatus(""))
+                dispatch(profileActions.setStatus(""))
             } else {
-                dispatch(setStatus(response))
+                dispatch(profileActions.setStatus(response))
             }
         })
 }
@@ -102,7 +86,7 @@ export const updateStatus = (status: string) => (dispatch: DispatchType) => {
     profileAPI.setStatus(status)
         .then(response => {
             if (response.resultCode === 0) {
-                dispatch(setStatus(status))
+                dispatch(profileActions.setStatus(status))
             }
         })
 }
@@ -112,7 +96,7 @@ export const updatePhoto = (photoFile: any) => (dispatch: DispatchType) => {
     profileAPI.setUserImage(photoFile)
         .then(response => {
             if (response.resultCode === 0) {
-                dispatch(setPhoto(response.data.photos))
+                dispatch(profileActions.setPhoto(response.data.photos))
             }
         })
 

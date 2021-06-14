@@ -3,7 +3,7 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import withAuthRedirect from "../../hocs/withAuthRedirect";
 import { Field, Form, Formik, FormikHelpers } from "formik";
-import { addNewMessage } from "../../store/dialogs-reducer";
+import { dialogsActions } from "../../store/dialogs-reducer";
 import DialogsUser from "./DialogsUser";
 import DialogsMessage from "./DialogsMessage";
 import { UserDialogType } from "../../store/types/types";
@@ -62,5 +62,5 @@ const mapStateToProps = (state: AppStateType) => ({
 
 export default compose(
     withAuthRedirect,
-    connect<TStateProps, TDispatchProps, {}, AppStateType>(mapStateToProps, { addNewMessage })
+    connect<TStateProps, TDispatchProps, {}, AppStateType>(mapStateToProps, { addNewMessage: dialogsActions.addNewMessage })
 )(Dialogs)

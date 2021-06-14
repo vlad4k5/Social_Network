@@ -1,3 +1,4 @@
+import { InferActionTypes } from "./store";
 import { UserDialogType } from "./types/types";
 
 const ADD_NEW_MESSAGE = "auth-reducer/ADD_NEW_MESSAGE";
@@ -15,6 +16,9 @@ let initialState = {
 type InitialStateType = typeof initialState;
 
 
+type ActionsType = InferActionTypes<typeof dialogsActions>
+
+
 const dialogsReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case ADD_NEW_MESSAGE: {
@@ -26,14 +30,9 @@ const dialogsReducer = (state = initialState, action: ActionsType): InitialState
 
 
 
-type ActionsType = AddNewMessageActionType
-
-type AddNewMessageActionType = {
-    type: typeof ADD_NEW_MESSAGE
-    message: string
+export const dialogsActions = {
+    addNewMessage: (message: string) => ({ type: ADD_NEW_MESSAGE, message })
 }
-export const addNewMessage = (message: string): AddNewMessageActionType => ({ type: ADD_NEW_MESSAGE, message });
-
 
 
 

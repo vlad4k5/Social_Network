@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { compose } from "redux";
 import withAuthRedirect from "../../hocs/withAuthRedirect";
-import { addNewPost, getProfile, getStatus, updatePhoto, updateStatus } from "../../store/profile-reducer";
+import { profileActions, getProfile, getStatus, updatePhoto, updateStatus } from "../../store/profile-reducer";
 import Posts from "./Posts/Posts";
 import basicPhoto from "../../assets/images/basicUserPhoto.png";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
@@ -75,6 +75,6 @@ const mapStateToProps = (state: AppStateType): TStateProps => ({
 
 export default compose(
     withAuthRedirect,
-    connect<TStateProps, TDispatchProps, TOwnProps, AppStateType>(mapStateToProps, { getProfile, getStatus, addNewPost, updateStatus, updatePhoto }),
+    connect<TStateProps, TDispatchProps, TOwnProps, AppStateType>(mapStateToProps, { getProfile, getStatus, addNewPost: profileActions.addNewPost, updateStatus, updatePhoto }),
     withRouter
 )(Profile);
