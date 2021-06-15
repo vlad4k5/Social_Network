@@ -1,10 +1,8 @@
-import { AppStateType } from './store';
-import { Dispatch } from "redux";
-import { ThunkAction } from "redux-thunk";
+import { InferActionTypes } from './store';
 import { usersAPI } from "../api/users-api";
-import { UserType } from "./types/types";
+import { CommonThunkCreatorType, UserType } from "./types/types";
 
-const SET_USERS = "users-reducer/SET_USERS";
+const SET_USERS = "SN/USERS/SET_USERS";
 
 type EntireUsersType = {
     items: Array<UserType>
@@ -12,10 +10,10 @@ type EntireUsersType = {
     error: string | number
 }
 
+
 let initialState = {
     users: null as EntireUsersType | null,
 }
-type InitialStateType = typeof initialState
 
 
 const usersReducer = (state = initialState, action: ActionsType): InitialStateType => {
@@ -27,25 +25,25 @@ const usersReducer = (state = initialState, action: ActionsType): InitialStateTy
     }
 }
 
-type ActionsType = SetUsersActionType
 
-
-type SetUsersActionType = {
-    type: typeof SET_USERS
-    users: Array<UserType>
-    totalUsersCount: number
+export const usersActions = {
+    setUsers: (users: Array<UserType>, totalUsersCount: number) => ({ type: SET_USERS, users, totalUsersCount })
 }
-const setUsers = (users: Array<UserType>, totalUsersCount: number): SetUsersActionType => ({ type: SET_USERS, users, totalUsersCount });
 
 
-export const getUsers = (count: number, page: number) => (dispatch: Dispatch<ActionsType>) => {
-    usersAPI.getUsers(count, page)
-        .then(response => {
-            if (!response.error) {
-                dispatch(setUsers(response.items, response.totalCount));
-            }
-        })
+
+
+export const getUsers = (count: number, page: number): ThunkType => async dispatch => {
+    const res = await usersAPI.getUsers(count, page)
+    if (!res.error) {
+        dispatch(usersActions.setUsers(res.items, res.totalCount));
+    }
 }
 
 
 export default usersReducer;
+
+
+type InitialStateType = typeof initialState
+type ActionsType = InferActionTypes<typeof usersActions>
+type ThunkType = CommonThunkCreatorType<ActionsType>

@@ -48,10 +48,7 @@ const Settings: React.FC<PropsType> = ({ profileInfo, updateProfile, ownerId, ge
         lookingForAJob: profileInfo.lookingForAJob,
         lookingForAJobDescription: profileInfo.lookingForAJobDescription,
         fullName: profileInfo.fullName,
-        photos: {
-            large: "",
-            small: ""
-        }
+        photos: profileInfo.photos
     }
     // above weird code :/
     const onSubmit = (values: ProfileInfoType) => {

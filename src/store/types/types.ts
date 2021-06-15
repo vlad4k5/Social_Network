@@ -1,3 +1,7 @@
+import { Action } from "redux"
+import { ThunkAction } from "redux-thunk"
+import { AppStateType } from "../store"
+
 export type ContactsType = {
     facebook: string
     website: string
@@ -55,3 +59,6 @@ export type LoginDataType = {
     rememberMe: boolean
     captcha: string | null
 }
+
+
+export type CommonThunkCreatorType<A extends Action, R = Promise<void>> = ThunkAction<R, AppStateType, unknown, A>

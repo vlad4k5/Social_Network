@@ -1,11 +1,11 @@
 import { InferActionTypes } from './store';
-import { Dispatch } from "redux";
 import { authAPI } from "../api/auth-api"
-import { getProfile, getStatus, profileActions } from "./profile-reducer";
-import { LoginDataType, UserDataType } from "./types/types";
+import { getProfile, getStatus, profileActions, ProfileActionsType } from "./profile-reducer";
+import { CommonThunkCreatorType, LoginDataType, UserDataType } from "./types/types";
 
-
-
+const SET_USER_DATA = "SN/AUTH/SET_USER_DATA"
+const SET_CAPTCHA = "SN/AUTH/SET_CAPTCHA"
+const SET_ERROR_MESSAGE = "SN/AUTH/SET_ERROR_MESSAGE"
 
 
 let initialState = {
@@ -18,19 +18,18 @@ let initialState = {
     captcha: null as string | null,
     errorMessage: null as string | null
 }
-type InitialStateType = typeof initialState;
 
-type ActionsType = InferActionTypes<typeof authActions>
+
 
 const authReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
-        case 'SET_USER_DATA': {
+        case SET_USER_DATA: {
             return { ...state, isAuth: action.isAuth, userData: action.userData ? action.userData : { email: null, id: null, login: null } }
         }
-        case 'SET_CAPTCHA': {
+        case SET_CAPTCHA: {
             return { ...state, captcha: action.captcha }
         }
-        case 'SET_ERROR_MESSAGE': {
+        case SET_ERROR_MESSAGE: {
             debugger
             return { ...state, errorMessage: action.errorMessage }
         }
@@ -40,62 +39,56 @@ const authReducer = (state = initialState, action: ActionsType): InitialStateTyp
 
 
 
-
 export const authActions = {
-    setUserData: (isAuth: boolean, userData: UserDataType | null) => ({ type: 'SET_USER_DATA', isAuth, userData } as const),
-    setCaptcha: (captcha: string) => ({ type: 'SET_CAPTCHA', captcha } as const),
-    setErrorMessage: (errorMessage: string | null) => ({ type: 'SET_ERROR_MESSAGE', errorMessage } as const)
+    setUserData: (isAuth: boolean, userData: UserDataType | null) => ({ type: SET_USER_DATA, isAuth, userData } as const),
+    setCaptcha: (captcha: string | null) => ({ type: SET_CAPTCHA, captcha } as const),
+    setErrorMessage: (errorMessage: string | null) => ({ type: SET_ERROR_MESSAGE, errorMessage } as const)
 }
 
 
 
-// type TDispatch = Dispatch<ActionsType>
 
-export const userAuthorizing = () => (dispatch: any) => {
-    authAPI.isUserAuthorized()
-        .then(response => {
-            if (response.resultCode === 0) {
-                dispatch(authActions.setUserData(true, response.data));
-                dispatch(getProfile(response.data.id));
-                dispatch(getStatus(response.data.id));
-            } else {
-                dispatch(authActions.setUserData(false, null));
-            }
-        })
+export const userAuthorizing = (): ThunkType => async dispatch => {
+    const res = await authAPI.isUserAuthorized()
+    if (res.resultCode === 0) {
+        dispatch(authActions.setUserData(true, res.data));
+        dispatch(getProfile(res.data.id));
+        dispatch(getStatus(res.data.id));
+    } else {
+        dispatch(authActions.setUserData(false, null));
+    }
 }
 
 
-export const logout = () => (dispatch: any) => {
-    debugger
-    authAPI.logout()
-        .then(response => {
-            if (response.resultCode === 0) {
-                dispatch(authActions.setUserData(false, null));
-                dispatch(profileActions.setProfile(null));
-                dispatch(profileActions.setStatus(""));
-            }
-        })
+export const logout = (): ThunkType => async dispatch => {
+    const res = await authAPI.logout()
+    if (res.resultCode === 0) {
+        dispatch(authActions.setUserData(false, null));
+        dispatch(profileActions.setProfile(null));
+        dispatch(profileActions.setStatus(""));
+    }
 }
 
 
 
-export const login = (loginData: LoginDataType) => (dispatch: any) => {
-    debugger
-    authAPI.login(loginData)
-        .then(response => {
-            if (response.resultCode === 0) {
-                dispatch(userAuthorizing());
-                dispatch(authActions.setErrorMessage(null));
-            } else if (response.resultCode === 10) {
-                dispatch(authActions.setErrorMessage(response.messages[0]))
-                authAPI.getCaptcha()
-                    .then(res => {
-                        debugger
-                        dispatch(authActions.setCaptcha(res.url))
-                    })
-            }
-        })
+export const login = (loginData: LoginDataType): ThunkType => async dispatch => {
+    const res = await authAPI.login(loginData)
+    if (res.resultCode === 0) {
+        dispatch(userAuthorizing());
+        dispatch(authActions.setErrorMessage(null));
+        dispatch(authActions.setCaptcha(null))
+    } else if (res.resultCode === 10) {
+        dispatch(authActions.setErrorMessage(res.messages[0]))
+        const captchaRes = await authAPI.getCaptcha()
+        dispatch(authActions.setCaptcha(captchaRes.url))
+    }
 }
 
 
 export default authReducer;
+
+
+
+type InitialStateType = typeof initialState;
+type ActionsType = InferActionTypes<typeof authActions>
+type ThunkType = CommonThunkCreatorType<ActionsType | ProfileActionsType>

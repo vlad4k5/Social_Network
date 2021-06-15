@@ -1,4 +1,4 @@
-import { LoginDataType, PhotosType, ProfileInfoType, UserType } from "../store/types/types";
+import { LoginDataType } from "../store/types/types";
 import { BasicResponseType, instance, ResponseWithDataType } from "./instance-api";
 
 

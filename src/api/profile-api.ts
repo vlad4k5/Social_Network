@@ -1,4 +1,4 @@
-import { LoginDataType, PhotosType, ProfileInfoType, UserType } from "../store/types/types";
+import { PhotosType, ProfileInfoType } from "../store/types/types";
 import { BasicResponseType, instance, ResponseWithDataType } from "./instance-api";
 
 
@@ -20,7 +20,7 @@ export const profileAPI = {
     setStatus(status: string) {
         return instance.put<BasicResponseType>("/profile/status", { status }).then(res => res.data)
     },
-    setUserImage(photoFile: any) {
+    setUserImage(photoFile: File) {
         const formData = new FormData();
         formData.append("image", photoFile)
         return instance.put<ResponseWithDataType<SetPhotoDataType>>("/profile/photo", formData, { headers: { "Content-Type": "multipart/form-data" } }).then(res => res.data)
