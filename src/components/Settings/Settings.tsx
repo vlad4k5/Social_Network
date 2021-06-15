@@ -3,12 +3,27 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import withAuthRedirect from "../../hocs/withAuthRedirect";
 import { getProfile, getStatus, updateProfile } from "../../store/profile-reducer";
-import s from "./Settings.module.css"
+import s from "./Settings.module.scss"
 import * as Yup from "yup";
+import { AppStateType } from "../../store/store";
+import { ProfileInfoType } from "../../store/types/types";
+import React from "react";
 
-const Settings = ({ profileInfo, updateProfile, ownerId, getProfile, getStatus }) => {
 
-    debugger
+type TStateProps = {
+    profileInfo: ProfileInfoType | null
+    ownerId: number | null
+}
+type TDispatchProps = {
+    updateProfile: (profileInfo: ProfileInfoType) => void
+    getProfile: (userId: number) => void
+    getStatus: (userId: number) => void
+}
+type PropsType = TStateProps & TDispatchProps
+
+const Settings: React.FC<PropsType> = ({ profileInfo, updateProfile, ownerId, getProfile, getStatus }) => {
+    if (ownerId === null) return <div>LLOADING.........</div>
+
     if (ownerId !== profileInfo?.userId) {
         getProfile(ownerId);
         getStatus(ownerId);
@@ -17,7 +32,7 @@ const Settings = ({ profileInfo, updateProfile, ownerId, getProfile, getStatus }
         return <div>Loading...</div>
     }
 
-    const initialValues = {
+    const initialValues: ProfileInfoType = {
         aboutMe: profileInfo.aboutMe,
         userId: profileInfo.userId,
         contacts: {
@@ -32,10 +47,14 @@ const Settings = ({ profileInfo, updateProfile, ownerId, getProfile, getStatus }
         },
         lookingForAJob: profileInfo.lookingForAJob,
         lookingForAJobDescription: profileInfo.lookingForAJobDescription,
-        fullName: profileInfo.fullName
+        fullName: profileInfo.fullName,
+        photos: {
+            large: "",
+            small: ""
+        }
     }
-    const onSubmit = values => {
-        debugger
+    // above weird code :/
+    const onSubmit = (values: ProfileInfoType) => {
         updateProfile(values)
     }
 
@@ -100,12 +119,12 @@ const Settings = ({ profileInfo, updateProfile, ownerId, getProfile, getStatus }
     </div >
 }
 
-const maStateToProps = state => ({
+const maStateToProps = (state: AppStateType) => ({
     profileInfo: state.profile.profileInfo,
     ownerId: state.auth.userData.id
 })
 
 export default compose(
-    connect(maStateToProps, { updateProfile, getProfile, getStatus }),
-    withAuthRedirect
+    withAuthRedirect,
+    connect(maStateToProps, { updateProfile, getProfile, getStatus })
 )(Settings);

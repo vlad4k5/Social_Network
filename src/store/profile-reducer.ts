@@ -22,7 +22,8 @@ type ActionsType = InferActionTypes<typeof profileActions>
 const profileReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case 'SET_PROFILE': {
-            return { ...state, profileInfo: action.profileInfo }    // refactoring from profileInfo : {...state.profileInfo, ...actionProfileInfo}
+            // @ts-ignore
+            return { ...state, profileInfo: { ...state.profileInfo, ...action.profileInfo } }
         }
         case 'SET_STATUS': {
             return { ...state, status: action.status }
