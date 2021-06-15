@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NavLink, Redirect } from "react-router-dom";
-import { usersAPI } from "../../../api/api";
+import { usersAPI } from "../../../api/users-api";
 import basicPhoto from "../../../assets/images/basicUserPhoto.png";
 import s from "./UserItem.module.scss";
 

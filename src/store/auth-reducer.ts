@@ -1,6 +1,6 @@
 import { InferActionTypes } from './store';
 import { Dispatch } from "redux";
-import { authAPI } from "../api/api"
+import { authAPI } from "../api/auth-api"
 import { getProfile, getStatus, profileActions } from "./profile-reducer";
 import { LoginDataType, UserDataType } from "./types/types";
 

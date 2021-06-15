@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 // import { connect } from "react-redux";
 import { compose } from "redux";
-import { usersAPI } from "../../api/api";
+import { usersAPI } from "../../api/users-api";
 import withAuthRedirect from "../../hocs/withAuthRedirect";
 import { UserType } from "../../store/types/types";
 // import { getUsers } from "../../store/users-reducer.ts";

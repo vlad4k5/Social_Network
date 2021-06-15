@@ -1,7 +1,7 @@
 import { AppStateType } from './store';
 import { Dispatch } from "redux";
 import { ThunkAction } from "redux-thunk";
-import { usersAPI } from "../api/api";
+import { usersAPI } from "../api/users-api";
 import { UserType } from "./types/types";
 
 const SET_USERS = "users-reducer/SET_USERS";

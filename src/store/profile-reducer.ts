@@ -1,5 +1,5 @@
 import { Dispatch } from "redux"
-import { profileAPI } from "../api/api"
+import { profileAPI } from "../api/profile-api"
 import { InferActionTypes } from "./store"
 import { PhotosType, PostType, ProfileInfoType } from "./types/types"
 
