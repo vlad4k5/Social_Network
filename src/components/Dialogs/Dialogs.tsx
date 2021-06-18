@@ -8,6 +8,7 @@ import DialogsUser from "./DialogsUser";
 import DialogsMessage from "./DialogsMessage";
 import { UserDialogType } from "../../store/types/types";
 import { AppStateType } from "../../store/store";
+import React from "react";
 
 
 type TStateProps = {
@@ -60,7 +61,7 @@ const mapStateToProps = (state: AppStateType) => ({
 })
 
 
-export default compose(
+export default compose<React.ComponentType>(
     withAuthRedirect,
     connect<TStateProps, TDispatchProps, {}, AppStateType>(mapStateToProps, { addNewMessage: dialogsActions.addNewMessage })
 )(Dialogs)

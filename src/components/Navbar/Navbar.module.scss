@@ -14,27 +14,10 @@
     }
 }
 
+
 .active {
     color: #ce888e;
     &:hover {
         color: #e9505d
     } 
 }
- 
-
-
-// .test {
-//     width: 200px;
-//     height: 200px;
-//     background-color: lightskyblue;
-//     margin: 30px auto;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     font-size: 35px;
-//     transition: 2s;
-//     // &:active{
-//     //     transform: rotate3d(3,3,3, 720deg) scale(5,5);
-        
-//     // }
-// }

@@ -1,3 +1,4 @@
+import { connect } from "formik";
 import { useEffect, useState } from "react";
 // import { connect } from "react-redux";
 import { compose } from "redux";
@@ -7,7 +8,7 @@ import { UserType } from "../../store/types/types";
 // import { getUsers } from "../../store/users-reducer.ts";
 import Paginator from "../common/Paginator/Paginator";
 import UserItem from "./UserItem/UserItem";
-
+import UsersSearchForm from "./UsersSearchForm/UsersSearchForm"
 
 
 const Users: React.FC = () => {
@@ -21,7 +22,7 @@ const Users: React.FC = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             setLoading(true);
-            const res = await usersAPI.getUsers(usersPerPage, currentPage);
+            const res = await usersAPI.getUsers(usersPerPage, currentPage, "");
             setUsers(res.items)
             setTotalUsersCount(res.totalCount)
             setLoading(false);
@@ -42,6 +43,7 @@ const Users: React.FC = () => {
 
     return <div>
         <h1>Users</h1><hr />
+        <UsersSearchForm />
         <Paginator
             totalItemsCount={totalUsersCount}
             onPageChanged={onPageChanged}

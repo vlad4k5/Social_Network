@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { compose } from "redux";
@@ -73,8 +73,8 @@ const mapStateToProps = (state: AppStateType): TStateProps => ({
     ownerId: state.auth.userData.id
 })
 
-export default compose(
-    withAuthRedirect,
+export default compose<React.ComponentType>(
     connect<TStateProps, TDispatchProps, TOwnProps, AppStateType>(mapStateToProps, { getProfile, getStatus, addNewPost: profileActions.addNewPost, updateStatus, updatePhoto }),
+    withAuthRedirect,
     withRouter
 )(Profile);

@@ -17,12 +17,7 @@ export type AppStateType = ReturnType<RootReducerType>
 
 
 
-
-
-type PropertiesType<T> = T extends { [key: string]: infer U } ? U : never
-export type InferActionTypes<T extends { [key: string]: (...args: any[]) => any }> = ReturnType<PropertiesType<T>>
-
-
+export type InferActionTypes<T> = T extends { [keys: string]: (...args: any[]) => infer U } ? U : never
 
 
 

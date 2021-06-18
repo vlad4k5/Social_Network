@@ -50,7 +50,7 @@ const Settings: React.FC<PropsType> = ({ profileInfo, updateProfile, ownerId, ge
         fullName: profileInfo.fullName,
         photos: profileInfo.photos
     }
-    // above weird code :/
+    // above weird code :/ "initialValues.photos"
     const onSubmit = (values: ProfileInfoType) => {
         updateProfile(values)
     }
@@ -121,7 +121,7 @@ const maStateToProps = (state: AppStateType) => ({
     ownerId: state.auth.userData.id
 })
 
-export default compose(
+export default compose<React.ComponentType>(
     withAuthRedirect,
     connect(maStateToProps, { updateProfile, getProfile, getStatus })
 )(Settings);

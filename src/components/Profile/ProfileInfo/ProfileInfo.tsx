@@ -31,7 +31,6 @@ const ProfileInfo: React.FC<PropsType> = ({ profileInfo, status, updateStatus, u
     const onStatusTextChanged = (e: React.FormEvent<HTMLInputElement>) => {
         setStatusText(e.currentTarget.value);
     }
-    // @ts-ignore
     const onMainPhotoSelected = (e: any) => {
         updatePhoto(e.target.files[0]);
     }
@@ -58,7 +57,6 @@ const ProfileInfo: React.FC<PropsType> = ({ profileInfo, status, updateStatus, u
         <div className={s.aboutMe}>
             <label htmlFor="status">Status: </label>
             {statusEditMode && isOwner
-                // @ts-ignore
                 ? <input value={statusText} onChange={onStatusTextChanged} onBlur={saveNewStatus} autoFocus={true} />
                 : <span id="status" onClick={() => { setStatusEditMode(true) }}>{status ? status : "User has no status"}</span>
             }

@@ -3,8 +3,6 @@ import s from "./Navbar.module.scss"
 
 
 
-
-
 const Navbar = () => {
     return <nav className={s.navbar}>
         <div className={s.navbar__Item}>
@@ -25,8 +23,6 @@ const Navbar = () => {
         <div className={s.navbar__Item}>
             <NavLink to="/settings" className={s.link} activeClassName={s.active}>Settings</NavLink>
         </div>
-
-        {/* <div className={s.test}>Машина</div> */}
     </nav>
 }
 

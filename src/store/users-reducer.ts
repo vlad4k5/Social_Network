@@ -33,8 +33,8 @@ export const usersActions = {
 
 
 
-export const getUsers = (count: number, page: number): ThunkType => async dispatch => {
-    const res = await usersAPI.getUsers(count, page)
+export const getUsers = (count: number, page: number, term: string): ThunkType => async dispatch => {
+    const res = await usersAPI.getUsers(count, page, "")
     if (!res.error) {
         dispatch(usersActions.setUsers(res.items, res.totalCount));
     }
