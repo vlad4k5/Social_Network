@@ -41,6 +41,11 @@ export type UserType = {
     status: string | null
     followed: boolean
 }
+export type EntireUsersType = {
+    items: Array<UserType>
+    totalCount: number
+    error: string | number
+}
 export type UserDataType = {
     email: string | null
     id: number | null

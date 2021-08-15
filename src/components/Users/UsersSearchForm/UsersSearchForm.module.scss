@@ -1,3 +1,27 @@
 .searchField {
-    color: red;
+    outline: 0px;
+    border: 1px solid rgb(147, 135, 255);
+    border-radius: 5px;
+    font-size: 20px;
+    width: 30%;
+    margin: 5px;
+    padding: 3px;
+    &:focus {
+        border:1px solid rgb(73, 53, 255)
+    }
+}
+
+
+.searchButton {
+    border: 1px solid rgb(73, 53, 255);
+    border-radius: 5px;
+    background-color: rgb(147, 135, 255) ;
+    padding: 5px;
+    color: white;
+    font-size: 16px;
+    margin: 5px;
+    &:hover {
+        background-color: rgb(118, 103, 250);
+        cursor: pointer;
+    }
 }

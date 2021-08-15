@@ -1,14 +1,10 @@
 import { InferActionTypes } from './store';
 import { usersAPI } from "../api/users-api";
-import { CommonThunkCreatorType, UserType } from "./types/types";
+import { CommonThunkCreatorType, EntireUsersType, UserType } from "./types/types";
 
 const SET_USERS = "SN/USERS/SET_USERS";
 
-type EntireUsersType = {
-    items: Array<UserType>
-    totalCount: number
-    error: string | number
-}
+
 
 
 let initialState = {
