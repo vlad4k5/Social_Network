@@ -32,16 +32,15 @@ type PropsType = TStateProps & TDispatchProps & TOwnProps
 
 const Profile: React.FC<PropsType> = ({ getProfile, getStatus, match, ownerId, profileInfo, status, posts, addNewPost, updateStatus, updatePhoto }) => {
     useEffect(() => {
-        if (match.params.userId) {
-            getProfile(match.params.userId);
-            getStatus(match.params.userId);
+        if (ownerId !== null){
+            getProfile(match.params.userId ? match.params.userId : ownerId);
+            getStatus(match.params.userId ? match.params.userId : ownerId);
         }
-    }, [])
+    }, [match.params.userId, ownerId, getProfile, getStatus])
 
     useEffect(() => {
-        getProfile(match.params.userId ? match.params.userId : ownerId);
-        getStatus(match.params.userId ? match.params.userId : ownerId);
-    }, [match.params.userId])
+        
+    }, [match.params.userId, ownerId])
 
 
     if (!profileInfo) {
@@ -70,7 +69,7 @@ const mapStateToProps = (state: AppStateType): TStateProps => ({
     profileInfo: state.profile.profileInfo,
     status: state.profile.status,
     posts: state.profile.posts,
-    ownerId: state.auth.userData.id
+    ownerId: state.auth.userData.id,
 })
 
 export default compose<React.ComponentType>(

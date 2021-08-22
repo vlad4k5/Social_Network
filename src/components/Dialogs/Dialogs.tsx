@@ -22,9 +22,8 @@ type TDispatchProps = {
 type PropsType = TStateProps & TDispatchProps
 
 const Dialogs: React.FC<PropsType> = ({ users, messages, addNewMessage }) => {
-
-    const dialogsUsers = users.map(u => <DialogsUser userName={u.userName} />)
-    const dialogsMessages = messages.map(m => <DialogsMessage message={m} />)
+    const dialogsUsers = users.map(u => <DialogsUser key={u.id} userName={u.userName} />)
+    const dialogsMessages = messages.map((m, index) => <DialogsMessage key={index} message={m} />)
 
     interface Values {
         message: string
@@ -46,7 +45,7 @@ const Dialogs: React.FC<PropsType> = ({ users, messages, addNewMessage }) => {
                 <Formik initialValues={{ message: "" }} onSubmit={onSubmit}>
                     <Form>
                         <Field as="textarea" id="message" name="message" /><br />
-                        <button>Send message</button>
+                        <button type="submit">Send message</button>
                     </Form>
                 </Formik>
             </div>

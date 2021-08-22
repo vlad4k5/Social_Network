@@ -14,9 +14,9 @@ type PropsType = {
 
 
 
-const MyPosts: React.FC<PropsType> = ({ posts, userPhoto, addNewPost, isOwner }) => {
+const Posts: React.FC<PropsType> = ({ posts, userPhoto, addNewPost, isOwner }) => {
     const profilePosts = [...posts].reverse().map(p =>
-        <Post message={p.message} likesCount={p.likesCount} userPhoto={userPhoto} id={p.id} />)
+        <Post key={p.id} message={p.message} likesCount={p.likesCount} userPhoto={userPhoto} id={p.id} />)
 
     interface Values {
         postText: string
@@ -29,17 +29,17 @@ const MyPosts: React.FC<PropsType> = ({ posts, userPhoto, addNewPost, isOwner })
     return <div>
         {isOwner && <Formik initialValues={{ postText: "" }} onSubmit={onSubmit}>
             <Form>
-                <Field as="textarea" name="postText">
+                <Field name="postText">
                     {(props: any) => {
 
-                        const { field, form, meta } = props;
+                        const { field } = props;
 
                         return <div>
                             <textarea className={s.postField} type="text" id="postText" placeholder="add new post" {...field}>{props.children}</textarea>
                         </div>
                     }}
                 </Field>
-                <button className={s.newPostButton}>Add post</button>
+                <button type="submit" className={s.newPostButton}>Add post</button>
             </Form>
         </Formik>}
         <div className={s.posts}>
@@ -49,4 +49,4 @@ const MyPosts: React.FC<PropsType> = ({ posts, userPhoto, addNewPost, isOwner })
 }
 
 
-export default MyPosts;
+export default Posts;

@@ -110,7 +110,7 @@ const Settings: React.FC<PropsType> = ({ profileInfo, updateProfile, ownerId, ge
                         </div>
                     </div>
                 </div>
-                <button>Save all</button>
+                <button type="submit">Save all</button>
             </Form>
         </Formik>
     </div >

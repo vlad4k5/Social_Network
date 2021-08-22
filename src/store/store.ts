@@ -1,4 +1,4 @@
-import { applyMiddleware, combineReducers, createStore } from "redux"
+import { applyMiddleware, combineReducers, compose, createStore } from "redux"
 import thunk from "redux-thunk"
 import profileReducer from "./profile-reducer"
 import authReducer from "./auth-reducer"
@@ -14,13 +14,14 @@ const rootReducer = combineReducers({
 });
 type RootReducerType = typeof rootReducer
 export type AppStateType = ReturnType<RootReducerType>
-
+//@ts-ignore
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 
 export type InferActionTypes<T> = T extends { [keys: string]: (...args: any[]) => infer U } ? U : never
 
 
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = createStore(rootReducer, composeEnhancers( applyMiddleware(thunk)));
 
 export default store;

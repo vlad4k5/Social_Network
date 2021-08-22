@@ -10,7 +10,6 @@ export const instance = axios.create({
     }
 })
 
-
 export type BasicResponseType = {
     resultCode: number
     messages: Array<string>

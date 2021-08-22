@@ -29,7 +29,6 @@ const Login: React.FC<PropsType> = ({ isAuth, captcha, login, errorMessage }) =>
 
 
     const onSubmit = (values: Values) => {
-        console.log("Values: ", values);
         login(values);
     }
 

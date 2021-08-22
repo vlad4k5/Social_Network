@@ -24,15 +24,15 @@ type TDispatchProps = {
 }
 type TOwnProps = {
 
-}
+} 
 
 type PropsType = TStateProps & TDispatchProps & TOwnProps
 
-const App: React.FC<PropsType> = ({ userAuthorizing, isAuth, profileInfo, status }) => {
+const App: React.FC<PropsType> = ({ userAuthorizing, isAuth }) => {
 
   useEffect(() => {
     userAuthorizing();
-  }, [])
+  }, [userAuthorizing])
 
   if (isAuth === false) {
     <Redirect to="/login" />

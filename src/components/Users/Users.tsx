@@ -1,4 +1,3 @@
-import { connect } from "formik";
 import { useEffect, useState } from "react";
 // import { connect } from "react-redux";
 import { compose } from "redux";
@@ -38,8 +37,7 @@ const Users: React.FC = () => {
     if (!users) {
         return <div>Loading</div>
     }
-
-    let showUsers = users.map(u => <UserItem name={u.name} id={u.id} photo={u.photos.small} followed={u.followed} status={u.status} />)
+    let showUsers = users.map(u => <UserItem key={u.id} name={u.name} id={u.id} photo={u.photos.small} followed={u.followed} status={u.status} />)
 
     return <div>
         <h1>Users</h1><hr />

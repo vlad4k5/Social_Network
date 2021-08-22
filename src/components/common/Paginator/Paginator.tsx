@@ -19,15 +19,15 @@ const Paginator: React.FC<PropsType> = ({ totalItemsCount, onPageChanged, curren
 
     if (currentPage >= 7 && currentPage <= totalPages - 3) {
         for (let i = currentPage; i <= lastPage; i++) {
-            pages.push(<button className={currentPage === i - 6 ? s.activePage : s.page} onClick={() => { onPageChanged(i - 6) }}>{i - 6}</button>)
+            pages.push(<button key={i} className={currentPage === i - 6 ? s.activePage : s.page} onClick={() => { onPageChanged(i - 6) }}>{i - 6}</button>)
         }
     } else if (currentPage < 7) {
         for (let i = 1; i <= pagesInPaginator; i++) {
-            pages.push(<button className={currentPage === i ? s.activePage : s.page} onClick={() => { onPageChanged(i) }}>{i}</button>)
+            pages.push(<button key={i} className={currentPage === i ? s.activePage : s.page} onClick={() => { onPageChanged(i) }}>{i}</button>)
         }
     } else if (currentPage > totalPages - 3) {
         for (let i = totalPages - pagesInPaginator; i < totalPages; i++) {
-            pages.push(<button className={currentPage === i ? s.activePage : s.page} onClick={() => { onPageChanged(i) }}>{i}</button>)
+            pages.push(<button key={i} className={currentPage === i ? s.activePage : s.page} onClick={() => { onPageChanged(i) }}>{i}</button>)
         }
     }
 

@@ -30,7 +30,6 @@ const authReducer = (state = initialState, action: ActionsType): InitialStateTyp
             return { ...state, captcha: action.captcha }
         }
         case SET_ERROR_MESSAGE: {
-            debugger
             return { ...state, errorMessage: action.errorMessage }
         }
         default: return state
