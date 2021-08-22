@@ -34,9 +34,9 @@ const App: React.FC<PropsType> = ({ userAuthorizing, isAuth }) => {
     userAuthorizing();
   }, [userAuthorizing])
 
-  if (isAuth === false) {
-    <Redirect to="/login" />
-  }
+  // if (isAuth === false) {
+  //   <Redirect to="/login" />
+  // }
   return <div className={s.app__Wrapper}>
     <header className={s.app__Header}>
       <Header />

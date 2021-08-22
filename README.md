@@ -24,9 +24,9 @@
 
 ##### 3) `npm start` / `yarn start`
 
-##### 4) Open [http://localhost:3000](http://localhost:3000)
+##### 4) Open [http://localhost:3000](http://localhost:3000) in your browser
 
-##### 5) To see the content on the pages, you need to click on the button in the upper right corner and enter these data:
+##### 5) To see the content on the pages, you need to click on the button in the top right corner and enter these data:
 
 ###### Login: `armia1823@gmail.com`
 

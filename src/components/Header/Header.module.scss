@@ -1,54 +1,80 @@
 .header_wrapper {
-    min-width: 600px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 80px;
-    background-color: #5b5ff0;
-}
+  min-width: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #5b5ff0;
 
-.mediaBlock {
+  .mediaBlock {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     color: ghostwhite;
     padding-left: 5%;
-}
-.loginBlock {
+
+    .logo {
+      height: 80px;
+    }
+
+    .slogan {
+      padding-left: 15px;
+      display: inline-block;
+    }
+  }
+
+  .loginBlock {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     justify-content: space-between;
-    padding-right: 60px;
-}
-#logo {
-    height: 80px;
-}
+    padding-right: 5%;
 
-.slogan {
-    padding-left: 15px;
-    display: inline-block;
-}
-
-
-.linkToProfile {
-    text-decoration: none;
-    color: ghostwhite;
-    font-size: 1.4em;
-    padding-right: 10px;
-    &:hover {
+    .linkToProfile {
+      text-decoration: none;
+      color: ghostwhite;
+      font-size: 1.4em;
+      padding-right: 10px;
+      opacity: 0.9;
+      &:hover {
         font-size: 1.5em;
+        opacity: 1;
+      }
     }
-}
 
-
-.linkToLogin {
-    text-decoration: none;
-    font-size: 1.5em;
-    color: ghostwhite;
-    color: ghostwhite;
-    &:hover {
+    .linkToLogin {
+      text-decoration: none;
+      font-size: 1.5em;
+      color: ghostwhite;
+      color: ghostwhite;
+      &:hover {
         text-decoration: underline;
+      }
     }
+
+    .logoutButton {
+      outline: none;
+      height: 40px;
+      text-align: center;
+      width: 130px;
+      border-radius: 40px;
+      background: #fff;
+      border: 2px solid #5b5ff0;
+      color: #5b5ff0;
+      letter-spacing: 1px;
+      font: {
+        size: 12px;
+        weight: bold;
+      }
+      cursor: pointer;
+      transition: all 0.25s ease;
+      &:hover {
+        color: white;
+        background: #5b5ff0;
+        font-size: 13px;
+      }
+      &:active {
+        letter-spacing: 2px;
+      }
+    }
+  }
 }

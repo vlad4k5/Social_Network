@@ -14,7 +14,7 @@ const mapSateToProps = (state: AppStateType) => ({
 function withAuthRedirect<WCP>(Component: React.ComponentType<WCP>) {
     function RedirectComponent(props: PropsType) {
         let { isAuth, ...restProps } = props
-        if (isAuth === false) <Redirect to="/login" />
+        if (isAuth === false) return <Redirect to="/login" />
 
         return < Component {...restProps as unknown as WCP} />
     }

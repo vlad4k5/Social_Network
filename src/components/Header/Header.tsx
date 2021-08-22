@@ -16,18 +16,21 @@ type TDispatchProps = {
 type PropsType = TStateProps & TDispatchProps
 
 const Header: React.FC<PropsType> = ({ isAuth, logout, userName }) => {
+
     return <div className={s.header_wrapper}>
         <div className={s.mediaBlock}>
-            <img src={logo} id={s.logo} alt="Social-Network logo" />
+            <img src={logo} className={s.logo} alt="Social-Network logo" />
             <h2 className={s.slogan}>Social Network</h2>
         </div>
         {isAuth ?
             <div className={s.loginBlock}>
                 <NavLink to="/profile" className={s.linkToProfile}>{userName}</NavLink>
-                <button onClick={logout} className={s.logoutButton}>Logout</button>
+                    <button onClick={logout} className={s.logoutButton}>Log out</button>
             </div>
             : <div className={s.loginBlock}>
-                <NavLink to="/login" className={s.linkToLogin} >Login</NavLink>
+                <NavLink to="/login" className={s.linkToLogin} >
+                    <button className={s.logoutButton}>Log in</button>
+                </NavLink>
             </div>
         }
 

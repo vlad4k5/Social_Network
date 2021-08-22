@@ -42,7 +42,7 @@ const Login: React.FC<PropsType> = ({ isAuth, captcha, login, errorMessage }) =>
     }
 
     return <div className={s.loginWrapper}>
-        <h2>Login Page </h2>
+        
         < Formik initialValues={{
             email: "",
             password: "",
@@ -53,28 +53,30 @@ const Login: React.FC<PropsType> = ({ isAuth, captcha, login, errorMessage }) =>
             validationSchema={validationSchema}
         >
             <Form>
+            <h2>Login Page </h2>
                 {errorMessage && <div className={s.serverErrorMessage}> {errorMessage} </div>}
-                <div className={s.loginItem} >
-                    <label htmlFor="email" > E - mail: </label>
-                    < ErrorMessage name="email" component={TextError} /> <br />
-                    < Field id="email" name="email" />
-                </div>
-                <div className={s.loginItem} >
-                    <label htmlFor="password" > Password: </label>
-                    < ErrorMessage name="password" component={TextError} /> <br />
-                    < Field type="password" id="password" name="password" />
-                </div>
-                < div className={s.loginItem} >
-                    <label htmlFor="rememberMe" > Remember me: </label>
-                    < Field type="checkbox" id="rememberMe" name="rememberMe" />
-                </div><br />
-                {captcha ? <div>
-                    < img src={captcha} alt="captcha" /> <br />
-                    <label htmlFor="captcha" > Please write a symbols from  captcha: </label><br />
-                    <Field type="text" id="captcha" name="captcha" />
-                </div> : null}
-                < button > Login </button>
+            <div className={s.loginItem} >
+                < ErrorMessage name="email" component={TextError} /> 
+                < Field type="text" name="email" placeholder="Email Address" />
+            </div>
 
+            <div className={s.loginItem} >
+                < ErrorMessage name="password" component={TextError} /> 
+                < Field type="password" name="password" placeholder="Password" />
+            </div>
+
+            < div className={s.loginItem} >
+            < Field type="checkbox" id="rememberMe" name="rememberMe" />
+            <label htmlFor="rememberMe" > Remember me: </label>
+            </div>
+
+            {captcha ? <div className={s.captchaBlock}>
+                < img src={captcha} alt="captcha" />
+                <label htmlFor="captcha" className={s.err} > Please write a symbols from  captcha: </label>
+                <Field type="text" id="captcha" name="captcha" />
+            </div> : null}
+
+            < button className={s.loginButton}> Login </button>
             </Form>
         </Formik>
 
