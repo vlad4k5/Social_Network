@@ -26,7 +26,7 @@
 
 ##### 4) Open [http://localhost:3000](http://localhost:3000) in your browser
 
-##### 5) To see the content on the pages, you need to click on the button in the top right corner and enter these data:
+##### 5) To see the content on the pages, you need to Log in:
 
 ###### Login: `armia1823@gmail.com`
 

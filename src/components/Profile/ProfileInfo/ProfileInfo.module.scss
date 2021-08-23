@@ -1,104 +1,134 @@
 $blue: #5b5ff0;
 $lightBlue: #7c80f8;
 
-@mixin imgProps($width: 100px, $borderRadius: 10%) {
-    
-}
-
-@mixin padd($padd...) {
-    padding: $padd;
-}
-
-@mixin link($link, $hover, ) {
-    a {
-        color: $link;
-        &:hover {
-            color: $hover;
-        }
+@mixin link($link, $hover) {
+  a {
+    color: $link;
+    &:hover {
+      color: $hover;
     }
+  }
 }
 @include link(black, red);
 
-
 .profileInfo_wrapper {
-    display: grid;
-    grid-template-columns: minmax(250px, 120px) minmax(720px, 1fr);
-    grid-template-rows: 40px 1fr;
-    grid-template-areas: "username aboutme" "userphoto aboutme";
-    gap: 10px;
-    margin: 0px 0px 10px 0px;
-    
+  display: flex;
 
-    h4 {
-        text-align: center;
-    }
-}
+  justify-content: space-between;
+  margin: 0px 0px 10px 0px;
 
-
-.userName {
+  h4 {
     text-align: center;
-    width: 100%;
-    grid-area: username;
-    color: white;
-    font-size: 30px;
-    background-color: $blue;
-    border-radius: 10px;
+  }
 }
 
+// .userName {
+//   text-align: center;
+//   width: 100%;
+//   color: white;
+//   font-size: 30px;
+//   background-color: $blue;
+//   border-radius: 10px;
+// }
 
 .userPhoto {
-    grid-area: userphoto;
-    img {
-        width: 100%;
-        border-radius: 50%;
-        border: 3px solid $blue;
-        box-sizing: border-box;
-        margin-bottom: 5px;
-    }
-    .photoFile {
-        width: 0.1px;
-        height: 0.1px;
-        opacity: 0;
-    }
-    .changePhotoLabel {
-        background-color: $lightBlue;
-        color: white;
-        padding: 5px 10px;
-        border-radius: 5px;
-        transition-duration: .15s;
-        cursor: pointer;
-        &:hover {
-            background-color: $blue;
-        }
-    }
-}
+  justify-content: center;
+  margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  img {
+    width: 200px;
+    border-radius: 2%;
+    cursor: pointer;
 
+    &:hover {
+      opacity: 0.95;
+    }
+  }
+  .photoFile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+  }
+
+  .editProfile {
+    align-self: flex-end;
+    width: 100%;
+    outline: 0px;
+    border: 0px;
+    background-color: #e5ebf1;
+    font-size: 20px;
+    padding: 5px;
+    cursor: pointer;
+    text-align: center;
+    opacity: 0.7;
+    border-radius: 7px;
+    margin-top: -10px;
+    a {
+      text-decoration: none;
+      color: black;
+    }
+
+    &:hover {
+      background-color: darken(#e5ebf1, 1%);
+      opacity: 1;
+    }
+  }
+}
 
 .aboutMe {
-    grid-area: aboutme;
-    width: 100%;
-    padding: 5px;
-    background-color: #efeff2;
-    border-radius: 20px;
-    border: 1px solid $blue;
+  font-size: 18px;
+  width: 77%;
+  min-width: 400px;
+  padding: 0 0 10px 10px;
+
+  .userName {
+    display: block;
+    font-size: 28px;
+    line-height: 25px;
+    font-weight: 400;
+  }
+
+  .userStatus {
+    padding: 3px 0;
+    font-size: 16px;
+    cursor: pointer;
+    opacity: 0.8;
+
+    &:hover {
+      background-color: #f0f0f0;
+    }
+
+    input {
+      outline: 0px;
+      font-size: 16px;
+      height: auto;
+      padding: 5px 0px;
+      width: 70%;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+    }
+
+    .aboutMeInfo {
+    }
+  }
 }
-
-
-
 
 .contactsBlock {
-    margin-left: 0px auto;
-    text-align: center;
+  margin-left: 0px auto;
+  text-align: center;
 }
 .contacts {
-    color: #7c80f8;
-    padding: 0px 5px;
-    text-decoration: none;
-    font-size: 20px;
-    transition-duration: .3s;
-    // transition-delay: 0.07s;
-    &:hover {
-        @include padd(0px 25px);
-        color: #0008f7;
-    }
+  color: #7c80f8;
+  padding: 0px 5px;
+  text-decoration: none;
+  font-size: 20px;
+  transition-duration: 0.3s;
+  // transition-delay: 0.07s;
+  &:hover {
+    padding: 0 25px;
+    color: #0008f7;
+  }
 }
