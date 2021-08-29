@@ -55,7 +55,6 @@ const Profile: React.FC<PropsType> = ({ getProfile, getStatus, match, ownerId, p
             updatePhoto={updatePhoto}
             isOwner={!match.params.userId}
         />
-        <hr />
         <Posts
             posts={posts}
             userPhoto={profileInfo.photos.small ? profileInfo.photos.small : basicPhoto}

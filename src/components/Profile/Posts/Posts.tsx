@@ -35,14 +35,14 @@ const Posts: React.FC<PropsType> = ({ posts, userPhoto, addNewPost, isOwner }) =
                         const { field } = props;
 
                         return <div>
-                            <textarea className={s.postField} type="text" id="postText" placeholder="add new post" {...field}>{props.children}</textarea>
+                            <textarea className={s.postField} type="text" id="postText" placeholder="Add new post..." {...field}>{props.children}</textarea>
                         </div>
                     }}
                 </Field>
                 <button type="submit" className={s.newPostButton}>Add post</button>
             </Form>
         </Formik>}
-        <div className={s.posts}>
+        <div>
             {profilePosts}
         </div>
     </div >

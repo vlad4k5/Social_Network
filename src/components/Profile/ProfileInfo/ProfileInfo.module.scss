@@ -22,26 +22,24 @@ $lightBlue: #7c80f8;
   }
 }
 
-// .userName {
-//   text-align: center;
-//   width: 100%;
-//   color: white;
-//   font-size: 30px;
-//   background-color: $blue;
-//   border-radius: 10px;
-// }
-
 .userPhoto {
   justify-content: center;
   margin-right: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+
+  .ownerPhoto {
+    cursor: none;
+  }
+
   img {
     width: 200px;
     border-radius: 2%;
-    cursor: pointer;
+  }
 
+  .ownerPhoto {
+    cursor: pointer;
     &:hover {
       opacity: 0.95;
     }
@@ -111,8 +109,8 @@ $lightBlue: #7c80f8;
       transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
     }
 
-    .aboutMeInfo {
-    }
+    // .aboutMeInfo {
+    // }
   }
 }
 

@@ -2,7 +2,7 @@ import s from "./ProfileInfo.module.scss";
 import basicPhoto from "../../../assets/images/basicUserPhoto.png";
 import { useEffect, useState } from "react";
 import { ProfileInfoType } from "../../../store/types/types";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 
 type PropsType = {
@@ -49,15 +49,19 @@ const ProfileInfo: React.FC<PropsType> = ({ profileInfo, status, updateStatus, u
 
         {/* <span className={s.userName}>{profileInfo.fullName}</span> */}
         <div className={s.userPhoto}>
-                <label htmlFor="photoFile">
-                    <img src={profileInfo.photos.large ? profileInfo.photos.large : basicPhoto} alt="User Avatar" />
+                <label htmlFor="photoFile" >
+                    <img 
+                        src={profileInfo.photos.large ? profileInfo.photos.large : basicPhoto} 
+                        className={isOwner? s.ownerPhoto: ""} 
+                        alt="User Avatar" 
+                    />
                 </label>
             {isOwner && <div>
                 <input id="photoFile" className={s.photoFile} type="file" onChange={onMainPhotoSelected} />
                 <button className={s.editProfile}>
-                    <Link to="/settings" >
+                    <NavLink to="/settings" >
                         Edit profile
-                    </Link>
+                    </NavLink>
                 </button>
                 
             </div>}
@@ -67,7 +71,7 @@ const ProfileInfo: React.FC<PropsType> = ({ profileInfo, status, updateStatus, u
 
         <div className={s.aboutMe}>
             <h1 className={s.userName}>{profileInfo.fullName}</h1>
-            <div className={s.userStatus} onClick={() => { setStatusEditMode(true) }}>
+            <div className={isOwner? s.userStatus: ""} onClick={() => { setStatusEditMode(true) }}>
                 <label htmlFor="status">Status: </label>
                 {statusEditMode && isOwner
                     ? <input value={statusText} onChange={onStatusTextChanged} onBlur={saveNewStatus} autoFocus={true} />
@@ -82,7 +86,7 @@ const ProfileInfo: React.FC<PropsType> = ({ profileInfo, status, updateStatus, u
             </div>
             <div className={s.jobInfo}>
                 <p>{profileInfo.lookingForAJob? `Looking for a job ✔️`: "Not looking for a job ❌"}</p>
-                <p>{profileInfo.lookingForAJobDescription? ``: ""}</p>
+                <p>{profileInfo.lookingForAJobDescription? profileInfo.lookingForAJobDescription: ""}</p>
             </div>
 
             <div className={s.contactsBlock}>
