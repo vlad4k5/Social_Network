@@ -40,7 +40,6 @@ const Users: React.FC = () => {
     let showUsers = users.map(u => <UserItem key={u.id} name={u.name} id={u.id} photo={u.photos.small} followed={u.followed} status={u.status} />)
 
     return <div>
-        <h1>Users</h1><hr />
         <UsersSearchForm />
         <Paginator
             totalItemsCount={totalUsersCount}

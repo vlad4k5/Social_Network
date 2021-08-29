@@ -19,32 +19,35 @@ const Paginator: React.FC<PropsType> = ({ totalItemsCount, onPageChanged, curren
 
     if (currentPage >= 7 && currentPage <= totalPages - 3) {
         for (let i = currentPage; i <= lastPage; i++) {
-            pages.push(<button key={i} className={currentPage === i - 6 ? s.activePage : s.page} onClick={() => { onPageChanged(i - 6) }}>{i - 6}</button>)
+            pages.push(<li><button key={i} className={currentPage === i - 6 ? s.activePage : s.page} onClick={() => { onPageChanged(i - 6) }}>{i - 6}</button></li>)
         }
     } else if (currentPage < 7) {
         for (let i = 1; i <= pagesInPaginator; i++) {
-            pages.push(<button key={i} className={currentPage === i ? s.activePage : s.page} onClick={() => { onPageChanged(i) }}>{i}</button>)
+            pages.push(<li><button key={i} className={currentPage === i ? s.activePage : s.page} onClick={() => { onPageChanged(i) }}>{i}</button></li>)
         }
     } else if (currentPage > totalPages - 3) {
         for (let i = totalPages - pagesInPaginator; i < totalPages; i++) {
-            pages.push(<button key={i} className={currentPage === i ? s.activePage : s.page} onClick={() => { onPageChanged(i) }}>{i}</button>)
+            pages.push(<li><button key={i} className={currentPage === i ? s.activePage : s.page} onClick={() => { onPageChanged(i) }}>{i}</button></li>)
         }
     }
 
 
 
 
-    return <div className={s.paginatorWrapper}>
+    return <nav className={s.paginatorWrapper}>
         <button className={s.page} disabled={currentPage === 1 || loading ? true
-            : false} onClick={() => onPageChanged(currentPage - 1)}>&#8592;</button>
-
-        {pages}
+            : false} onClick={() => onPageChanged(currentPage - 1)}>&#60;</button>
+        <ul className={s.pages}>
+            {pages}
+        </ul>
+        
+        
 
         <span>{" ... "}</span>
         <button className={currentPage === totalPages ? s.activePage : s.page} onClick={() => onPageChanged(totalPages)}  >{totalPages}</button>
 
-        <button className={s.page} disabled={currentPage === totalPages || loading ? true : false} onClick={() => onPageChanged(currentPage + 1)}>&#8594;</button>
-    </div>
+        <button className={s.page} disabled={currentPage === totalPages || loading ? true : false} onClick={() => onPageChanged(currentPage + 1)}>&#62;</button>
+    </nav>
 }
 
 
