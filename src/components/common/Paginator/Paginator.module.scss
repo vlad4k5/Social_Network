@@ -9,7 +9,7 @@
       display: inline-block;
       font-size: 100%;
       width: auto;
-      border-radius: 3px;
+      border-radius: 10px;
     }
   }
 
@@ -21,14 +21,15 @@
     font-size: 21px;
     padding: 0.3em 0.5em;
     cursor: pointer;
-
+    border-radius: 7px;
     &:hover {
-      color: rgb(37, 131, 255);
+      color: #5b5ff0;
+      background-color: rgb(230, 230, 230);
     }
   }
 
   .activePage {
-    background: rgb(167, 167, 167);
+    background: rgb(211, 211, 211);
     color: black;
   }
 }

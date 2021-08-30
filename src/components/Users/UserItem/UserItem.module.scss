@@ -1,23 +1,62 @@
+.userItem {
+  display: flex;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  margin: 10px 0px;
+  background-color: #ffffff;
 
-
-.userItem{
-    border-radius: 20px;
-    border: 1px solid blue;
-    display: grid;
-    grid-template-columns: 1fr 6fr;
-    margin: 10px 0px;
-    background-color: #ffffff;
-}
-
-.userPhoto {
+  .userPhoto {
     margin: 5px 15px;
     border-radius: 50%;
-    border: 2px solid blue;
+    border: 1px solid lightgray;
     width: 80px;
-}
+  }
 
+  .userInfo {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    .userName {
+      font-weight: 500;
+      color: rgb(77, 77, 255);
+      font-size: 19px;
+      text-decoration: none;
 
-.followUnfollowButton {
-    margin: 0px 0px 10px 25px;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
 
+  .subscribeBlock {
+    margin: 10px 10px 0px 0px;
+
+    .followedButton {
+      background-color: rgb(235, 235, 235);
+      border: none;
+      padding: 6px 15px;
+      border-radius: 5px;
+      color: black;
+      font-size: 17px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: darken(rgb(235, 235, 235), 3%);
+      }
+    }
+
+    .unfollowedButton {
+      background-color: rgb(77, 77, 255);
+      border: none;
+      padding: 6px 15px;
+      border-radius: 5px;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: darken(rgb(77, 77, 255), 5%);
+      }
+    }
+  }
 }

@@ -43,17 +43,18 @@ const UserItem: React.FC<PropsType> = ({ photo, name, status, id, followed }) =>
             <NavLink to={`/profile/${id}`}>
                 <img onClick={() => { <Redirect to={`profile/${id}`} /> }} src={photo ? photo : basicPhoto} className={s.userPhoto} alt="User Avatar" />
             </NavLink>
-
-            {isFollowed
-                ? <button disabled={loading} onClick={() => { unfollow(id) }} className={s.followUnfollowButton}>Unfollow</button>
-                : <button disabled={loading} onClick={() => { follow(id) }} className={s.followUnfollowButton}>Follow</button>
-            }
-
         </div>
 
-        <div>
-            <br /><span>User name: </span><NavLink to={`/profile/${id}`}>{name}</NavLink><br /><br />
-            <span>User status: {status ? status : "User has not specified"}</span>
+        <div className={s.userInfo}>
+            <NavLink to={`/profile/${id}`} className={s.userName}>{name}</NavLink>
+            <span>{status ? status : "User has no status"}</span>
+        </div>
+
+        <div className={s.subscribeBlock}>
+            {isFollowed
+                ? <button disabled={loading} onClick={() => { unfollow(id) }} className={s.followedButton}>Unfollow</button>
+                : <button disabled={loading} onClick={() => { follow(id) }} className={s.unfollowedButton}>Follow</button>
+            }
         </div>
     </div>
 }
