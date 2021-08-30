@@ -28,6 +28,6 @@
 
 ##### 5) To see the content on the pages, you need to Log in:
 
-###### Login: `armia1823@gmail.com`
+###### Login: `free@samuraijs.com`
 
-###### Password: `vlad4k5`
+###### Password: `free`
