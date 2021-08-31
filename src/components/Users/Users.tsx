@@ -7,8 +7,9 @@ import { UserType } from "../../store/types/types";
 // import { getUsers } from "../../store/users-reducer.ts";
 import Paginator from "../common/Paginator/Paginator";
 import UserItem from "./UserItem/UserItem";
-import UsersSearchForm from "./UsersSearchForm/UsersSearchForm"
-
+import UsersSearchForm from "./UsersSearchForm/UsersSearchForm";
+import preloader from "../../assets/images/preloader.gif";
+import s from "./Users.module.scss";
 
 const Users: React.FC = () => {
     const [loading, setLoading] = useState(false);
@@ -41,7 +42,8 @@ const Users: React.FC = () => {
 
     return <div>
         <UsersSearchForm />
-        <Paginator
+        {!loading?<div>
+            <Paginator
             totalItemsCount={totalUsersCount}
             onPageChanged={onPageChanged}
             currentPage={currentPage}
@@ -58,6 +60,11 @@ const Users: React.FC = () => {
             itemsPerPage={usersPerPage}
             loading={loading}
             pagesInPaginator={10} />
+            </div>
+        : <div className={s.preloaderBlock}>
+            <img src={preloader} />
+        </div>
+        }
     </div >
 }
 
