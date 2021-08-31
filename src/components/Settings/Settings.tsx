@@ -8,6 +8,7 @@ import * as Yup from "yup";
 import { AppStateType } from "../../store/store";
 import { ProfileInfoType } from "../../store/types/types";
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 
 type TStateProps = {
@@ -89,15 +90,15 @@ const Settings: React.FC<PropsType> = ({ profileInfo, updateProfile, ownerId, ge
                     <Field as="textarea" name="lookingForAJobDescription" id="lookingForAJobDescription" />
                     <span className={s.errorMessage}><ErrorMessage name="lookingForAJobDescription" /></span>
 
-                    <label htmlFor="lookingForAJob">Open for job:</label>
-                    <span><Field type="checkbox" name="lookingForAJob" id="lookingForAJob" /></span>
-                    <span className={s.errorMessage}></span>
-
-                    <h2>Contacts</h2> <span></span> <span></span>
+                    <label htmlFor="lookingForAJob"> Looking for a job:</label>
+                    <Field type="checkbox" name="lookingForAJob" id="lookingForAJob"/>
+                    <label htmlFor="lookingForAJob" className={s.toggle }><span></span></label>
+                    <span></span>
                     
 
 
 
+                    <h2>Contacts</h2> <span></span> <span></span>
 
                     <label htmlFor="facebook">Facebook:</label>
                     <Field type="text" name="contacts.facebook" id="facebook" />
@@ -132,7 +133,11 @@ const Settings: React.FC<PropsType> = ({ profileInfo, updateProfile, ownerId, ge
                     <span className={s.errorMessage}><ErrorMessage name="contacts.mainLink" /></span>
 
                 </div>
-                <button type="submit" className={s.submitButton}>Save changes</button>
+                <NavLink to="/profile">
+                <button type="submit" className={s.submitButton}>
+                    Save changes
+                </button>
+                </NavLink>
             </Form>
         </Formik>
     </div >
