@@ -9,6 +9,7 @@ const SET_USERS = "SN/USERS/SET_USERS";
 
 let initialState = {
     users: null as EntireUsersType | null,
+    isFetching: false 
 }
 
 
