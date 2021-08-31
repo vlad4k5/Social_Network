@@ -60,57 +60,67 @@ const Settings: React.FC<PropsType> = ({ profileInfo, updateProfile, ownerId, ge
             facebook: Yup.string().url("Invalid url format")
         }),
         aboutMe: Yup.string().max(200, "Too long text"),
-        fullName: Yup.string().max(20, "Too long text"),
+        fullName: Yup.string().max(20, "Too long name"),
     })
 
     return <div className={s.settingsComponent}>
-        <h1>Settings</h1>
-        <hr />
+        <h2>Account settings</h2>
 
         <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
             <Form>
                 <div className={s.settingsWrapper}>
-                    <div className={s.settingsBlock}>
-                        <label htmlFor="aboutMe">About Me:</label>
-                        <ErrorMessage name="aboutMe" /><br />
-                        <Field as="textarea" name="aboutMe" id="aboutMe" /><br />
-                        <label htmlFor="fullName">Full Name:</label><br />
-                        <Field type="text" name="fullName" id="fullName" />
-                    </div>
-                    <div className={s.settingsBlock}>
-                        <label htmlFor="lookingForAJobDescription">Job information:</label><br />
-                        <Field as="textarea" name="lookingForAJobDescription" id="lookingForAJobDescription" /><br />
-                        <label htmlFor="lookingForAJob">Open for job:</label>
-                        <Field type="checkbox" name="lookingForAJob" id="lookingForAJob" />
-                    </div>
-                    <div className={s.settingsBlock}>
-                        <h3>Contacts:</h3>
-                        <div className={s.settingsContactsWrapper}>
-                            <div className={s.contactsLabales}>
-                                <label htmlFor="facebook">Facebook:</label><br />
+                    <label htmlFor="aboutMe">About Me:</label>
+                    <Field as="textarea" name="aboutMe" id="aboutMe" />
+                    <span><ErrorMessage name="aboutMe" /></span>
+                    
+                    <label htmlFor="fullName">Full Name:</label>
+                    <Field type="text" name="fullName" id="fullName" />
+                    <span><ErrorMessage name="fullName" /></span>
+                    
+                    <label htmlFor="lookingForAJobDescription">Job information:</label>
+                    <Field as="textarea" name="lookingForAJobDescription" id="lookingForAJobDescription" />
+                    <span></span>
 
-                                <label htmlFor="website">Website:</label><br />
-                                <label htmlFor="vk">Vk:</label><br />
-                                <label htmlFor="twitter">Twitter:</label><br />
-                                <label htmlFor="instagram">Instagram:</label><br />
-                                <label htmlFor="youtube">Youtube:</label><br />
-                                <label htmlFor="github">Github:</label><br />
-                                <label htmlFor="mainLink">MainLink:</label><br />
-                            </div>
-                            <div>
-                                <Field type="text" name="contacts.facebook" id="facebook" /><ErrorMessage name="contacts.facebook" />
-                                <Field type="text" name="contacts.website" id="website" />
-                                <Field type="text" name="contacts.vk" id="vk" />
-                                <Field type="text" name="contacts.twitter" id="twitter" />
-                                <Field type="text" name="contacts.instagram" id="instagram" />
-                                <Field type="text" name="contacts.youtube" id="youtube" />
-                                <Field type="text" name="contacts.github" id="github" />
-                                <Field type="text" name="contacts.mainLink" id="mainLink" />
-                            </div>
-                        </div>
-                    </div>
+                    <label htmlFor="lookingForAJob">Open for job:</label>
+                    <span><Field type="checkbox" name="lookingForAJob" id="lookingForAJob" /></span>
+                    <span></span>
+
+                    <h2>Contacts</h2> <span></span> <span></span>
+                    
+                    <label htmlFor="facebook">Facebook:</label>
+                    <Field type="text" name="contacts.facebook" id="facebook" />
+                    <span><ErrorMessage name="contacts.facebook" /></span>
+
+                    <label htmlFor="website">Website:</label>
+                    <Field type="text" name="contacts.website" id="website" />
+                    <span><ErrorMessage name="contacts.facebook" /></span>
+
+                    <label htmlFor="vk">Vkontakte:</label>
+                    <Field type="text" name="contacts.vk" id="vk" />
+                    <span><ErrorMessage name="contacts.facebook" /></span>
+
+                    <label htmlFor="twitter">Twitter:</label>
+                    <Field type="text" name="contacts.twitter" id="twitter" />
+                    <span><ErrorMessage name="contacts.facebook" /></span>
+
+                    <label htmlFor="instagram">Instagram:</label>
+                    <Field type="text" name="contacts.instagram" id="instagram" />
+                    <span><ErrorMessage name="contacts.facebook" /></span>
+
+                    <label htmlFor="youtube">Youtube:</label>
+                    <Field type="text" name="contacts.youtube" id="youtube" />
+                    <span><ErrorMessage name="contacts.facebook" /></span>
+
+                    <label htmlFor="github">Github:</label>
+                    <Field type="text" name="contacts.github" id="github" />
+                    <span><ErrorMessage name="contacts.facebook" /></span>
+
+                    <label htmlFor="mainLink">MainLink:</label>
+                    <Field type="text" name="contacts.mainLink" id="mainLink" />
+                    <span><ErrorMessage name="contacts.facebook" /></span>
+
                 </div>
-                <button type="submit">Save all</button>
+                <button type="submit" className={s.submitButton}>Save all</button>
             </Form>
         </Formik>
     </div >

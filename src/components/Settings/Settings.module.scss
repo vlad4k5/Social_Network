@@ -1,28 +1,74 @@
 .settingsComponent {
-    padding: 15px;
-}
+  padding: 15px;
 
+  h2 {
+    margin-bottom: 40px;
+    font-weight: 500;
+  }
+}
 
 .settingsWrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    column-gap: 10px;
-}
+  font-size: 16px;
+  font-weight: 350;
+  opacity: 0.8;
+  display: grid;
+  grid-template-columns: 1fr 3fr 2fr;
+  align-items: start;
+  justify-content: start;
+  gap: 20px;
 
-.settingsBlock {
-    background-color: #ffffff;
-    border: 1px solid blue;
-    border-radius: 20px;
+  h2 {
+    font-size: 24px;
+    font-weight: 400;
+    opacity: 0.9;
+    margin-top: 10px;
+  }
+
+  textarea {
+    height: 115px;
+    overflow: hidden;
+    resize: none;
+    outline: none;
+    font-size: 16px;
     padding: 10px;
-    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: -5px;
+  }
+
+  input {
+    outline: 0px;
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+    margin-top: -5px;
+
+    &:focus {
+      z-index: 2;
+    }
+  }
 }
 
-.settingsContactsWrapper {
-    display: grid;
-    grid-template-columns: 3fr 7fr;
+.submitButton {
+  display: block;
+  min-width: 250px;
+  margin: 0 auto;
+  margin-top: 30px;
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 6px;
+  color: #fff;
+  background-color: #5b5ff0;
+  border: none;
+  cursor: pointer;
+  text-shadow: none;
+  transition: 0.25s;
+  &:hover {
+    background-color: darken(#5b5ff0, 3%);
+  }
 }
-
-.contactsLabales {
-    line-height: 1.55em;
-}
-
