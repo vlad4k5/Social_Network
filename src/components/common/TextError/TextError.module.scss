@@ -1,4 +1,6 @@
+@import "../../../scss/variables";
+
 .error {
-  color: red;
+  color: $red;
   font-weight: 350;
 }

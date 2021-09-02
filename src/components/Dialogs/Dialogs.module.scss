@@ -1,13 +1,15 @@
+@import "../../scss/variables";
+
 .dialogsWrapper {
   display: grid;
   grid-template-columns: 2fr 7fr;
   column-gap: 10px;
 
   .dialogsUsers {
-    background-color: #ffffff;
+    background-color: $white;
     padding: 20px;
     border-radius: 5px;
-    border: 1px solid rgb(150, 150, 150);
+    border: 1px solid $gray;
     box-sizing: border-box;
   }
   .dialogsUserPhoto {
@@ -21,10 +23,10 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: #ffffff;
+    background-color: $white;
     padding: 20px;
     border-radius: 5px;
-    border: 1px solid rgb(150, 150, 150);
+    border: 1px solid $gray;
     box-sizing: border-box;
 
     form {
@@ -37,7 +39,7 @@
       height: 30px;
       transition: 0.3s;
       cursor: pointer;
-      background-color: lightBlue;
+      background-color: $lightBlue;
       border: none;
       padding: 5px 15px;
       border-radius: 5px;
@@ -56,13 +58,13 @@
       outline: none;
       font-size: 16px;
       padding: 5px;
-      border: 1px solid #ccc;
+      border: 1px solid $gray;
       border-radius: 4px;
       margin-top: -5px;
 
       &:focus {
-        border-color: #5b5ff0;
-        box-shadow: 1px 1px 15px #c8caff;
+        border-color: $lightBlue;
+        box-shadow: 1px 1px 15px lighten($lightBlue, 30%);
       }
     }
   }
@@ -79,7 +81,7 @@
     color: #8488eb;
     font-weight: 350;
     &:hover {
-      color: blue;
+      color: $blue;
       font-weight: 400;
     }
   }

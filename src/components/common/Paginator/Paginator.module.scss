@@ -1,3 +1,5 @@
+@import "../../../scss/variables";
+
 .paginatorWrapper {
   ul {
     list-style-type: none;
@@ -17,19 +19,19 @@
     border: none;
     font: inherit;
     background-color: transparent;
-    color: #777;
+    color: darken($gray, 25%);
     font-size: 21px;
     padding: 0.3em 0.5em;
     cursor: pointer;
     border-radius: 7px;
     &:hover {
-      color: #5b5ff0;
-      background-color: rgb(230, 230, 230);
+      color: $blue;
+      background-color: lighten($gray, 12%);
     }
   }
 
   .activePage {
-    background: rgb(211, 211, 211);
+    background: lighten($gray, 5%);
     color: black;
   }
 }

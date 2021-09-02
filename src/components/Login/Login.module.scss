@@ -1,3 +1,5 @@
+@import "../../scss/variables";
+
 .loginWrapper {
   margin-top: 80px;
   margin-bottom: 80px;
@@ -6,7 +8,7 @@
     max-width: 480px;
     padding: 35px 35px 55px;
     margin: 0 auto;
-    background-color: #fff;
+    background-color: $white;
     border: 1px solid rgba(0, 0, 0, 0.1);
     &:focus {
       z-index: 2;
@@ -25,7 +27,7 @@
       height: auto;
       padding: 10px;
       width: 80%;
-      border: 1px solid #ccc;
+      border: 1px solid $gray;
       border-radius: 4px;
       transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
 
@@ -62,13 +64,13 @@
       line-height: 1.33;
       border-radius: 6px;
       color: #fff;
-      background-color: #5b5ff0;
+      background-color: $lightBlue;
       border: none;
       cursor: pointer;
       text-shadow: none;
       transition: 0.25s;
       &:hover {
-        background-color: darken(#5b5ff0, 3%);
+        background-color: darken($lightBlue, 3%);
       }
     }
     .captchaBlock {
@@ -86,6 +88,6 @@
 
 .serverErrorMessage {
   font-size: 1.3em;
-  color: red;
+  color: $red;
   margin-bottom: 10px;
 }

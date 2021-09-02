@@ -1,7 +1,9 @@
+@import "./scss/variables";
+
 body {
   max-width: 1200px;
   margin: 0 auto;
-  background-color: #eeeef5;
+  background-color: $white;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;

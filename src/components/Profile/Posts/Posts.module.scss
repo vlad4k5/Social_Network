@@ -1,6 +1,4 @@
-$veryLightBlue: #afb2fd;
-$lightBlue: #7c80f8;
-$blue: #5b5ff0;
+@import "../../../scss/variables";
 
 @mixin transitionDuration {
   transition-duration: 0.3s;
@@ -12,7 +10,7 @@ $blue: #5b5ff0;
   resize: none;
   border: none;
   min-width: 50%;
-  outline: 1px solid $veryLightBlue;
+  outline: 1px solid $lightBlue;
   margin: 10px 0px;
   padding: 5px;
   &:focus {
@@ -29,14 +27,14 @@ $blue: #5b5ff0;
   border: none;
   padding: 5px 15px;
   border-radius: 5px;
-  color: white;
+  color: $white;
   &:hover {
     background-color: $blue;
   }
 }
 
 .post {
-  background-color: #ffffff;
+  background-color: $white;
   margin: 15px 0px;
   display: grid;
   grid-template-columns: 80px 1fr 70px;
@@ -48,7 +46,7 @@ $blue: #5b5ff0;
     width: 70px;
     border-radius: 50%;
     margin: 10px 5px;
-    border: 1px solid lightgray;
+    border: 1px solid $gray;
   }
 
   .postText {
@@ -62,7 +60,7 @@ $blue: #5b5ff0;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #f5f5f5;
+    background-color: lighten($gray, 15%);
     border-radius: 0px 9px 9px 0px;
 
     .likeButton {

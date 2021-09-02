@@ -1,9 +1,11 @@
+@import "../../scss/variables";
+
 .header_wrapper {
   min-width: 600px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #5b5ff0;
+  background-color: $lightBlue;
 
   .mediaBlock {
     display: flex;
@@ -53,13 +55,13 @@
 
     .logoutButton {
       outline: none;
-      height: 40px;
+      height: 35px;
       text-align: center;
       width: 130px;
       border-radius: 40px;
       background: #fff;
-      border: 2px solid #5b5ff0;
-      color: #5b5ff0;
+      border: none;
+      color: $lightBlue;
       letter-spacing: 1px;
       font: {
         size: 12px;
@@ -69,7 +71,7 @@
       transition: all 0.25s ease;
       &:hover {
         color: white;
-        background: #5b5ff0;
+        background: $lightBlue;
         font-size: 13px;
       }
       &:active {

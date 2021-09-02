@@ -1,14 +1,16 @@
+@import "../../../scss/variables";
+
 .userItem {
   display: flex;
   border-radius: 5px;
-  border: 1px solid lightgray;
+  border: 1px solid $gray;
   margin: 10px 0px;
-  background-color: #ffffff;
+  background-color: $white;
 
   .userPhoto {
     margin: 5px 15px;
     border-radius: 50%;
-    border: 1px solid lightgray;
+    border: 1px solid $gray;
     width: 80px;
   }
 
@@ -18,7 +20,7 @@
     width: 75%;
     .userName {
       font-weight: 500;
-      color: rgb(77, 77, 255);
+      color: $lightBlue;
       font-size: 19px;
       text-decoration: none;
 
@@ -32,30 +34,32 @@
     margin: 10px 10px 0px 0px;
 
     .followedButton {
-      background-color: rgb(235, 235, 235);
+      background-color: lighten($gray, 10%);
       border: none;
       padding: 6px 15px;
       border-radius: 5px;
       color: black;
       font-size: 17px;
       cursor: pointer;
+      transition: 0.2s;
 
       &:hover {
-        background-color: darken(rgb(235, 235, 235), 3%);
+        background-color: lighten($gray, 6%);
       }
     }
 
     .unfollowedButton {
-      background-color: rgb(77, 77, 255);
+      background-color: $lightBlue;
       border: none;
       padding: 6px 15px;
       border-radius: 5px;
       color: white;
       font-size: 17px;
       cursor: pointer;
+      transition: 0.2s;
 
       &:hover {
-        background-color: darken(rgb(77, 77, 255), 5%);
+        background-color: $blue;
       }
     }
   }

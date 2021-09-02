@@ -1,5 +1,4 @@
-$blue: #5b5ff0;
-$lightBlue: #7c80f8;
+@import "../../../scss/variables";
 
 @mixin link($link, $hover) {
   a {
@@ -9,7 +8,7 @@ $lightBlue: #7c80f8;
     }
   }
 }
-@include link(black, red);
+@include link(black, $red);
 
 .profileInfo_wrapper {
   display: flex;
@@ -55,7 +54,7 @@ $lightBlue: #7c80f8;
     width: 100%;
     outline: 0px;
     border: 0px;
-    background-color: #e5ebf1;
+    background-color: darken($lightgray, 5%);
     font-size: 20px;
     padding: 5px;
     cursor: pointer;
@@ -69,7 +68,7 @@ $lightBlue: #7c80f8;
     }
 
     &:hover {
-      background-color: darken(#e5ebf1, 1%);
+      background-color: darken($lightgray, 5%);
       opacity: 1;
     }
   }
@@ -95,7 +94,7 @@ $lightBlue: #7c80f8;
     opacity: 0.8;
 
     &:hover {
-      background-color: #f0f0f0;
+      background-color: darken($whiteGray, 2%);
     }
 
     input {
@@ -104,29 +103,9 @@ $lightBlue: #7c80f8;
       height: auto;
       padding: 5px 0px;
       width: 70%;
-      border: 1px solid #ccc;
+      border: 1px solid $gray;
       border-radius: 4px;
       transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
     }
-
-    // .aboutMeInfo {
-    // }
-  }
-}
-
-.contactsBlock {
-  margin-left: 0px auto;
-  text-align: center;
-}
-.contacts {
-  color: #7c80f8;
-  padding: 0px 5px;
-  text-decoration: none;
-  font-size: 20px;
-  transition-duration: 0.3s;
-  // transition-delay: 0.07s;
-  &:hover {
-    padding: 0 25px;
-    color: #0008f7;
   }
 }
