@@ -9,12 +9,14 @@ import basicPhoto from "../../assets/images/basicUserPhoto.png";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import { PostType, ProfileInfoType } from "../../store/types/types";
 import { AppStateType } from "../../store/store";
+import Preloader from "../common/Preloader/Preloader";
 
 type TStateProps = {
     profileInfo: ProfileInfoType | null
     status: string
     posts: Array<PostType>
     ownerId: number | null
+    isLoading: boolean
 }
 type TDispatchProps = {
     getProfile: (userId: number) => void
@@ -30,7 +32,7 @@ type TOwnProps = {
 
 type PropsType = TStateProps & TDispatchProps & TOwnProps
 
-const Profile: React.FC<PropsType> = ({ getProfile, getStatus, match, ownerId, profileInfo, status, posts, addNewPost, updateStatus, updatePhoto }) => {
+const Profile: React.FC<PropsType> = ({ getProfile, getStatus, match, ownerId, profileInfo, status, posts, addNewPost, updateStatus, updatePhoto, isLoading }) => {
     useEffect(() => {
         if (ownerId !== null){
             getProfile(match.params.userId ? match.params.userId : ownerId);
@@ -42,12 +44,13 @@ const Profile: React.FC<PropsType> = ({ getProfile, getStatus, match, ownerId, p
         
     }, [match.params.userId, ownerId])
 
-
     if (!profileInfo) {
-        return <div>Loading...</div>
+        return <Preloader />
     }
 
     return <>
+    {isLoading? <Preloader />
+    : <div>
         <ProfileInfo
             profileInfo={profileInfo}
             status={status}
@@ -57,10 +60,12 @@ const Profile: React.FC<PropsType> = ({ getProfile, getStatus, match, ownerId, p
         />
         <Posts
             posts={posts}
-            userPhoto={profileInfo.photos.small ? profileInfo.photos.small : basicPhoto}
+            userPhoto={profileInfo?.photos.small ? profileInfo.photos.small : basicPhoto}
             addNewPost={addNewPost}
             isOwner={!match.params.userId}
         />
+    </div>
+    } 
     </>
 }
 
@@ -69,6 +74,7 @@ const mapStateToProps = (state: AppStateType): TStateProps => ({
     status: state.profile.status,
     posts: state.profile.posts,
     ownerId: state.auth.userData.id,
+    isLoading: state.profile.isLoading
 })
 
 export default compose<React.ComponentType>(

@@ -3,7 +3,7 @@ import { BasicResponseType, instance, ResponseWithDataType } from "./instance-ap
 
 
 type SetPhotoDataType = {
-    photos: PhotosType
+    photos: PhotosType,
 }
 
 export const profileAPI = {

@@ -4,6 +4,7 @@ import { CommonThunkCreatorType, PhotosType, PostType, ProfileInfoType } from ".
 
 const SET_PROFILE = "SN/PROFILE/SET_PROFILE"
 const SET_STATUS = "SN/PROFILE/SET_STATUS"
+const SET_LOADING = "SN/PROFILE/SET_LOADING"
 const SET_PHOTO = "SN/PROFILE/SET_PHOTO"
 const ADD_NEW_POST = "SN/PROFILE/ADD_NEW_POST"
 
@@ -12,6 +13,7 @@ const ADD_NEW_POST = "SN/PROFILE/ADD_NEW_POST"
 let initialState = {
     status: "",
     profileInfo: null as ProfileInfoType | null,
+    isLoading: false,
     posts: [
         { id: 1, message: "My first post", likesCount: 190 },
         { id: 2, message: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", likesCount: 21 },
@@ -28,6 +30,9 @@ const profileReducer = (state = initialState, action: ProfileActionsType): Initi
         case SET_STATUS: {
             return { ...state, status: action.status }
         }
+        case SET_LOADING: {
+            return { ...state, isLoading: action.loading }
+        }
         case SET_PHOTO: {
             return { ...state, profileInfo: { ...state.profileInfo, photos: action.photos } as ProfileInfoType }
         }
@@ -43,6 +48,7 @@ const profileReducer = (state = initialState, action: ProfileActionsType): Initi
 export const profileActions = {
     setProfile: (profileInfo: ProfileInfoType | null) => ({ type: SET_PROFILE, profileInfo } as const),
     setStatus: (status: string) => ({ type: SET_STATUS, status } as const),
+    setLoading: (loading: boolean) => ({ type: SET_LOADING, loading } as const),
     setPhoto: (photos: PhotosType) => ({ type: SET_PHOTO, photos } as const),
     addNewPost: (postText: string) => ({ type: ADD_NEW_POST, postText } as const)
 }
@@ -51,17 +57,21 @@ export const profileActions = {
 
 
 export const getProfile = (userId: number): ThunkType => async dispatch => {
+    dispatch(profileActions.setLoading(true))
     const res = await profileAPI.getProfile(userId)
 
     dispatch(profileActions.setProfile(res))
+    dispatch(profileActions.setLoading(false))
 }
 
 export const updateProfile = (profileInfo: ProfileInfoType): ThunkType => async dispatch => {
+    dispatch(profileActions.setLoading(true))
     const res = await profileAPI.setProfile(profileInfo)
 
     if (res.resultCode === 0) {
         dispatch(profileActions.setProfile(profileInfo))
     }
+    dispatch(profileActions.setLoading(false))
 }
 
 

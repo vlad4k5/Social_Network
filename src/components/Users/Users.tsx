@@ -1,15 +1,11 @@
 import { useEffect, useState } from "react";
-// import { connect } from "react-redux";
 import { compose } from "redux";
 import { usersAPI } from "../../api/users-api";
 import withAuthRedirect from "../../hocs/withAuthRedirect";
 import { UserType } from "../../store/types/types";
-// import { getUsers } from "../../store/users-reducer.ts";
 import Paginator from "../common/Paginator/Paginator";
 import UserItem from "./UserItem/UserItem";
 import UsersSearchForm from "./UsersSearchForm/UsersSearchForm";
-import preloader from "../../assets/images/preloader.gif";
-import s from "./Users.module.scss";
 import FakeUserItem from "./UserItem/FakeUserItem";
 
 const Users: React.FC = () => {

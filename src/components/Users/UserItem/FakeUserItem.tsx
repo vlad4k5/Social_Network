@@ -2,7 +2,7 @@ import ContentLoader from "react-content-loader"
 
 const FakeUserItem = () => (
     <ContentLoader 
-      speed={2}
+      speed={1}
       width={920}
       height={103}
       viewBox="0 0 920 103"

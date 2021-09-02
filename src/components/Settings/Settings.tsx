@@ -8,6 +8,7 @@ import * as Yup from "yup";
 import { AppStateType } from "../../store/store";
 import { ProfileInfoType } from "../../store/types/types";
 import React from "react";
+import Preloader from "../common/Preloader/Preloader";
 
 
 type TStateProps = {
@@ -22,14 +23,14 @@ type TDispatchProps = {
 type PropsType = TStateProps & TDispatchProps
 
 const Settings: React.FC<PropsType> = ({ profileInfo, updateProfile, ownerId, getProfile, getStatus }) => {
-    if (ownerId === null) return <div>LLOADING.........</div>
+    if (ownerId === null) return <Preloader />
 
     if (ownerId !== profileInfo?.userId) {
         getProfile(ownerId);
         getStatus(ownerId);
     }
     if (!profileInfo || ownerId !== profileInfo.userId) {
-        return <div>Loading...</div>
+        return <Preloader />
     }
 
     const initialValues: ProfileInfoType = {
