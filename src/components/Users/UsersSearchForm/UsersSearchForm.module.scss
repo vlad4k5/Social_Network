@@ -1,27 +1,32 @@
 .searchField {
-    outline: 0px;
-    border: 1px solid rgb(147, 135, 255);
-    border-radius: 5px;
-    font-size: 20px;
-    width: 30%;
-    margin: 5px;
-    padding: 3px;
-    &:focus {
-        border:1px solid rgb(73, 53, 255)
-    }
+  width: 400px;
+  outline: 0px;
+  position: relative;
+  font-size: 16px;
+  height: auto;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  margin-top: -5px;
+
+  &:focus {
+    z-index: 2;
+    border-color: #5b5ff0;
+    box-shadow: 3px 3px 15px #c8caff;
+  }
 }
 
-
 .searchButton {
-    border: 1px solid rgb(73, 53, 255);
-    border-radius: 5px;
-    background-color: rgb(147, 135, 255) ;
-    padding: 5px;
-    color: white;
-    font-size: 16px;
-    margin: 5px;
-    &:hover {
-        background-color: rgb(118, 103, 250);
-        cursor: pointer;
-    }
+  border: 1px solid rgb(73, 53, 255);
+  border-radius: 5px;
+  background-color: rgb(147, 135, 255);
+  padding: 5px;
+  color: white;
+  font-size: 16px;
+  margin: 5px;
+  &:hover {
+    background-color: rgb(118, 103, 250);
+    cursor: pointer;
+  }
 }

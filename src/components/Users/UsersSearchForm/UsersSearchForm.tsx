@@ -1,30 +1,30 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import TextError from "../../common/TextError/TextError";
+import { FC, useState } from "react";
 import s from "./UsersSearchForm.module.scss"
 
-
-type Values = {
-    term: string
+type PropsType = {
+    setFindValue: (value: string) => void
+    setCurrentPage: (val: number) => void
 }
 
-const onSubmit = (values: Values) => {
+const UsersSearchForm: FC<PropsType> = ({setFindValue, setCurrentPage}) => {
+    const [term, setTerm] = useState("")
 
-}
-const validationSchema = Yup.object({
-    term: Yup.string().max(25, "25 characters maximum")
-})
+    const onChangeTerm= (e: any) =>{
+        setTerm(e.target.value)
+    }
 
-
-const UsersSearchForm = () => {
-    return <Formik initialValues={{ term: "" }} onSubmit={onSubmit} validationSchema={validationSchema}>
-        <Form>
-            <Field type="text" name="term" className={s.searchField} />
-            <button className={s.searchButton}> Find User</button><br />
-            <ErrorMessage name="term" component={TextError} />
+    const findUsers = () => { 
+        setFindValue(term)
+        setCurrentPage(1)
+    }
+    
+    return <div>
+        <input type="text" name="term" className={s.searchField} value={term} onChange={onChangeTerm}/>
+        <button className={s.searchButton} onClick={findUsers}  > Find User</button><br />
             <br />
-        </Form>
-    </Formik>
+    </div>
+            
+
 }
 
 

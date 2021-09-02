@@ -10,7 +10,7 @@ type TgetUsers = {
 
 export const usersAPI = {
     getUsers(count: number, page: number, term: string) {
-        return instance.get<TgetUsers>(`/users/?count=${count}&page=${page}`).then(res => res.data)
+        return instance.get<TgetUsers>(`/users/?count=${count}&page=${page}&term=${term}`).then(res => res.data)
     },
     follow(userId: number) {
         return instance.post<BasicResponseType>(`/follow/${userId}`).then(res => res.data)
