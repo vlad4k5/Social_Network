@@ -8,7 +8,6 @@ import * as Yup from "yup";
 import { AppStateType } from "../../store/store";
 import { ProfileInfoType } from "../../store/types/types";
 import React from "react";
-import { NavLink } from "react-router-dom";
 
 
 type TStateProps = {
@@ -133,11 +132,11 @@ const Settings: React.FC<PropsType> = ({ profileInfo, updateProfile, ownerId, ge
                     <span className={s.errorMessage}><ErrorMessage name="contacts.mainLink" /></span>
 
                 </div>
-                <NavLink to="/profile">
+                
                 <button type="submit" className={s.submitButton}>
                     Save changes
                 </button>
-                </NavLink>
+                
             </Form>
         </Formik>
     </div >

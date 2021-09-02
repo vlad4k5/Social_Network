@@ -35,19 +35,24 @@ const Dialogs: React.FC<PropsType> = ({ users, messages, addNewMessage }) => {
     }
 
     return <div>
-        <h1>Messages</h1> <hr />
         <div className={s.dialogsWrapper}>
             <div className={s.dialogsUsers}>
                 {dialogsUsers}
             </div>
             <div className={s.dialogsMessages}>
-                {dialogsMessages}<hr />
+
+                <div className={s.messages}>
+                    {dialogsMessages}
+                </div>
+
+                <div>
                 <Formik initialValues={{ message: "" }} onSubmit={onSubmit}>
                     <Form>
-                        <Field as="textarea" id="message" name="message" /><br />
-                        <button type="submit">Send message</button>
+                        <Field as="textarea" id="message" name="message" />
+                        <button type="submit" className={s.sendMessageButton}>Send message</button>
                     </Form>
                 </Formik>
+                </div>
             </div>
         </div>
     </div >

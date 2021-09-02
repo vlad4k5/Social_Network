@@ -18,8 +18,6 @@ type PropsType = {
 
 const ProfileInfo: React.FC<PropsType> = ({ profileInfo, status, updateStatus, updatePhoto, isOwner }) => {
 
-    console.log(profileInfo)
-
     const [statusEditMode, setStatusEditMode] = useState(false)
     const [statusText, setStatusText] = useState(status)
 

@@ -1,42 +1,91 @@
 .dialogsWrapper {
-    display: grid;
-    grid-template-columns: 2fr 7fr;
-    column-gap: 10px;
-}
+  display: grid;
+  grid-template-columns: 2fr 7fr;
+  column-gap: 10px;
 
-.dialogsUsers {
+  .dialogsUsers {
     background-color: #ffffff;
     padding: 20px;
     border-radius: 5px;
-    border: 1px solid blue;
+    border: 1px solid rgb(150, 150, 150);
     box-sizing: border-box;
-}
-.linkToUserChat{
-    text-decoration: none;
-    font-size: 1.4em;
-    color: #8488eb;
-    &:hover{
-        /* background-color: rgb(247, 247, 247); */
-        color: blue;
-        font-weight: 500;
-    }
-}
-
-.dialogsUserPhoto {
+  }
+  .dialogsUserPhoto {
+    margin-right: 10px;
     width: 40px;
-}
-.dialogsUserWrapper {
-    display: grid;
-    grid-template-columns: 1fr 4fr;
-    margin-bottom: 10px;
-}
+    border-radius: 50%;
+  }
 
-
-
-.dialogsMessages {
+  .dialogsMessages {
+    height: calc(100vh - 150px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background-color: #ffffff;
     padding: 20px;
     border-radius: 5px;
-    border: 1px solid blue;
+    border: 1px solid rgb(150, 150, 150);
     box-sizing: border-box;
+
+    form {
+      display: flex;
+      justify-items: center;
+      align-items: center;
+    }
+
+    .sendMessageButton {
+      height: 30px;
+      transition: 0.3s;
+      cursor: pointer;
+      background-color: lightBlue;
+      border: none;
+      padding: 5px 15px;
+      border-radius: 5px;
+      color: white;
+      margin-left: 30px;
+      &:hover {
+        background-color: blue;
+      }
+    }
+
+    textarea {
+      height: 65px;
+      width: 400px;
+      overflow: hidden;
+      resize: none;
+      outline: none;
+      font-size: 16px;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-top: -5px;
+
+      &:focus {
+        border-color: #5b5ff0;
+        box-shadow: 1px 1px 15px #c8caff;
+      }
+    }
+  }
+}
+
+.dialogsUserWrapper {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  margin-bottom: 10px;
+
+  .linkToUserChat {
+    text-decoration: none;
+    font-size: 1.2em;
+    color: #8488eb;
+    font-weight: 350;
+    &:hover {
+      color: blue;
+      font-weight: 400;
+    }
+  }
+}
+
+.dialogsMessageWrapper {
+  display: flex;
+  align-items: center;
 }

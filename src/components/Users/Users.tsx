@@ -62,7 +62,7 @@ const Users: React.FC = () => {
             pagesInPaginator={10} />
             </div>
         : <div className={s.preloaderBlock}>
-            <img src={preloader} />
+            <img src={preloader} alt="Preloader" />
         </div>
         }
     </div >
