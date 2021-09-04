@@ -1,3 +1,5 @@
+[Link to gh-pages](https://vlad4k5.github.io/Social_Network/)
+
 ### Stack:
 
 ##### - ReactJS, hooks
@@ -13,6 +15,8 @@
 ##### - SCSS, css-modules
 
 ##### - React Context
+
+##### - React Skeleton
 
 <br/>
 
