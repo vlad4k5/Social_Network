@@ -1,28 +1,27 @@
-$bgColor: ghostwhite;
+@import "./scss//variables";
 
 .app__Wrapper {
-    display: grid;
-    grid-template-areas: "header header" "navbar content";
-    grid-template-columns: minmax(200px, 20%) minmax(600px, 80%);
-    grid-template-rows: 80px, 1fr;
-    gap: 5px;
+  display: grid;
+  grid-template-areas: "header header" "navbar content";
+  grid-template-columns: minmax(200px, 20%) minmax(600px, 80%);
+  grid-template-rows: 80px, 1fr;
+  gap: 5px;
 
-    .app__Header {
-        grid-area: header;
-    }
+  .app__Header {
+    grid-area: header;
+  }
 
-    .app__Navbar {
-        grid-area: navbar;
-        margin-left: 5px;
-        background-color: $bgColor;
-    }
+  .app__Navbar {
+    grid-area: navbar;
+    margin-left: 5px;
+    background-color: $whiteGray;
+  }
 
-    .app__Content {
-        grid-area: content;
-        background-color: $bgColor;
-        min-height: 700px;
-        padding: 15px;
-        margin-right: 5px;
-    }
+  .app__Content {
+    grid-area: content;
+    background-color: $whiteGray;
+    min-height: 700px;
+    padding: 15px;
+    margin-right: 5px;
+  }
 }
-

@@ -6,8 +6,8 @@ const FakeUserItem = () => (
       width={920}
       height={103}
       viewBox="0 0 920 103"
-      backgroundColor="#5b5ff0"
-      foregroundColor="#ffffff"
+      backgroundColor="#dedede"
+      foregroundColor="#8575ff"
     >
       <rect x="534" y="113" rx="0" ry="0" width="88" height="71" /> 
     <rect x="573" y="182" rx="10" ry="10" width="150" height="90" /> 

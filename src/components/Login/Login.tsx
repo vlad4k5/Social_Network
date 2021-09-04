@@ -65,9 +65,12 @@ const Login: React.FC<PropsType> = ({ isAuth, captcha, login, errorMessage }) =>
                 < Field type="password" name="password" placeholder="Password" />
             </div>
 
-            < div className={s.loginItem} >
-            < Field type="checkbox" id="rememberMe" name="rememberMe" />
-            <label htmlFor="rememberMe" > Remember me: </label>
+            < div className={s.checkboxBlock} >
+            {/* < Field type="checkbox" id="rememberMe" name="rememberMe" />
+            <label htmlFor="rememberMe" > Remember me: </label> */}
+            <label htmlFor="rememberMe" className={s.label}> Remember me:</label>
+            <Field type="checkbox" name="rememberMe" id="rememberMe"/>
+            <label htmlFor="rememberMe" className={s.toggle }><span></span></label>
             </div>
 
             {captcha ? <div className={s.captchaBlock}>

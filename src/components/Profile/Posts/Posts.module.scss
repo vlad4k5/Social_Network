@@ -1,8 +1,5 @@
 @import "../../../scss/variables";
-
-@mixin transitionDuration {
-  transition-duration: 0.3s;
-}
+@import "../../../scss/mixins";
 
 .postField {
   @include transitionDuration;
@@ -21,16 +18,7 @@
 }
 
 .newPostButton {
-  @include transitionDuration;
-  cursor: pointer;
-  background-color: $lightBlue;
-  border: none;
-  padding: 5px 15px;
-  border-radius: 5px;
-  color: $white;
-  &:hover {
-    background-color: $blue;
-  }
+  @include button;
 }
 
 .post {
@@ -67,14 +55,13 @@
       @include transitionDuration;
       cursor: pointer;
       font-size: 20px;
-      color: lightgray;
+      color: $gray;
       background-color: inherit;
       border: none;
       border-radius: 5px;
       &:hover {
-        color: red;
+        color: $red;
         transform: scale(1.4, 1.4);
-        // background-color: rgb(238, 136, 136);
       }
     }
   }

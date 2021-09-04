@@ -1,4 +1,5 @@
 @import "../../../scss/variables";
+@import "../../../scss/mixins";
 
 .userItem {
   display: flex;
@@ -19,12 +20,14 @@
     flex-direction: column;
     width: 75%;
     .userName {
+      width: 200px;
       font-weight: 500;
       color: $lightBlue;
       font-size: 19px;
       text-decoration: none;
 
       &:hover {
+        color: $blue;
         text-decoration: underline;
       }
     }
@@ -33,33 +36,17 @@
   .subscribeBlock {
     margin: 10px 10px 0px 0px;
 
-    .followedButton {
-      background-color: lighten($gray, 10%);
-      border: none;
-      padding: 6px 15px;
-      border-radius: 5px;
-      color: black;
-      font-size: 17px;
-      cursor: pointer;
-      transition: 0.2s;
-
-      &:hover {
-        background-color: lighten($gray, 6%);
-      }
+    button {
+      @include button;
+      width: 90px;
+      margin-right: 30px;
     }
 
-    .unfollowedButton {
-      background-color: $lightBlue;
-      border: none;
-      padding: 6px 15px;
-      border-radius: 5px;
-      color: white;
-      font-size: 17px;
-      cursor: pointer;
-      transition: 0.2s;
-
+    .followedButton {
+      background-color: lighten($gray, 10%);
+      color: $black;
       &:hover {
-        background-color: $blue;
+        background-color: lighten($gray, 6%);
       }
     }
   }

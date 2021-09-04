@@ -53,7 +53,7 @@ const UserItem: React.FC<PropsType> = ({ photo, name, status, id, followed }) =>
         <div className={s.subscribeBlock}>
             {isFollowed
                 ? <button disabled={loading} onClick={() => { unfollow(id) }} className={s.followedButton}>Unfollow</button>
-                : <button disabled={loading} onClick={() => { follow(id) }} className={s.unfollowedButton}>Follow</button>
+                : <button disabled={loading} onClick={() => { follow(id) }} >Follow</button>
             }
         </div>
     </div>

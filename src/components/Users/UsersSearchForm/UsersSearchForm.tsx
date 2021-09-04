@@ -18,10 +18,9 @@ const UsersSearchForm: FC<PropsType> = ({setFindValue, setCurrentPage}) => {
         setCurrentPage(1)
     }
     
-    return <div>
+    return <div className={s.searchWrapper}>
         <input type="text" name="term" className={s.searchField} value={term} onChange={onChangeTerm}/>
-        <button className={s.searchButton} onClick={findUsers}  > Find User</button><br />
-            <br />
+        <button className={s.searchButton} onClick={findUsers}  > Find User</button>
     </div>
             
 

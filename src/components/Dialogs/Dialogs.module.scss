@@ -1,4 +1,5 @@
 @import "../../scss/variables";
+@import "../../scss/mixins";
 
 .dialogsWrapper {
   display: grid;
@@ -36,36 +37,13 @@
     }
 
     .sendMessageButton {
-      height: 30px;
-      transition: 0.3s;
-      cursor: pointer;
-      background-color: $lightBlue;
-      border: none;
-      padding: 5px 15px;
-      border-radius: 5px;
-      color: white;
+      @include button;
       margin-left: 30px;
-      &:hover {
-        background-color: blue;
-      }
     }
 
     textarea {
-      height: 65px;
+      @include textarea(65px);
       width: 400px;
-      overflow: hidden;
-      resize: none;
-      outline: none;
-      font-size: 16px;
-      padding: 5px;
-      border: 1px solid $gray;
-      border-radius: 4px;
-      margin-top: -5px;
-
-      &:focus {
-        border-color: $lightBlue;
-        box-shadow: 1px 1px 15px lighten($lightBlue, 30%);
-      }
     }
   }
 }
@@ -78,7 +56,7 @@
   .linkToUserChat {
     text-decoration: none;
     font-size: 1.2em;
-    color: #8488eb;
+    color: $lightBlue;
     font-weight: 350;
     &:hover {
       color: $blue;
