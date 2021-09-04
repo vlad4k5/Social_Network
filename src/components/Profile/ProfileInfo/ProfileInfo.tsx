@@ -3,7 +3,7 @@ import basicPhoto from "../../../assets/images/basicUserPhoto.png";
 import { useEffect, useState } from "react";
 import { ProfileInfoType } from "../../../store/types/types";
 import { NavLink } from "react-router-dom";
-
+import Preloader from "../../common/Preloader/Preloader";
 
 type PropsType = {
     profileInfo: ProfileInfoType | null
@@ -12,9 +12,6 @@ type PropsType = {
     updatePhoto: (file: any) => void
     isOwner: boolean | null
 }
-
-
-
 
 const ProfileInfo: React.FC<PropsType> = ({ profileInfo, status, updateStatus, updatePhoto, isOwner }) => {
 
@@ -37,15 +34,9 @@ const ProfileInfo: React.FC<PropsType> = ({ profileInfo, status, updateStatus, u
         updatePhoto(e.target.files[0]);
     }
 
-
-
-    if (!profileInfo) return <div>LLLLLoadign...</div>
-
-
+    if (!profileInfo) return <Preloader />
 
     return <div className={s.profileInfo_wrapper}>
-
-        {/* <span className={s.userName}>{profileInfo.fullName}</span> */}
         <div className={s.userPhoto}>
                 <label htmlFor="photoFile" >
                     <img 
@@ -61,11 +52,8 @@ const ProfileInfo: React.FC<PropsType> = ({ profileInfo, status, updateStatus, u
                         Edit profile
                     </NavLink>
                 </button>
-                
             </div>}
         </div>
-
-
 
         <div className={s.aboutMe}>
             <h1 className={s.userName}>{profileInfo.fullName}</h1>
@@ -78,7 +66,6 @@ const ProfileInfo: React.FC<PropsType> = ({ profileInfo, status, updateStatus, u
                     </span>}
             </div>
             
-
             <div className={s.aboutMeInfo}>
                 <p>About me: {profileInfo.aboutMe ? profileInfo.aboutMe : ""}</p>
             </div>
@@ -86,20 +73,7 @@ const ProfileInfo: React.FC<PropsType> = ({ profileInfo, status, updateStatus, u
                 <p>{profileInfo.lookingForAJob? `Looking for a job ✔️`: "Not looking for a job ❌"}</p>
                 <p>{profileInfo.lookingForAJobDescription? profileInfo.lookingForAJobDescription: ""}</p>
             </div>
-
-            <div className={s.contactsBlock}>
-                {/* <a href={profileInfo.contacts.facebook} className={s.contacts}>facebook</a>
-                <a href={profileInfo.contacts.website} className={s.contacts}>website</a>
-                <a href={profileInfo.contacts.vk} className={s.contacts}>vkontakte</a>
-                <a href={profileInfo.contacts.twitter} className={s.contacts}>twitter</a>
-                <a href={profileInfo.contacts.instagram} className={s.contacts}>instagram</a>
-                <a href={profileInfo.contacts.youtube} className={s.contacts}>youtube</a>
-                <a href={profileInfo.contacts.github} className={s.contacts}>github</a>
-                <a href={profileInfo.contacts.mainLink} className={s.contacts}>mainLink</a> */}
-            </div>
         </div>
     </div>
 }
-
-
 export default ProfileInfo;

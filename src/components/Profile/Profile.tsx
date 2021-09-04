@@ -29,10 +29,10 @@ type TOwnProps = {
     match: any
 }
 
-
 type PropsType = TStateProps & TDispatchProps & TOwnProps
 
 const Profile: React.FC<PropsType> = ({ getProfile, getStatus, match, ownerId, profileInfo, status, posts, addNewPost, updateStatus, updatePhoto, isLoading }) => {
+
     useEffect(() => {
         if (ownerId !== null){
             getProfile(match.params.userId ? match.params.userId : ownerId);
@@ -40,32 +40,25 @@ const Profile: React.FC<PropsType> = ({ getProfile, getStatus, match, ownerId, p
         }
     }, [match.params.userId, ownerId, getProfile, getStatus])
 
-    useEffect(() => {
-        
-    }, [match.params.userId, ownerId])
-
-    if (!profileInfo) {
-        return <Preloader />
-    }
+    if (!profileInfo) return <Preloader />
 
     return <>
-    {isLoading? <Preloader />
-    : <div>
-        <ProfileInfo
-            profileInfo={profileInfo}
-            status={status}
-            updateStatus={updateStatus}
-            updatePhoto={updatePhoto}
-            isOwner={!match.params.userId}
-        />
-        <Posts
-            posts={posts}
-            userPhoto={profileInfo?.photos.small ? profileInfo.photos.small : basicPhoto}
-            addNewPost={addNewPost}
-            isOwner={!match.params.userId}
-        />
-    </div>
-    } 
+        {isLoading? <Preloader />
+        : <div>
+            <ProfileInfo
+                profileInfo={profileInfo}
+                status={status}
+                updateStatus={updateStatus}
+                updatePhoto={updatePhoto}
+                isOwner={!match.params.userId}
+            />
+            <Posts
+                posts={posts}
+                userPhoto={profileInfo?.photos.small ? profileInfo.photos.small : basicPhoto}
+                addNewPost={addNewPost}
+                isOwner={!match.params.userId}
+            />
+        </div>} 
     </>
 }
 

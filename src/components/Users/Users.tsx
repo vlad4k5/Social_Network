@@ -9,6 +9,7 @@ import UsersSearchForm from "./UsersSearchForm/UsersSearchForm";
 import FakeUserItem from "./UserItem/FakeUserItem";
 
 const Users: React.FC = () => {
+    
     const [loading, setLoading] = useState(false);
     const [users, setUsers] = useState<Array<UserType>>([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -16,26 +17,20 @@ const Users: React.FC = () => {
     const [findValue, setFindValue] = useState("")
     const usersPerPage = 20;
 
-
     useEffect(() => {
-        const fetchUsers = async () => {
+        (async () => {
             setLoading(true);
             const res = await usersAPI.getUsers(usersPerPage, currentPage, findValue);
             setUsers(res.items)
             setTotalUsersCount(res.totalCount)
             setLoading(false);
-        }
-        fetchUsers();
+        })()
     }, [currentPage, findValue])
 
     const onPageChanged = (page: number) => {
         setCurrentPage(page);
     }
 
-
-    if (!users) {
-        return <div>Loading</div>
-    }
     let showUsers = users.map(u => <UserItem key={u.id} name={u.name} id={u.id} photo={u.photos.small} followed={u.followed} status={u.status} />)
 
     return <div>
@@ -61,9 +56,4 @@ const Users: React.FC = () => {
         </div>
     </div >
 }
-
-
-
-export default compose(
-    withAuthRedirect
-)(Users);
+export default compose(withAuthRedirect)(Users);

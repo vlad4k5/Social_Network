@@ -1,7 +1,6 @@
 import { UserType } from "../store/types/types";
 import { BasicResponseType, instance } from "./instance-api";
 
-
 type TgetUsers = {
     items: Array<UserType>
     totalCount: number
@@ -9,15 +8,16 @@ type TgetUsers = {
 }
 
 export const usersAPI = {
-    getUsers(count: number, page: number, term: string) {
-        return instance.get<TgetUsers>(`/users/?count=${count}&page=${page}&term=${term}`).then(res => res.data)
+    async getUsers(count: number, page: number, term: string) {
+        const res = await instance.get<TgetUsers>(`/users/?count=${count}&page=${page}&term=${term}`)
+        return res.data
     },
-    follow(userId: number) {
-        return instance.post<BasicResponseType>(`/follow/${userId}`).then(res => res.data)
+    async follow(userId: number) {
+        const res = await instance.post<BasicResponseType>(`/follow/${userId}`)
+        return res.data
     },
-    unfollow(userId: number) {
-        return instance.delete<BasicResponseType>(`/follow/${userId}`).then(res => res.data)
+    async unfollow(userId: number) {
+        const res = await instance.delete<BasicResponseType>(`/follow/${userId}`)
+        return res.data
     }
 }
-
-

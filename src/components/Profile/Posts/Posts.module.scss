@@ -2,19 +2,9 @@
 @import "../../../scss/mixins";
 
 .postField {
-  @include transitionDuration;
-  font-size: 16px;
-  resize: none;
-  border: none;
-  min-width: 50%;
-  outline: 1px solid $lightBlue;
-  margin: 10px 0px;
-  padding: 5px;
-  &:focus {
-    outline: 1px solid $blue;
-    min-width: 70%;
-    height: 100px;
-  }
+  @include textarea;
+  width: 60%;
+  margin-bottom: 10px;
 }
 
 .newPostButton {
@@ -25,7 +15,7 @@
   background-color: $white;
   margin: 15px 0px;
   display: grid;
-  grid-template-columns: 80px 1fr 70px;
+  grid-template-columns: 80px 1fr;
   border-radius: 10px;
   border: 1px solid $lightBlue;
   min-height: 100px;
@@ -39,30 +29,5 @@
 
   .postText {
     padding: 5px 10px;
-  }
-
-  .likeBlock {
-    font-size: 24px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: lighten($gray, 15%);
-    border-radius: 0px 9px 9px 0px;
-
-    .likeButton {
-      @include transitionDuration;
-      cursor: pointer;
-      font-size: 20px;
-      color: $gray;
-      background-color: inherit;
-      border: none;
-      border-radius: 5px;
-      &:hover {
-        color: $red;
-        transform: scale(1.4, 1.4);
-      }
-    }
   }
 }

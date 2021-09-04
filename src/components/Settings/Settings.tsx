@@ -51,7 +51,7 @@ const Settings: React.FC<PropsType> = ({ profileInfo, updateProfile, ownerId, ge
         fullName: profileInfo.fullName,
         photos: profileInfo.photos
     }
-    // above weird code :/ "initialValues.photos"
+
     const onSubmit = (values: ProfileInfoType) => {
         updateProfile(values)
     }
@@ -78,6 +78,7 @@ const Settings: React.FC<PropsType> = ({ profileInfo, updateProfile, ownerId, ge
         <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
             <Form>
                 <div className={s.settingsWrapper}>
+
                     <label htmlFor="aboutMe">About Me:</label>
                     <Field as="textarea" name="aboutMe" id="aboutMe" />
                     <span className={s.errorMessage}><ErrorMessage name="aboutMe" /></span>
@@ -94,8 +95,6 @@ const Settings: React.FC<PropsType> = ({ profileInfo, updateProfile, ownerId, ge
                     <Field type="checkbox" name="lookingForAJob" id="lookingForAJob"/>
                     <label htmlFor="lookingForAJob" className={s.toggle }><span></span></label>
                     <span></span>
-                    
-
 
 
                     <h2>Contacts</h2> <span></span> <span></span>

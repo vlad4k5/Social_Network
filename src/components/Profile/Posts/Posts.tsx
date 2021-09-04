@@ -3,8 +3,6 @@ import { Formik, Form, Field, FormikHelpers } from "formik";
 import Post from "./Post";
 import { PostType } from "../../../store/types/types";
 
-
-
 type PropsType = {
     posts: Array<PostType>
     userPhoto: any
@@ -12,9 +10,8 @@ type PropsType = {
     isOwner: boolean | null
 }
 
-
-
 const Posts: React.FC<PropsType> = ({ posts, userPhoto, addNewPost, isOwner }) => {
+
     const profilePosts = [...posts].reverse().map(p =>
         <Post key={p.id} message={p.message} likesCount={p.likesCount} userPhoto={userPhoto} id={p.id} />)
 
@@ -47,6 +44,4 @@ const Posts: React.FC<PropsType> = ({ posts, userPhoto, addNewPost, isOwner }) =
         </div>
     </div >
 }
-
-
 export default Posts;

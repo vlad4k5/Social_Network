@@ -32,7 +32,6 @@ export type PostType = {
 }
 
 
-
 export type UserType = {
     name: string
     id: number
@@ -55,7 +54,6 @@ export type UserDialogType = {
     userName: string
     id: number
 }
-
 
 
 export type LoginDataType = {

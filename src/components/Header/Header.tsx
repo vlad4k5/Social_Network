@@ -23,17 +23,16 @@ const Header: React.FC<PropsType> = ({ isAuth, logout, userName }) => {
             <h2 className={s.slogan}>Social Network</h2>
         </div>
         {isAuth ?
-            <div className={s.loginBlock}>
-                <NavLink to="/profile" className={s.linkToProfile}>{userName}</NavLink>
-                    <button onClick={logout} className={s.logoutButton}>Log out</button>
-            </div>
-            : <div className={s.loginBlock}>
-                <NavLink to="/login" className={s.linkToLogin} >
-                    <button className={s.logoutButton}>Log in</button>
-                </NavLink>
-            </div>
+        <div className={s.loginBlock}>
+            <NavLink to="/profile" className={s.linkToProfile}>{userName}</NavLink>
+            <button onClick={logout} className={s.logoutButton}>Log out</button>
+        </div>
+        : <div className={s.loginBlock}>
+            <NavLink to="/login" className={s.linkToLogin} >
+                <button className={s.logoutButton}>Log in</button>
+            </NavLink>
+        </div>
         }
-
     </div >
 }
 
@@ -41,5 +40,4 @@ const mapStateToProps = (state: AppStateType) => ({
     isAuth: state.auth.isAuth,
     userName: state.auth.userData.login
 })
-
 export default connect<TStateProps, TDispatchProps, {}, AppStateType>(mapStateToProps, { logout })(Header);

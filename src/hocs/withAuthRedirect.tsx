@@ -22,6 +22,4 @@ function withAuthRedirect<WCP>(Component: React.ComponentType<WCP>) {
 
     return ConnectAuthRedirectComponent
 }
-
-
 export default withAuthRedirect

@@ -27,7 +27,6 @@ const Login: React.FC<PropsType> = ({ isAuth, captcha, login, errorMessage }) =>
         captcha: string | null
     }
 
-
     const onSubmit = (values: Values) => {
         login(values);
     }
@@ -42,7 +41,6 @@ const Login: React.FC<PropsType> = ({ isAuth, captcha, login, errorMessage }) =>
     }
 
     return <div className={s.loginWrapper}>
-        
         < Formik initialValues={{
             email: "",
             password: "",
@@ -53,33 +51,31 @@ const Login: React.FC<PropsType> = ({ isAuth, captcha, login, errorMessage }) =>
             validationSchema={validationSchema}
         >
             <Form>
-            <h2>Login Page </h2>
+                <h2>Login Page </h2>
                 {errorMessage && <div className={s.serverErrorMessage}> {errorMessage} </div>}
-            <div className={s.loginItem} >
-                < ErrorMessage name="email" component={TextError} /> 
-                < Field type="text" name="email" placeholder="Email Address" />
-            </div>
+                <div className={s.loginItem} >
+                    < ErrorMessage name="email" component={TextError} /> 
+                    < Field type="text" name="email" placeholder="Email Address" />
+                </div>
 
-            <div className={s.loginItem} >
-                < ErrorMessage name="password" component={TextError} /> 
-                < Field type="password" name="password" placeholder="Password" />
-            </div>
+                <div className={s.loginItem} >
+                    < ErrorMessage name="password" component={TextError} /> 
+                    < Field type="password" name="password" placeholder="Password" />
+                </div>
 
-            < div className={s.checkboxBlock} >
-            {/* < Field type="checkbox" id="rememberMe" name="rememberMe" />
-            <label htmlFor="rememberMe" > Remember me: </label> */}
-            <label htmlFor="rememberMe" className={s.label}> Remember me:</label>
-            <Field type="checkbox" name="rememberMe" id="rememberMe"/>
-            <label htmlFor="rememberMe" className={s.toggle }><span></span></label>
-            </div>
+                <div className={s.checkboxBlock} >
+                    <label htmlFor="rememberMe" className={s.label}> Remember me:</label>
+                    <Field type="checkbox" name="rememberMe" id="rememberMe"/>
+                    <label htmlFor="rememberMe" className={s.toggle }><span></span></label>
+                </div>
 
-            {captcha ? <div className={s.captchaBlock}>
-                < img src={captcha} alt="captcha" />
-                <label htmlFor="captcha" className={s.err} > Please write a symbols from  captcha: </label>
-                <Field type="text" id="captcha" name="captcha" />
-            </div> : null}
+                {captcha && <div className={s.captchaBlock}>
+                    <img src={captcha} alt="captcha" />
+                    <label htmlFor="captcha" className={s.err} > Please write a symbols from  captcha: </label>
+                    <Field type="text" id="captcha" name="captcha" />
+                </div>}
 
-            < button className={s.loginButton}> Login </button>
+                < button className={s.loginButton}> Login </button>
             </Form>
         </Formik>
 
@@ -91,5 +87,4 @@ const mapStateToProps = (state: AppStateType) => ({
     captcha: state.auth.captcha,
     errorMessage: state.auth.errorMessage
 })
-
 export default connect<TStateProps, TDispatchProps, {}, AppStateType>(mapStateToProps, { login })(Login);

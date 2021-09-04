@@ -4,7 +4,6 @@ import { usersAPI } from "../../../api/users-api";
 import basicPhoto from "../../../assets/images/basicUserPhoto.png";
 import s from "./UserItem.module.scss";
 
-
 type PropsType = {
     photo: string | null
     name: string
@@ -12,8 +11,6 @@ type PropsType = {
     id: number
     followed: boolean
 }
-
-
 
 const UserItem: React.FC<PropsType> = ({ photo, name, status, id, followed }) => {
 
@@ -23,18 +20,14 @@ const UserItem: React.FC<PropsType> = ({ photo, name, status, id, followed }) =>
     const follow = async (id: number) => {
         isLoading(true)
         const res = await usersAPI.follow(id);
-        if (res.resultCode === 0) {
-            setIsFollowed(true);
-        }
+        if (res.resultCode === 0) setIsFollowed(true);
         isLoading(false);
     }
 
     const unfollow = async (id: number) => {
         isLoading(true)
         const res = await usersAPI.unfollow(id);
-        if (res.resultCode === 0) {
-            setIsFollowed(false);
-        }
+        if (res.resultCode === 0) setIsFollowed(false);
         isLoading(false);
     }
 
@@ -58,6 +51,4 @@ const UserItem: React.FC<PropsType> = ({ photo, name, status, id, followed }) =>
         </div>
     </div>
 }
-
-
 export default UserItem;

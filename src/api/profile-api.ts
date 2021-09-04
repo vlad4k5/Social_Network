@@ -1,29 +1,32 @@
 import { PhotosType, ProfileInfoType } from "../store/types/types";
 import { BasicResponseType, instance, ResponseWithDataType } from "./instance-api";
 
-
 type SetPhotoDataType = {
     photos: PhotosType,
 }
 
 export const profileAPI = {
-    getProfile(userId: number) {
-        return instance.get<ProfileInfoType>(`/profile/${userId}`).then(res => res.data)
+    async getProfile(userId: number) {
+        const res = await instance.get<ProfileInfoType>(`/profile/${userId}`)
+        return res.data
     },
-    getStatus(userId: number) {
-        return instance.get<string>(`/profile/status/${userId}`).then(res => res.data)
+    async getStatus(userId: number) {
+        const res = await instance.get<string>(`/profile/status/${userId}`)
+        return res.data
     },
 
-    setProfile(profile: ProfileInfoType) {
-        return instance.put<BasicResponseType>("/profile", profile).then(res => res.data)
+    async setProfile(profile: ProfileInfoType) {
+        const res = await instance.put<BasicResponseType>("/profile", profile)
+        return res.data
     },
-    setStatus(status: string) {
-        return instance.put<BasicResponseType>("/profile/status", { status }).then(res => res.data)
+    async setStatus(status: string) {
+        const res = await instance.put<BasicResponseType>("/profile/status", { status })
+        return res.data
     },
-    setUserImage(photoFile: File) {
+    async setUserImage(photoFile: File) {
         const formData = new FormData();
         formData.append("image", photoFile)
-        return instance.put<ResponseWithDataType<SetPhotoDataType>>("/profile/photo", formData, { headers: { "Content-Type": "multipart/form-data" } }).then(res => res.data)
+        const res = await instance.put<ResponseWithDataType<SetPhotoDataType>>("/profile/photo", formData, { headers: { "Content-Type": "multipart/form-data" } })
+        return res.data
     }
 }
-

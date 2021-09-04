@@ -3,7 +3,6 @@ import { UserDialogType } from "./types/types";
 
 const ADD_NEW_MESSAGE = "SN/DIALOGS/ADD_NEW_MESSAGE";
 
-
 let initialState = {
     users: [
         { userName: "Dmitry", id: 1 },
@@ -14,7 +13,6 @@ let initialState = {
     messages: ["Hello, my name is Dmitry", "What's up?", "How old are you?", "Where are you from?", "Nice to meet you! :)"] as Array<string>
 }
 
-
 const dialogsReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case ADD_NEW_MESSAGE: {
@@ -24,15 +22,11 @@ const dialogsReducer = (state = initialState, action: ActionsType): InitialState
     }
 }
 
-
 export const dialogsActions = {
     addNewMessage: (message: string) => ({ type: ADD_NEW_MESSAGE, message } as const)
 }
 
-
-
 export default dialogsReducer;
-
 
 type InitialStateType = typeof initialState;
 type ActionsType = InferActionTypes<typeof dialogsActions>

@@ -9,12 +9,10 @@ type PropsType = {
     pagesInPaginator?: number
 }
 
-
 const Paginator: React.FC<PropsType> = ({ totalItemsCount, onPageChanged, currentPage = 1, itemsPerPage, loading, pagesInPaginator = 10 }) => {
+
     let totalPages = Math.ceil(totalItemsCount / itemsPerPage);
-
     let lastPage = pagesInPaginator + currentPage - 1;
-
     let pages = [];
 
     if (currentPage >= 7 && currentPage <= totalPages - 3) {
@@ -31,25 +29,18 @@ const Paginator: React.FC<PropsType> = ({ totalItemsCount, onPageChanged, curren
         }
     }
 
-
-
-
     return <nav className={s.paginatorWrapper}>
         <button className={s.page} disabled={currentPage === 1 || loading ? true
             : false} onClick={() => onPageChanged(currentPage - 1)}>&#60;</button>
-        <ul className={s.pages}>
-            {pages}
-        </ul>
-        
-        
 
-        <span>{" ... "}</span>
+            <ul className={s.pages}>
+                {pages}
+            </ul>
+            <span>{" ... "}</span>
+
         <button className={currentPage === totalPages ? s.activePage : s.page} onClick={() => onPageChanged(totalPages)}  >{totalPages}</button>
 
         <button className={s.page} disabled={currentPage === totalPages || loading ? true : false} onClick={() => onPageChanged(currentPage + 1)}>&#62;</button>
     </nav>
 }
-
-
-
 export default Paginator;

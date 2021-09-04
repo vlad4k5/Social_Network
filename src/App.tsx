@@ -34,9 +34,6 @@ const App: React.FC<PropsType> = ({ userAuthorizing, isAuth }) => {
     userAuthorizing();
   }, [userAuthorizing])
 
-  // if (isAuth === false) {
-  //   <Redirect to="/login" />
-  // }
   return <div className={s.app__Wrapper}>
     <header className={s.app__Header}>
       <Header />
@@ -66,6 +63,4 @@ const mapStateToProps = (state: AppStateType): TStateProps => ({
   status: state.profile.status,
   isAuth: state.auth.isAuth
 })
-
-
 export default connect<TStateProps, TDispatchProps, TOwnProps, AppStateType>(mapStateToProps, { userAuthorizing })(App);

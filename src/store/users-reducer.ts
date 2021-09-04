@@ -4,13 +4,9 @@ import { CommonThunkCreatorType, EntireUsersType, UserType } from "./types/types
 
 const SET_USERS = "SN/USERS/SET_USERS";
 
-
-
-
 let initialState = {
     users: null as EntireUsersType | null,
 }
-
 
 const usersReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
@@ -21,13 +17,9 @@ const usersReducer = (state = initialState, action: ActionsType): InitialStateTy
     }
 }
 
-
 export const usersActions = {
     setUsers: (users: Array<UserType>, totalUsersCount: number) => ({ type: SET_USERS, users, totalUsersCount })
 }
-
-
-
 
 export const getUsers = (count: number, page: number, term: string): ThunkType => async dispatch => {
     const res = await usersAPI.getUsers(count, page, "")
@@ -36,9 +28,7 @@ export const getUsers = (count: number, page: number, term: string): ThunkType =
     }
 }
 
-
 export default usersReducer;
-
 
 type InitialStateType = typeof initialState
 type ActionsType = InferActionTypes<typeof usersActions>

@@ -7,6 +7,7 @@ type PropsType = {
 }
 
 const UsersSearchForm: FC<PropsType> = ({setFindValue, setCurrentPage}) => {
+
     const [term, setTerm] = useState("")
 
     const onChangeTerm= (e: any) =>{
@@ -22,9 +23,5 @@ const UsersSearchForm: FC<PropsType> = ({setFindValue, setCurrentPage}) => {
         <input type="text" name="term" className={s.searchField} value={term} onChange={onChangeTerm}/>
         <button className={s.searchButton} onClick={findUsers}  > Find User</button>
     </div>
-            
-
 }
-
-
 export default UsersSearchForm

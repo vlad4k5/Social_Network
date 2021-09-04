@@ -10,11 +10,11 @@ import { UserDialogType } from "../../store/types/types";
 import { AppStateType } from "../../store/store";
 import React from "react";
 
-
 type TStateProps = {
     users: Array<UserDialogType>
     messages: Array<string>
 }
+
 type TDispatchProps = {
     addNewMessage: (message: string) => void
 }
@@ -22,6 +22,7 @@ type TDispatchProps = {
 type PropsType = TStateProps & TDispatchProps
 
 const Dialogs: React.FC<PropsType> = ({ users, messages, addNewMessage }) => {
+
     const dialogsUsers = users.map(u => <DialogsUser key={u.id} userName={u.userName} />)
     const dialogsMessages = messages.map((m, index) => <DialogsMessage key={index} message={m} />)
 
@@ -58,12 +59,10 @@ const Dialogs: React.FC<PropsType> = ({ users, messages, addNewMessage }) => {
     </div >
 }
 
-
 const mapStateToProps = (state: AppStateType) => ({
     users: state.dialogs.users,
     messages: state.dialogs.messages
 })
-
 
 export default compose<React.ComponentType>(
     withAuthRedirect,

@@ -29,5 +29,4 @@ const FakeUserItem = () => (
     <rect x="790" y="25" rx="4" ry="4" width="85" height="30" />
     </ContentLoader>
   )
-
 export default FakeUserItem

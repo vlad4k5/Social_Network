@@ -1,9 +1,6 @@
 import { LoginDataType } from "../store/types/types";
 import { BasicResponseType, instance, ResponseWithDataType } from "./instance-api";
 
-
-
-
 type TUserAuthorizedData = {
     id: number
     email: string
@@ -17,16 +14,20 @@ type TgetCaptcha = {
 }
 
 export const authAPI = {
-    isUserAuthorized() {
-        return instance.get<ResponseWithDataType<TUserAuthorizedData>>("/auth/me").then(res => res.data)
+    async isUserAuthorized (){
+        const res = await instance.get<ResponseWithDataType<TUserAuthorizedData>>("/auth/me")
+        return res.data
     },
-    logout() {
-        return instance.delete<BasicResponseType>("/auth/login").then(res => res.data)
+    async logout() {
+        const res = await instance.delete<BasicResponseType>("/auth/login")
+        return res.data
     },
-    login(loginData: LoginDataType) {
-        return instance.post<ResponseWithDataType<TLoginData>>("/auth/login", loginData).then(res => res.data)
+    async login(loginData: LoginDataType) {
+        const res = await instance.post<ResponseWithDataType<TLoginData>>("/auth/login", loginData)
+        return res.data
     },
-    getCaptcha() {
-        return instance.get<TgetCaptcha>("/security/get-captcha-url").then(res => res.data)
+    async getCaptcha() {
+        const res = await instance.get<TgetCaptcha>("/security/get-captcha-url")
+        return res.data
     }
 }

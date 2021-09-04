@@ -1,7 +1,6 @@
 import s from "./Dialogs.module.scss";
 import basicPhoto from "../../assets/images/basicUserPhoto.png";
 
-
 type PropsType = {
     message: string
 }
@@ -12,6 +11,4 @@ const DialogsMessage: React.FC<PropsType> = ({ message }) => {
         <span>{message}</span>
     </div>
 }
-
-
 export default DialogsMessage

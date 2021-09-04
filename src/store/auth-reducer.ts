@@ -7,7 +7,6 @@ const SET_USER_DATA = "SN/AUTH/SET_USER_DATA"
 const SET_CAPTCHA = "SN/AUTH/SET_CAPTCHA"
 const SET_ERROR_MESSAGE = "SN/AUTH/SET_ERROR_MESSAGE"
 
-
 let initialState = {
     userData: {
         email: null as string | null,
@@ -18,8 +17,6 @@ let initialState = {
     captcha: null as string | null,
     errorMessage: null as string | null
 }
-
-
 
 const authReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
@@ -36,15 +33,11 @@ const authReducer = (state = initialState, action: ActionsType): InitialStateTyp
     }
 }
 
-
-
 export const authActions = {
     setUserData: (isAuth: boolean, userData: UserDataType | null) => ({ type: SET_USER_DATA, isAuth, userData } as const),
     setCaptcha: (captcha: string | null) => ({ type: SET_CAPTCHA, captcha } as const),
     setErrorMessage: (errorMessage: string | null) => ({ type: SET_ERROR_MESSAGE, errorMessage } as const)
 }
-
-
 
 
 export const userAuthorizing = (): ThunkType => async dispatch => {
@@ -58,7 +51,6 @@ export const userAuthorizing = (): ThunkType => async dispatch => {
     }
 }
 
-
 export const logout = (): ThunkType => async dispatch => {
     const res = await authAPI.logout()
     if (res.resultCode === 0) {
@@ -67,8 +59,6 @@ export const logout = (): ThunkType => async dispatch => {
         dispatch(profileActions.setStatus(""));
     }
 }
-
-
 
 export const login = (loginData: LoginDataType): ThunkType => async dispatch => {
     const res = await authAPI.login(loginData)
@@ -82,11 +72,7 @@ export const login = (loginData: LoginDataType): ThunkType => async dispatch => 
         dispatch(authActions.setCaptcha(captchaRes.url))
     }
 }
-
-
 export default authReducer;
-
-
 
 type InitialStateType = typeof initialState;
 type ActionsType = InferActionTypes<typeof authActions>
