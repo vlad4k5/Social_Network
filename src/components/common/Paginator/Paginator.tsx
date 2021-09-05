@@ -20,7 +20,7 @@ const Paginator: React.FC<PropsType> = ({ totalItemsCount, onPageChanged, curren
             pages.push(<li key={i}><button  className={currentPage === i - 6 ? s.activePage : s.page} onClick={() => { onPageChanged(i - 6) }}>{i - 6}</button></li>)
         }
     } else if (currentPage < 7) {
-        for (let i = 1; i <= pagesInPaginator; i++) {
+        for (let i = 1; i <= pagesInPaginator && i < totalPages; i++) {
             pages.push(<li key={i}><button  className={currentPage === i ? s.activePage : s.page} onClick={() => { onPageChanged(i) }}>{i}</button></li>)
         }
     } else if (currentPage > totalPages - 3) {
@@ -35,11 +35,9 @@ const Paginator: React.FC<PropsType> = ({ totalItemsCount, onPageChanged, curren
 
             <ul className={s.pages}>
                 {pages}
+                <li>{totalPages > 10 &&<span>{" ... "}</span>}</li>
+                <li><button className={currentPage === totalPages ? s.activePage : s.page} onClick={() => onPageChanged(totalPages)}  >{totalPages}</button></li>
             </ul>
-            <span>{" ... "}</span>
-
-        <button className={currentPage === totalPages ? s.activePage : s.page} onClick={() => onPageChanged(totalPages)}  >{totalPages}</button>
-
         <button className={s.page} disabled={currentPage === totalPages || loading ? true : false} onClick={() => onPageChanged(currentPage + 1)}>&#62;</button>
     </nav>
 }

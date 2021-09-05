@@ -7,6 +7,7 @@ import Paginator from "../common/Paginator/Paginator";
 import UserItem from "./UserItem/UserItem";
 import UsersSearchForm from "./UsersSearchForm/UsersSearchForm";
 import FakeUserItem from "./UserItem/FakeUserItem";
+import s from "./Users.module.scss";
 
 const Users: React.FC = () => {
     
@@ -15,17 +16,22 @@ const Users: React.FC = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalUsersCount, setTotalUsersCount] = useState(0);
     const [findValue, setFindValue] = useState("")
+    const [isSubscribed, setIsSubscribed] = useState(false)
+    const [searchNotFound, setSearchNotFound] = useState(false)
     const usersPerPage = 20;
+    
 
     useEffect(() => {
         (async () => {
             setLoading(true);
-            const res = await usersAPI.getUsers(usersPerPage, currentPage, findValue);
+            const res = await usersAPI.getUsers(usersPerPage, currentPage, findValue, isSubscribed);
+            if(res.items.length === 0) setSearchNotFound(true)
+            else setSearchNotFound(false)
             setUsers(res.items)
             setTotalUsersCount(res.totalCount)
             setLoading(false);
         })()
-    }, [currentPage, findValue])
+    }, [currentPage, findValue, isSubscribed])
 
     const onPageChanged = (page: number) => {
         setCurrentPage(page);
@@ -34,8 +40,8 @@ const Users: React.FC = () => {
     let showUsers = users.map(u => <UserItem key={u.id} name={u.name} id={u.id} photo={u.photos.small} followed={u.followed} status={u.status} />)
 
     return <div>
-        <UsersSearchForm setFindValue={setFindValue} setCurrentPage={setCurrentPage} />
-        <div>
+        <UsersSearchForm setFindValue={setFindValue} setCurrentPage={setCurrentPage} setIsSubscribed={setIsSubscribed}/>
+        {!searchNotFound ? <div>
             <Paginator
             totalItemsCount={totalUsersCount}
             onPageChanged={onPageChanged}
@@ -54,6 +60,8 @@ const Users: React.FC = () => {
             loading={loading}
             pagesInPaginator={10} />
         </div>
+        : <span className={s.searchNotFound}>Nothing was found for "{findValue}" :(</span>
+        }
     </div >
 }
 export default compose(withAuthRedirect)(Users);

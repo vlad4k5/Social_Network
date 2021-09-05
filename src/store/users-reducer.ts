@@ -21,8 +21,8 @@ export const usersActions = {
     setUsers: (users: Array<UserType>, totalUsersCount: number) => ({ type: SET_USERS, users, totalUsersCount })
 }
 
-export const getUsers = (count: number, page: number, term: string): ThunkType => async dispatch => {
-    const res = await usersAPI.getUsers(count, page, "")
+export const getUsers = (count: number, page: number, term: string, subscribes: boolean): ThunkType => async dispatch => {
+    const res = await usersAPI.getUsers(count, page, term, subscribes)
     if (!res.error) {
         dispatch(usersActions.setUsers(res.items, res.totalCount));
     }

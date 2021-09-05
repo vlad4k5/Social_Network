@@ -8,8 +8,9 @@ type TgetUsers = {
 }
 
 export const usersAPI = {
-    async getUsers(count: number, page: number, term: string) {
-        const res = await instance.get<TgetUsers>(`/users/?count=${count}&page=${page}&term=${term}`)
+    async getUsers(count: number, page: number, term: string , subscribes: boolean) {
+        debugger
+        const res = await instance.get<TgetUsers>(`/users/?count=${count}&page=${page}&term=${term}${subscribes ? `&friend=${subscribes}`: ''}`)
         return res.data
     },
     async follow(userId: number) {
