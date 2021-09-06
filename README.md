@@ -1,14 +1,12 @@
 [Link to gh-pages](https://vlad4k5.github.io/Social_Network/)
 
-### Stack:
+### Technologies used:
 
 ##### - ReactJS, hooks
 
-##### - Redux, redux-thunk
+##### - Redux, react-redux, redux-thunk
 
 ##### - Typescript
-
-##### - React Router
 
 ##### - Axios
 
@@ -17,6 +15,8 @@
 ##### - React Context
 
 ##### - React Skeleton
+
+##### - Formik, Yup
 
 <br/>
 
