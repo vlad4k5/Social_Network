@@ -4,10 +4,10 @@ import s from "./UsersSearchForm.module.scss"
 type PropsType = {
     setFindValue: (val: string) => void
     setCurrentPage: (val: number) => void
-    setIsSubscribed: (val: boolean) => void
+    setFindSubscribed: (val: boolean) => void
 }
 
-const UsersSearchForm: FC<PropsType> = ({setFindValue, setCurrentPage, setIsSubscribed}) => {
+const UsersSearchForm: FC<PropsType> = ({setFindValue, setCurrentPage, setFindSubscribed}) => {
 
     const [term, setTerm] = useState("")
     
@@ -22,7 +22,7 @@ const UsersSearchForm: FC<PropsType> = ({setFindValue, setCurrentPage, setIsSubs
     }
 
     const onclickSubscribesOnly = (e: any) => {
-        setIsSubscribed(e.target.checked)
+        setFindSubscribed(e.target.checked)
     }
     
     return <div className={s.searchWrapper}>

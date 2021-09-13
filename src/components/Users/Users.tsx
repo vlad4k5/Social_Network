@@ -16,7 +16,7 @@ const Users: React.FC = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalUsersCount, setTotalUsersCount] = useState(0);
     const [findValue, setFindValue] = useState("")
-    const [isSubscribed, setIsSubscribed] = useState(false)
+    const [findSubscribed, setFindSubscribed] = useState(false)
     const [searchNotFound, setSearchNotFound] = useState(false)
     const usersPerPage = 20;
     
@@ -24,14 +24,14 @@ const Users: React.FC = () => {
     useEffect(() => {
         (async () => {
             setLoading(true);
-            const res = await usersAPI.getUsers(usersPerPage, currentPage, findValue, isSubscribed);
+            const res = await usersAPI.getUsers(usersPerPage, currentPage, findValue, findSubscribed);
             if(res.items.length === 0) setSearchNotFound(true)
             else setSearchNotFound(false)
             setUsers(res.items)
             setTotalUsersCount(res.totalCount)
             setLoading(false);
         })()
-    }, [currentPage, findValue, isSubscribed])
+    }, [currentPage, findValue, findSubscribed])
 
     const onPageChanged = (page: number) => {
         setCurrentPage(page);
@@ -40,7 +40,7 @@ const Users: React.FC = () => {
     let showUsers = users.map(u => <UserItem key={u.id} name={u.name} id={u.id} photo={u.photos.small} followed={u.followed} status={u.status} />)
 
     return <div>
-        <UsersSearchForm setFindValue={setFindValue} setCurrentPage={setCurrentPage} setIsSubscribed={setIsSubscribed}/>
+        <UsersSearchForm setFindValue={setFindValue} setCurrentPage={setCurrentPage} setFindSubscribed={setFindSubscribed}/>
         {!searchNotFound ? <div>
             <Paginator
             totalItemsCount={totalUsersCount}
@@ -60,7 +60,7 @@ const Users: React.FC = () => {
             loading={loading}
             pagesInPaginator={10} />
         </div>
-        : <span className={s.searchNotFound}>Nothing was found for "{findValue}" :(</span>
+        : <span className={s.searchNotFound}>{findSubscribed && !findValue ? "You have no subscriptions :(" : `Nothing was found for " ${findValue} "`} </span>
         }
     </div >
 }
