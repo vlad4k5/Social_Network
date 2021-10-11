@@ -1,3 +1,10 @@
+
+##### To see the content on the pages, you need to Log in:
+
+###### Login: `free@samuraijs.com`
+
+###### Password: `free`
+
 [Link to gh-pages](https://vlad4k5.github.io/Social_Network/)
 
 ### Technologies used:
@@ -20,8 +27,3 @@
 
 <br/>
 
-##### To see the content on the pages, you need to Log in:
-
-###### Login: `free@samuraijs.com`
-
-###### Password: `free`
